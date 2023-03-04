@@ -1,6 +1,7 @@
 package com.s44khin.passman.codes.navigation
 
 import androidx.navigation.NavGraphBuilder
+import com.s44khin.passman.codes.add.presentation.AddCodeScreen
 import com.s44khin.passman.codes.master.presentation.CodesListScreen
 import com.s44khin.passman.navigation.NavDestination
 import com.s44khin.passman.navigation.extensions.composable
@@ -13,12 +14,20 @@ object CodesNavigation : NavDestination {
     object List : NavDestination {
         override val route = "${CodesNavigation.route}/list"
     }
+
+    object Add : NavDestination {
+        override val route = "${CodesNavigation.route}/add"
+    }
 }
 
 fun NavGraphBuilder.codesNavigation() {
     navigation(rootDestination = CodesNavigation, startDestination = CodesNavigation.List) {
         composable(destination = CodesNavigation.List) {
             CodesListScreen()
+        }
+
+        composable(destination = CodesNavigation.Add) {
+            AddCodeScreen()
         }
     }
 }

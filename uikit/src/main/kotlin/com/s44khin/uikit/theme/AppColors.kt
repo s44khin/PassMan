@@ -87,9 +87,9 @@ internal val lightColors: AppColors
         rootBackground = Color(0xffedeef0),
         background = Color(0xffffffff),
         borderOnBackground = Color(0x40000000),
-        textOnPrimary = Color(0xff000000),
+        textOnPrimary = Color(0xFFFFFFFF),
         textOnBackground = Color(0xff000000),
-        textOnBackgroundVariant = Color(0xB3000000),
+        textOnBackgroundVariant = Color(0x80000000),
     )
 
 internal val darkColors: AppColors
@@ -99,7 +99,7 @@ internal val darkColors: AppColors
         rootBackground = Color(0xff141414),
         background = Color(0xff222222),
         borderOnBackground = Color(0x40FFFFFF),
-        textOnPrimary = Color(0xff000000),
+        textOnPrimary = Color(0xFFFFFFFF),
         textOnBackground = Color(0xffffffff),
-        textOnBackgroundVariant = Color(0xB3FFFFFF),
+        textOnBackgroundVariant = Color(0x80FFFFFF),
     )

@@ -23,6 +23,8 @@ compose-ui = "1.3.3"
 compose-ui-preview = "1.3.3"
 compose-viewModel = "2.5.1"
 dagger = "2.45"
+totp = "2.4.0"
+room = "2.5.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradle" }
@@ -42,3 +44,6 @@ compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview", versio
 compose-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "compose-viewModel" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+totp = { module = "dev.turingcomplete:kotlin-onetimepassword", version.ref = "totp" }
+room = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }

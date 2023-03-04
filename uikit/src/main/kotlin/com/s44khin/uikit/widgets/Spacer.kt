@@ -26,9 +26,9 @@ fun ColumnScope.Spacer(height: Dp, color: Color = AppTheme.colors.background) = 
 
 @Composable
 @NonRestartableComposable
-fun RowScope.Spacer(height: Dp, color: Color = AppTheme.colors.background) = Spacer(
+fun RowScope.Spacer(width: Dp, color: Color = AppTheme.colors.background) = Spacer(
     modifier = Modifier
         .fillMaxHeight()
-        .width(height)
+        .width(width)
         .background(color = color)
 )

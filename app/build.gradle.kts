@@ -63,6 +63,9 @@ dependencies {
     implementation(libs.compose.ui.preview)
     implementation(libs.compose.viewModel)
     implementation(libs.dagger)
+    implementation(libs.totp)
+    implementation(libs.room)
     implementation(project(mapOf("path" to ":uikit")))
     kapt(libs.dagger.compiler)
+    kapt(libs.room.compiler)
 }

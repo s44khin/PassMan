@@ -2,9 +2,13 @@ package com.s44khin.passman.di.modules
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
+import androidx.room.Room
+import com.s44khin.passman.codes.data.dataBase.CodesDataBase
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.AppViewModelFactory
 import com.s44khin.passman.di.AppScope
+import com.s44khin.passman.navigation.ScreenRouter
 import dagger.Module
 import dagger.Provides
 import javax.inject.Provider
@@ -29,4 +33,20 @@ class AppModule {
     fun provideAppStorage(context: Context) = AppStorage(
         sharedPreferences = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE)
     )
+
+    @AppScope
+    @Provides
+    fun provideScreenRouter(navHostController: NavHostController) = ScreenRouter(
+        navHostController = navHostController,
+    )
+
+    @AppScope
+    @Provides
+    fun provideCodesDataBase(context: Context): CodesDataBase {
+        return Room.databaseBuilder(
+            context = context,
+            klass = CodesDataBase::class.java,
+            name = "codesDataBase"
+        ).build()
+    }
 }

@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">PassMan</string>
     <string name="codes_label">Codes</string>
+    <string name="codes_add_new_code_label">Add code</string>
+    <string name="codes_secret_code">Secret code</string>
+    <string name="codes_name">Name</string>
+    <string name="codes_color">Color</string>
     <string name="settings_label">Settings</string>
     <string name="settings_theme">Theme:</string>
     <string name="settings_theme_system">System</string>

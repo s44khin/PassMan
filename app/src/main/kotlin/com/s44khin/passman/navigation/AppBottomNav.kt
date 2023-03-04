@@ -40,14 +40,18 @@ fun AppBottomNav(navController: NavController) {
 
     BottomNav {
         bottomNavItems.forEach { navItem ->
+            val selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true
+
             BottomNavItem(
-                selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true,
+                selected = selected,
                 icon = navItem.icon,
                 label = stringResource(navItem.label),
                 onClick = {
                     navController.navigate(navItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                        if (!selected) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
                         }
 
                         launchSingleTop = true
