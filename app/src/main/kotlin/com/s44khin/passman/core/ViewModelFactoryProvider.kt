@@ -1,9 +1,8 @@
-package com.s44khin.passman
+package com.s44khin.passman.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.s44khin.passman.core.AppViewModelFactory
 
 val LocalViewModelFactoryProvider = staticCompositionLocalOf<AppViewModelFactory> {
     error("No AppViewModelFactory provided")

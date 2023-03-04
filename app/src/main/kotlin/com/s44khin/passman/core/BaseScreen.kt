@@ -5,10 +5,9 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.s44khin.passman.LocalViewModelFactoryProvider
 
 @Composable
-inline fun <STATE : Any, ACTION : Any, reified VIEW_MODEL : BaseViewModel<STATE, ACTION>> BaseScreen(
+inline fun <STATE : Any, ACTION : Any, reified VIEW_MODEL : BaseViewModel<STATE, ACTION>> Screen(
     content: @Composable ScreenScope<STATE, ACTION>.() -> Unit
 ) {
     val viewModel: VIEW_MODEL = viewModel(factory = LocalViewModelFactoryProvider.current)
