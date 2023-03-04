@@ -2,21 +2,19 @@ package com.s44khin.passman.codes.master.presentation.widgets
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -61,6 +59,24 @@ fun ColumnScope.CodesListItem(item: TotpItemVO) {
 
                     Spacer(width = 8.dp)
 
+                    Icon(
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically)
+                            .size(14.dp),
+                        imageVector = Icons.Rounded.ArrowBack,
+                        contentDescription = Icons.Rounded.ArrowBack.name,
+                        tint = AppTheme.colors.textOnBackgroundVariant,
+                    )
+
+                    Spacer(width = 2.dp)
+
+                    AnimatedTimer(
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                        value = item.timer
+                    )
+
+                    Spacer(width = 8.dp)
+
                     Text(
                         modifier = Modifier.align(Alignment.CenterVertically),
                         text = it.nextCode,
@@ -71,17 +87,4 @@ fun ColumnScope.CodesListItem(item: TotpItemVO) {
             }
         }
     }
-}
-
-@Composable
-fun Bullet(
-    modifier: Modifier = Modifier,
-    color: Color
-) {
-    Spacer(
-        modifier = modifier
-            .size(16.dp)
-            .clip(RoundedCornerShape(8.dp))
-            .background(color)
-    )
 }

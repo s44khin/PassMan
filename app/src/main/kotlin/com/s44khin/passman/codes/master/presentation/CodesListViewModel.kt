@@ -6,9 +6,9 @@ import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
 import com.s44khin.passman.core.BaseViewModel
 import com.s44khin.passman.navigation.ScreenRouter
-import com.s44khin.passman.util.infinity
 import dev.turingcomplete.kotlinonetimepassword.GoogleAuthenticator
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
@@ -40,7 +40,8 @@ class CodesListViewModel @Inject constructor(
                         secretCode = it.secretCode,
                         nextCode = getCode(it.secretCode, next = true),
                         code = getCode(it.secretCode, next = false),
-                        color = it.color
+                        color = it.color,
+                        timer = getTimer()
                     )
                 }
             )
@@ -50,21 +51,38 @@ class CodesListViewModel @Inject constructor(
     }
 
     private fun updateCodes() {
-        viewModelScope.infinity(Dispatchers.IO) {
-            viewState = viewState.toNewList(
-                newCodes = viewState.codes.map {
-                    it.copy(
-                        code = getCode(it.secretCode, false),
-                        nextCode = getCode(it.secretCode, true)
-                    )
-                }
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            while (true) {
+                val timer = getTimer()
+
+                viewState = viewState.toNewList(
+                    newCodes = viewState.codes.map {
+                        it.copy(
+                            code = if (timer == 30) getCode(it.secretCode, false) else it.code,
+                            nextCode = if (timer == 30) getCode(it.secretCode, true) else it.nextCode,
+                            timer = timer,
+                        )
+                    }
+                )
+
+                delay(1000)
+            }
         }
     }
 
     private fun getCode(secretCode: String, next: Boolean): String {
         val timestamp = if (next) Date(System.currentTimeMillis() + 30000) else Date(System.currentTimeMillis())
         return GoogleAuthenticator(secretCode.toByteArray()).generate(timestamp)
+    }
+
+    private fun getTimer(): Int {
+        var seconds = (System.currentTimeMillis() % 100000) / 1000
+
+        while (seconds >= 30) {
+            seconds -= 30
+        }
+
+        return 30 - seconds.toInt()
     }
 
     private fun addClick() {

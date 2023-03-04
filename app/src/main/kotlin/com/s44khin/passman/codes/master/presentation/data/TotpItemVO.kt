@@ -11,4 +11,5 @@ data class TotpItemVO(
     val secretCode: String,
     val name: String,
     val color: CodeColor,
+    val timer: Int,
 )
