@@ -13,6 +13,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
@@ -20,8 +21,14 @@ import com.s44khin.uikit.theme.AppTheme
 private val BottomNavigationHeight = 56.dp
 
 @Composable
-fun BottomNav(content: @Composable RowScope.() -> Unit) {
-    Surface(elevation = 0.dp) {
+fun BottomNav(
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit
+) {
+    Surface(
+        modifier = modifier,
+        elevation = 0.dp
+    ) {
         Row(
             modifier = Modifier
                 .background(color = AppTheme.colors.background)
@@ -48,6 +55,8 @@ fun RowScope.BottomNavItem(
         label = { Text(text = label) },
         icon = { Icon(imageVector = icon, contentDescription = icon.name) },
         alwaysShowLabel = false,
+        selectedContentColor = AppTheme.colors.primary,
         onClick = onClick,
+        unselectedContentColor = Color.Black.copy(alpha = .7f)
     )
 }

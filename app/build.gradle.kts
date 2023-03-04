@@ -58,10 +58,11 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.icons)
     implementation(libs.compose.material)
+    implementation(libs.compose.navigation)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.preview)
     implementation(libs.compose.viewModel)
     implementation(libs.dagger)
     implementation(project(mapOf("path" to ":uikit")))
-    kapt(libs.dagger)
+    kapt(libs.dagger.compiler)
 }
