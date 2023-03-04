@@ -17,7 +17,7 @@ import com.s44khin.uikit.theme.AppTheme
 
 @Composable
 @NonRestartableComposable
-fun ColumnScope.Spacer(height: Dp, color: Color = AppTheme.colors.rootBackground) = Spacer(
+fun ColumnScope.Spacer(height: Dp, color: Color = AppTheme.colors.background) = Spacer(
     modifier = Modifier
         .fillMaxWidth()
         .height(height)
@@ -26,7 +26,7 @@ fun ColumnScope.Spacer(height: Dp, color: Color = AppTheme.colors.rootBackground
 
 @Composable
 @NonRestartableComposable
-fun RowScope.Spacer(height: Dp, color: Color = AppTheme.colors.rootBackground) = Spacer(
+fun RowScope.Spacer(height: Dp, color: Color = AppTheme.colors.background) = Spacer(
     modifier = Modifier
         .fillMaxHeight()
         .width(height)

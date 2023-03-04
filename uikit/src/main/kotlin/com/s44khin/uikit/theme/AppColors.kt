@@ -15,6 +15,10 @@ open class AppColors internal constructor(
     primary: Color,
     rootBackground: Color,
     background: Color,
+    borderOnBackground: Color,
+    textOnPrimary: Color,
+    textOnBackground: Color,
+    textOnBackgroundVariant: Color,
 ) {
     var primary by mutableStateOf(primary)
         private set
@@ -25,16 +29,36 @@ open class AppColors internal constructor(
     var background by mutableStateOf(background)
         private set
 
+    var borderOnBackground by mutableStateOf(borderOnBackground)
+        private set
+
+    var textOnPrimary by mutableStateOf(textOnPrimary)
+        private set
+
+    var textOnBackground by mutableStateOf(textOnBackground)
+        private set
+
+    var textOnBackgroundVariant by mutableStateOf(textOnBackgroundVariant)
+        private set
+
     internal fun copy() = AppColors(
         primary = primary,
         rootBackground = rootBackground,
         background = background,
+        borderOnBackground = borderOnBackground,
+        textOnPrimary = textOnPrimary,
+        textOnBackground = textOnBackground,
+        textOnBackgroundVariant = textOnBackgroundVariant,
     )
 
     internal fun update(other: AppColors) {
         primary = other.primary
         rootBackground = other.rootBackground
         background = other.background
+        borderOnBackground = other.borderOnBackground
+        textOnPrimary = other.textOnPrimary
+        textOnBackground = other.textOnBackground
+        textOnBackgroundVariant = other.textOnBackgroundVariant
     }
 }
 
@@ -61,7 +85,11 @@ internal val lightColors: AppColors
     get() = AppColors(
         primary = Color(0xffe65100),
         rootBackground = Color(0xffedeef0),
-        background = Color(0xffffffff)
+        background = Color(0xffffffff),
+        borderOnBackground = Color(0x40000000),
+        textOnPrimary = Color(0xff000000),
+        textOnBackground = Color(0xff000000),
+        textOnBackgroundVariant = Color(0xB3000000),
     )
 
 internal val darkColors: AppColors
@@ -69,5 +97,9 @@ internal val darkColors: AppColors
     get() = AppColors(
         primary = Color(0xffe65100),
         rootBackground = Color(0xff141414),
-        background = Color(0xff222222)
+        background = Color(0xff222222),
+        borderOnBackground = Color(0x40FFFFFF),
+        textOnPrimary = Color(0xff000000),
+        textOnBackground = Color(0xffffffff),
+        textOnBackgroundVariant = Color(0xB3FFFFFF),
     )
