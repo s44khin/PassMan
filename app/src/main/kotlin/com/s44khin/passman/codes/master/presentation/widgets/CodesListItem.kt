@@ -42,6 +42,7 @@ private data class State(
 fun CodesListItem(
     item: TotpItemVO,
     inEdit: Boolean,
+    showNextCode: Boolean,
     onAction: (CodesListAction) -> Unit,
 ) {
     Row(
@@ -80,32 +81,34 @@ fun CodesListItem(
                         fontWeight = FontWeight.Bold,
                     )
 
-                    Spacer(width = 8.dp)
+                    if (showNextCode) {
+                        Spacer(width = 8.dp)
 
-                    Icon(
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .size(14.dp),
-                        imageVector = Icons.Rounded.ArrowBack,
-                        contentDescription = Icons.Rounded.ArrowBack.name,
-                        tint = AppTheme.colors.textOnBackgroundVariant,
-                    )
+                        Icon(
+                            modifier = Modifier
+                                .align(Alignment.CenterVertically)
+                                .size(14.dp),
+                            imageVector = Icons.Rounded.ArrowBack,
+                            contentDescription = Icons.Rounded.ArrowBack.name,
+                            tint = AppTheme.colors.textOnBackgroundVariant,
+                        )
 
-                    Spacer(width = 2.dp)
+                        Spacer(width = 2.dp)
 
-                    AnimatedTimer(
-                        modifier = Modifier.align(Alignment.CenterVertically),
-                        value = item.timer
-                    )
+                        AnimatedTimer(
+                            modifier = Modifier.align(Alignment.CenterVertically),
+                            value = item.timer
+                        )
 
-                    Spacer(width = 8.dp)
+                        Spacer(width = 8.dp)
 
-                    Text(
-                        modifier = Modifier.align(Alignment.CenterVertically),
-                        text = it.nextCode,
-                        color = AppTheme.colors.textOnBackgroundVariant,
-                        fontSize = 16.sp,
-                    )
+                        Text(
+                            modifier = Modifier.align(Alignment.CenterVertically),
+                            text = it.nextCode,
+                            color = AppTheme.colors.textOnBackgroundVariant,
+                            fontSize = 16.sp,
+                        )
+                    }
                 }
             }
         }

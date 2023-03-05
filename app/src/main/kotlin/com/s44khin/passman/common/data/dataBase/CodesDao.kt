@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.data.dataBase
+package com.s44khin.passman.common.data.dataBase
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -15,4 +15,7 @@ interface CodesDao {
 
     @Query("DELETE FROM CodeEntity WHERE uid IN (:ids)")
     suspend fun deleteByIds(vararg ids: String)
+
+    @Query("DELETE FROM CodeEntity")
+    suspend fun deleteAll()
 }

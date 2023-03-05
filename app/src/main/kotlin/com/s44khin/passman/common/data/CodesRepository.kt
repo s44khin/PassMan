@@ -1,7 +1,7 @@
-package com.s44khin.passman.codes.data
+package com.s44khin.passman.common.data
 
-import com.s44khin.passman.codes.data.dataBase.CodeEntity
-import com.s44khin.passman.codes.data.dataBase.CodesDataBase
+import com.s44khin.passman.common.data.dataBase.CodeEntity
+import com.s44khin.passman.common.data.dataBase.CodesDataBase
 import javax.inject.Inject
 
 class CodesRepository @Inject constructor(
@@ -13,4 +13,6 @@ class CodesRepository @Inject constructor(
     suspend fun insertCodes(vararg codes: CodeEntity) = codesDataBase.codesDao().insertAll(*codes)
 
     suspend fun deleteById(vararg ids: String) = codesDataBase.codesDao().deleteByIds(*ids)
+
+    suspend fun deleteAll() = codesDataBase.codesDao().deleteAll()
 }

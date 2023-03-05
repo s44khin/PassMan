@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.data.dataBase
+package com.s44khin.passman.common.data.dataBase
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

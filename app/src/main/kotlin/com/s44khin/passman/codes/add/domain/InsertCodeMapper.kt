@@ -1,7 +1,7 @@
 package com.s44khin.passman.codes.add.domain
 
 import com.s44khin.passman.codes.add.presentation.data.CodeColor
-import com.s44khin.passman.codes.data.dataBase.CodeEntity
+import com.s44khin.passman.common.data.dataBase.CodeEntity
 import javax.inject.Inject
 
 class InsertCodeMapper @Inject constructor() {

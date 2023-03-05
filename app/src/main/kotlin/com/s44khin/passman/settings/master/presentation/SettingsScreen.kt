@@ -16,12 +16,10 @@ import com.s44khin.passman.BuildConfig
 import com.s44khin.passman.R
 import com.s44khin.passman.core.Screen
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
+import com.s44khin.passman.settings.master.presentation.widgets.OtherBlock
 import com.s44khin.passman.settings.master.presentation.widgets.ThemeBlock
 import com.s44khin.uikit.layouts.RootColumn
-import com.s44khin.uikit.layouts.TitleBlock
-import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.RootSpacer
-import com.s44khin.uikit.widgets.Spacer
 import com.s44khin.uikit.widgets.TopNav
 import kotlinx.coroutines.launch
 
@@ -55,13 +53,20 @@ fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> 
                 onAction = onAction
             )
 
+            RootSpacer(height = 8.dp)
+
+            OtherBlock(
+                modifier = Modifier.padding(vertical = 16.dp),
+                state = state,
+                onAction = onAction,
+            )
+
             if (isDebug) {
                 RootSpacer(height = 8.dp)
 
                 DebugBlock(
-                    modifier = Modifier.padding(vertical = 16.dp),
-                    state = state,
-                    onAction =onAction
+                    modifier = Modifier.padding(top = 16.dp),
+                    onAction = onAction
                 )
             }
         }

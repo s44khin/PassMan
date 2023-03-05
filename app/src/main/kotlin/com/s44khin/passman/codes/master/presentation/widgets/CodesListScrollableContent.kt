@@ -20,6 +20,7 @@ import com.s44khin.uikit.theme.AppTheme
 fun ColumnScope.CodesListScrollableContent(
     scrollState: ScrollState,
     list: List<TotpItemVO>,
+    showNextCode: Boolean,
     inEdit: Boolean,
     onAction: (CodesListAction) -> Unit
 ) {
@@ -35,6 +36,7 @@ fun ColumnScope.CodesListScrollableContent(
             CodesListItem(
                 item = totpItem,
                 inEdit = inEdit,
+                showNextCode = showNextCode,
                 onAction = onAction
             )
 

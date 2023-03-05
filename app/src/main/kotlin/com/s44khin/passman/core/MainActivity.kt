@@ -11,10 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
+import com.s44khin.passman.common.Constants
 import com.s44khin.passman.di.extensions.appComponent
 import com.s44khin.passman.navigation.AppBottomNav
 import com.s44khin.passman.navigation.AppNavHost
-import com.s44khin.passman.settings.master.presentation.SettingsViewModel
 import com.s44khin.passman.settings.master.presentation.data.ThemeVO
 import com.s44khin.uikit.theme.AppTheme
 import javax.inject.Inject
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
             }
 
             val theme: ThemeVO = remember {
-                val str = appStorage.getString(key = SettingsViewModel.THEME_KEY, ThemeVO.System.name)
+                val str = appStorage.getString(key = Constants.THEME_KEY, ThemeVO.System.name)
                 ThemeVO.valueOf(str)
             }
 

@@ -1,11 +1,12 @@
 package com.s44khin.passman.codes.master.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.s44khin.passman.codes.common.Constants
 import com.s44khin.passman.codes.master.domain.DeleteCodesUseCase
 import com.s44khin.passman.codes.master.domain.GetCodesUseCase
 import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
+import com.s44khin.passman.common.Constants
+import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.BaseViewModel
 import com.s44khin.passman.navigation.ScreenRouter
 import com.s44khin.passman.util.filterMap
@@ -20,8 +21,11 @@ class CodesListViewModel @Inject constructor(
     private val deleteCodesUseCase: DeleteCodesUseCase,
     private val getCodesUseCase: GetCodesUseCase,
     private val screenRouter: ScreenRouter,
+    appStorage: AppStorage,
 ) : BaseViewModel<CodesListState, CodesListAction>(
-    initState = CodesListState()
+    initState = CodesListState(
+        showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
+    )
 ) {
 
     init {

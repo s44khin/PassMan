@@ -11,5 +11,10 @@
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_dark">Dark</string>
     <string name="settings_theme_light">Light</string>
+    <string name="settings_other">Other</string>
+    <string name="settings_show_next_code">Show next code</string>
+    <string name="settings_restart">Restart</string>
+    <string name="settings_debug_add_data">Add debug data</string>
+    <string name="settings_debug_delete_all">Delete all</string>
     <string name="settings_debug" translatable="false">Debug</string>
 </resources>

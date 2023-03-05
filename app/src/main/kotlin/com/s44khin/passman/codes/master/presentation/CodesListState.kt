@@ -8,6 +8,7 @@ import com.s44khin.passman.util.mapIf
 data class CodesListState(
     val codes: List<TotpItemVO> = emptyList(),
     val inEdit: Boolean = false,
+    val showNextCode: Boolean = true,
 ) {
 
     fun toNewList(newCodes: List<TotpItemVO>) = copy(codes = newCodes)

@@ -1,7 +1,7 @@
 package com.s44khin.passman.codes.add.domain
 
 import com.s44khin.passman.codes.add.presentation.data.CodeColor
-import com.s44khin.passman.codes.data.CodesRepository
+import com.s44khin.passman.common.data.CodesRepository
 import javax.inject.Inject
 
 class InsertCodeUseCase @Inject constructor(

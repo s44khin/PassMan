@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.room.Room
-import com.s44khin.passman.codes.data.dataBase.CodesDataBase
+import com.s44khin.passman.common.data.dataBase.CodesDataBase
+import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.AppViewModelFactory
 import com.s44khin.passman.di.AppScope
@@ -49,4 +50,8 @@ class AppModule {
             name = "codesDataBase"
         ).build()
     }
+
+    @AppScope
+    @Provides
+    fun provideAppRouter(context: Context) = AppRouter(context)
 }

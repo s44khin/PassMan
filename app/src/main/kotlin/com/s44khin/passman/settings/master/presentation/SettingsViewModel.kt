@@ -1,34 +1,71 @@
 package com.s44khin.passman.settings.master.presentation
 
+import androidx.lifecycle.viewModelScope
+import com.s44khin.passman.common.Constants
+import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.BaseViewModel
+import com.s44khin.passman.settings.master.domain.DeleteAllUseCase
+import com.s44khin.passman.settings.master.domain.InsertCodesUseCase
 import com.s44khin.passman.settings.master.presentation.data.ThemeVO
+import com.s44khin.passman.settings.master.presentation.data.codeMock
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
+    private val appRouter: AppRouter,
     private val appStorage: AppStorage,
+    private val deleteAllUseCase: DeleteAllUseCase,
+    private val insertCodesUseCase: InsertCodesUseCase,
 ) : BaseViewModel<SettingsState, SettingsAction>(
-    initState = SettingsState()
+    initState = SettingsState(
+        currentTheme = ThemeVO.valueOf(
+            appStorage.getString(key = Constants.THEME_KEY, defaultValue = ThemeVO.System.name)
+        ),
+        showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
+    )
 ) {
 
-    companion object {
-        const val THEME_KEY = "theme_key"
-    }
-
-    init {
-        viewState = viewState.changeTheme(
-            newTheme = ThemeVO.valueOf(
-                appStorage.getString(key = THEME_KEY, defaultValue = ThemeVO.System.name)
-            )
-        )
-    }
+    private val savedState = viewState.copy()
 
     override fun onAction(action: SettingsAction) = when (action) {
+        is SettingsAction.AddDebugData -> addDebugData()
         is SettingsAction.ChangeTheme -> changeTheme(action.theme)
+        is SettingsAction.DeleteAll -> deleteAll()
+        is SettingsAction.ChangeShowNextCode -> changeShowNextCode()
+        is SettingsAction.Restart -> restart()
     }
 
     private fun changeTheme(theme: ThemeVO) {
-        appStorage.putString(key = THEME_KEY, value = theme.name)
+        appStorage.putString(key = Constants.THEME_KEY, value = theme.name)
         viewState = viewState.changeTheme(theme)
+        viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
+    }
+
+    private fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            deleteAllUseCase.execute()
+        }
+    }
+
+    private fun addDebugData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            insertCodesUseCase.execute(*codeMock)
+        }
+    }
+
+    private fun changeShowNextCode() {
+        viewState = viewState.changeShowNextCode()
+        appStorage.putBoolean(key = Constants.SHOW_NEXT_CODE_KEY, value = viewState.showNextCode)
+        viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
+    }
+
+    private fun checkButtonEnabled(): Boolean = with(viewState) {
+        showNextCode != savedState.showNextCode || currentTheme != savedState.currentTheme
+    }
+
+    private fun restart() {
+        appRouter.restart()
     }
 }

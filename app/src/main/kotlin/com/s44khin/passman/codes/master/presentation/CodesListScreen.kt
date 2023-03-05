@@ -60,6 +60,7 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
         CodesListScrollableContent(
             scrollState = scrollState,
             list = state.codes,
+            showNextCode = state.showNextCode,
             inEdit = state.inEdit,
             onAction = onAction,
         )

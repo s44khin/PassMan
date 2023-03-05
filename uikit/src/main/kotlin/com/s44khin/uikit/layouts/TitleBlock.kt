@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -24,6 +25,7 @@ fun TitleBlock(
 ) {
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .animateContentSize()
             .clip(RoundedCornerShape(24.dp))
             .background(color = AppTheme.colors.background)
