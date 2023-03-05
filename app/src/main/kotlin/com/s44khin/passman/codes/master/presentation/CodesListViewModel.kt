@@ -60,7 +60,8 @@ class CodesListViewModel @Inject constructor(
                         nextCode = getCode(it.secretCode, next = true),
                         code = getCode(it.secretCode, next = false),
                         color = it.color,
-                        timer = getTimer()
+                        timer = getTimer(),
+                        account = it.account
                     )
                 }
             )

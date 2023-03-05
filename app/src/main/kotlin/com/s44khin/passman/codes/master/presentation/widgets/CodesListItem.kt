@@ -66,11 +66,29 @@ fun CodesListItem(
         Spacer(width = 16.dp)
 
         Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = item.name,
-                color = AppTheme.colors.textOnBackgroundVariant,
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = item.name,
+                    color = AppTheme.colors.textOnBackgroundVariant,
+                )
 
+                if (item.account != null) {
+                    Spacer(width = 2.dp)
+
+                    Text(
+                        text = "·",
+                        color = AppTheme.colors.textOnBackgroundVariant,
+                    )
+
+                    Spacer(width = 2.dp)
+
+                    Text(
+                        text = item.account,
+                        color = AppTheme.colors.textOnBackgroundVariant,
+                        fontSize = 12.sp,
+                    )
+                }
+            }
             Spacer(height = 4.dp)
 
             AnimatedContent(targetState = State(item.code, item.nextCode)) {

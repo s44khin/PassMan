@@ -12,4 +12,6 @@ data class CodeEntity(
     @ColumnInfo(name = "secret_code") val secretCode: String,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "color") val color: String,
+    @ColumnInfo(name = "account") val account: String?,
+    @ColumnInfo(name = "description") val description: String?,
 )
