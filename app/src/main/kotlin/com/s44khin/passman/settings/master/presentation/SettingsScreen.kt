@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.s44khin.passman.BuildConfig
 import com.s44khin.passman.R
 import com.s44khin.passman.core.Screen
+import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
 import com.s44khin.passman.settings.master.presentation.widgets.ThemeBlock
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.layouts.TitleBlock
@@ -27,6 +30,7 @@ fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> 
     RootColumn(modifier = Modifier.fillMaxSize()) {
         val scrollState = rememberScrollState()
         val coroutineScope = rememberCoroutineScope()
+        val isDebug = remember { BuildConfig.DEBUG }
 
         TopNav(
             label = stringResource(R.string.settings_label),
@@ -50,6 +54,16 @@ fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> 
                 viewState = state,
                 onAction = onAction
             )
+
+            if (isDebug) {
+                RootSpacer(height = 8.dp)
+
+                DebugBlock(
+                    modifier = Modifier.padding(vertical = 16.dp),
+                    state = state,
+                    onAction =onAction
+                )
+            }
         }
 
         RootSpacer(height = 8.dp)

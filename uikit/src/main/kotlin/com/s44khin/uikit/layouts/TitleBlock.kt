@@ -1,5 +1,6 @@
 package com.s44khin.uikit.layouts
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -23,6 +24,7 @@ fun TitleBlock(
 ) {
     Column(
         modifier = Modifier
+            .animateContentSize()
             .clip(RoundedCornerShape(24.dp))
             .background(color = AppTheme.colors.background)
             .then(modifier)

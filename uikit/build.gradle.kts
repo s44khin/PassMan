@@ -10,6 +10,7 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildTypes {

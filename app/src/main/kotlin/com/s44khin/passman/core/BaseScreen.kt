@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
@@ -14,10 +15,12 @@ inline fun <STATE : Any, ACTION : Any, reified VIEW_MODEL : BaseViewModel<STATE,
 
     val state by viewModel.state.collectAsState()
 
-    val scope = ScreenScopeImpl(
-        state = state,
-        onAction = viewModel::onAction
-    )
+    val scope = remember(state) {
+        ScreenScopeImpl(
+            state = state,
+            onAction = viewModel::onAction
+        )
+    }
 
     scope.content()
 }
