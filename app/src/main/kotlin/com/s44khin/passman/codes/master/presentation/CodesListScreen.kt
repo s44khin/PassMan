@@ -9,7 +9,6 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,7 +18,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.s44khin.passman.R
 import com.s44khin.passman.codes.master.presentation.widgets.CodesListScrollableContent
 import com.s44khin.passman.core.Screen
-import com.s44khin.passman.settings.master.presentation.data.ThemeVO
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.RootSpacer
@@ -33,15 +31,20 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
         val scrollState = rememberScrollState()
         val coroutineScope = rememberCoroutineScope()
         val systemUiController = rememberSystemUiController()
-        val defaultStatusBar = remember { systemUiController.statusBarDarkContentEnabled }
+        val isSystemInDarkTheme = isSystemInDarkTheme()
 
         DisposableEffect(systemUiController, state.inEdit) {
             systemUiController.setStatusBarColor(
                 color = Color.Transparent,
-                darkIcons = if (state.inEdit) false else defaultStatusBar
+                darkIcons = !state.inEdit && !isSystemInDarkTheme
             )
 
-            onDispose { }
+            onDispose {
+                systemUiController.setStatusBarColor(
+                    color = Color.Transparent,
+                    darkIcons = !isSystemInDarkTheme
+                )
+            }
         }
 
         TopNav(

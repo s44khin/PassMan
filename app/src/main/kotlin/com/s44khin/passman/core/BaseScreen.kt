@@ -36,5 +36,5 @@ interface ScreenScope<STATE : Any, ACTION : Any> {
 @Immutable
 class ScreenScopeImpl<STATE : Any, ACTION : Any>(
     override val state: STATE,
-    override val onAction: (ACTION) -> Unit
+    override val onAction: (ACTION) -> Unit,
 ) : ScreenScope<STATE, ACTION>

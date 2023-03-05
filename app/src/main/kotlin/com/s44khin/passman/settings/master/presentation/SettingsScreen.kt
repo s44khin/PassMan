@@ -17,7 +17,6 @@ import com.s44khin.passman.R
 import com.s44khin.passman.core.Screen
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
 import com.s44khin.passman.settings.master.presentation.widgets.OtherBlock
-import com.s44khin.passman.settings.master.presentation.widgets.ThemeBlock
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.widgets.RootSpacer
 import com.s44khin.uikit.widgets.TopNav
@@ -47,14 +46,6 @@ fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> 
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
         ) {
-            ThemeBlock(
-                modifier = Modifier.padding(vertical = 16.dp),
-                viewState = state,
-                onAction = onAction
-            )
-
-            RootSpacer(height = 8.dp)
-
             OtherBlock(
                 modifier = Modifier.padding(vertical = 16.dp),
                 state = state,
