@@ -5,8 +5,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
@@ -112,8 +112,8 @@ fun CodesListItem(
 
         AnimatedVisibility(
             visible = inEdit,
-            enter = fadeIn() + scaleIn(),
-            exit = fadeOut() + scaleOut(),
+            enter = fadeIn() + slideInHorizontally { it },
+            exit = fadeOut() + slideOutHorizontally { it },
         ) {
             AppCheckBox(
                 checked = item.checked,

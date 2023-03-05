@@ -32,3 +32,21 @@ fun RowScope.Spacer(width: Dp, color: Color = AppTheme.colors.background) = Spac
         .width(width)
         .background(color = color)
 )
+
+@Composable
+@NonRestartableComposable
+fun ColumnScope.RootSpacer(height: Dp, color: Color = AppTheme.colors.rootBackground) = Spacer(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(height)
+        .background(color = color)
+)
+
+@Composable
+@NonRestartableComposable
+fun RowScope.RootSpacer(width: Dp, color: Color = AppTheme.colors.rootBackground) = Spacer(
+    modifier = Modifier
+        .fillMaxHeight()
+        .width(width)
+        .background(color = color)
+)

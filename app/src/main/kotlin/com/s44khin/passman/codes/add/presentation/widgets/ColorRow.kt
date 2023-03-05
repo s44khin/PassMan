@@ -11,7 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,39 +36,46 @@ import com.s44khin.passman.R
 import com.s44khin.passman.codes.add.presentation.AddCodeAction
 import com.s44khin.passman.codes.add.presentation.AddCodeState
 import com.s44khin.passman.codes.add.presentation.data.CodeColor
+import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.Spacer
 
 @Composable
-fun ColumnScope.ColorBlock(
+fun ColorBlock(
     modifier: Modifier = Modifier,
     state: AddCodeState,
     onAction: (AddCodeAction) -> Unit,
 ) {
-    Text(
-        modifier = Modifier.padding(horizontal = 16.dp),
-        text = stringResource(R.string.codes_color),
-        fontSize = 18.sp,
-        fontWeight = FontWeight.Bold
-    )
+    Column(
+        modifier = Modifier
+            .clip(RoundedCornerShape(24.dp))
+            .background(color = AppTheme.colors.background)
+            .then(modifier)
+    ) {
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = stringResource(R.string.codes_color),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = AppTheme.colors.textOnBackground,
+        )
 
-    Spacer(height = 8.dp)
+        Spacer(height = 8.dp)
 
-    Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
-        Spacer(width = 16.dp)
+        Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
+            Spacer(width = 16.dp)
 
-        CodeColor.values().forEachIndexed { index, color ->
-            ColorRowItem(
-                selected = state.color == color,
-                codeColor = color,
-                onClick = { onAction(AddCodeAction.ChangeColor(color)) }
-            )
+            CodeColor.values().forEachIndexed { index, color ->
+                ColorRowItem(
+                    selected = state.color == color,
+                    codeColor = color,
+                    onClick = { onAction(AddCodeAction.ChangeColor(color)) }
+                )
 
-            if (index != CodeColor.values().lastIndex) {
-                Spacer(width = 8.dp)
+                if (index != CodeColor.values().lastIndex) {
+                    Spacer(width = 8.dp)
+                }
             }
         }
-
-        Spacer(width = 16.dp)
     }
 }
 
@@ -82,7 +89,7 @@ private fun ColorRowItem(
 ) {
     Box(
         modifier = modifier
-            .height(48.dp)
+            .height(42.dp)
             .aspectRatio(1f)
             .clip(RoundedCornerShape(24.dp))
             .background(color = codeColor.color)

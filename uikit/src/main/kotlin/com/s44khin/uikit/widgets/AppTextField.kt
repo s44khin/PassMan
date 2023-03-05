@@ -1,12 +1,10 @@
 package com.s44khin.uikit.widgets
 
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
 
 @Composable
@@ -18,7 +16,6 @@ fun AppTextField(
 ) {
     OutlinedTextField(
         modifier = modifier,
-        shape = RoundedCornerShape(24.dp),
         value = value,
         onValueChange = onValueChange,
         label = { Text(text = label) },
@@ -26,6 +23,9 @@ fun AppTextField(
             focusedLabelColor = AppTheme.colors.primary,
             focusedBorderColor = AppTheme.colors.primary,
             cursorColor = AppTheme.colors.primary,
+            unfocusedBorderColor = AppTheme.colors.textOnBackgroundVariant,
+            unfocusedLabelColor = AppTheme.colors.textOnBackgroundVariant,
+            textColor = AppTheme.colors.textOnBackground,
         )
     )
 }

@@ -25,9 +25,9 @@ fun AnimatedTimer(
         targetState = value,
         transitionSpec = {
             if (targetState > initialState) {
-                slideInVertically { height -> height } + fadeIn() with slideOutVertically { height -> -height } + fadeOut()
+                slideInVertically { it } + fadeIn() with slideOutVertically { -it } + fadeOut()
             } else {
-                slideInVertically { height -> -height } + fadeIn() with slideOutVertically { height -> height } + fadeOut()
+                slideInVertically { it } + fadeIn() with slideOutVertically { -it } + fadeOut()
             }.using(
                 SizeTransform(clip = false)
             )
