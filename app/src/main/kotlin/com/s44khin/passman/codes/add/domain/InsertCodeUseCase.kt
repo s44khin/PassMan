@@ -9,7 +9,13 @@ class InsertCodeUseCase @Inject constructor(
     private val mapper: InsertCodeMapper,
 ) {
 
-    suspend fun execute(secretCode: String, name: String, color: CodeColor) = repository.insertCodes(
-        mapper.map(secretCode, name, color)
+    suspend fun execute(
+        secretCode: String,
+        name: String,
+        color: CodeColor,
+        account: String?,
+        description: String?,
+    ) = repository.insertCodes(
+        mapper.map(secretCode, name, color, account, description)
     )
 }

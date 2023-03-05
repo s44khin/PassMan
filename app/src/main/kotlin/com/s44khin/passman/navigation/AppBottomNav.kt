@@ -23,14 +23,19 @@ private val bottomNavItems = listOf(
     AppBottomNavItem(
         icon = Icons.Rounded.Code,
         label = R.string.codes_label,
-        route = CodesNavigation.route
+        route = CodesNavigation.List.route
     ),
 
     AppBottomNavItem(
         icon = Icons.Rounded.Settings,
         label = R.string.settings_label,
-        route = SettingsNavigation.route
+        route = SettingsNavigation.List.route
     )
+)
+
+private val bottomNavItemsRouts = listOf(
+    CodesNavigation.List.route,
+    SettingsNavigation.List.route
 )
 
 @Composable
@@ -38,27 +43,29 @@ fun AppBottomNav(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNav {
-        bottomNavItems.forEach { navItem ->
-            val selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true
+    if (currentDestination?.route in bottomNavItemsRouts) {
+        BottomNav {
+            bottomNavItems.forEach { navItem ->
+                val selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true
 
-            BottomNavItem(
-                selected = selected,
-                icon = navItem.icon,
-                label = stringResource(navItem.label),
-                onClick = {
-                    navController.navigate(navItem.route) {
-                        if (!selected) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
+                BottomNavItem(
+                    selected = selected,
+                    icon = navItem.icon,
+                    label = stringResource(navItem.label),
+                    onClick = {
+                        navController.navigate(navItem.route) {
+                            if (!selected) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
                             }
-                        }
 
-                        launchSingleTop = true
-                        restoreState = true
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

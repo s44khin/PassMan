@@ -38,5 +38,13 @@ fun AddCodeScrollableContent(
             state = state,
             onAction = onAction
         )
+
+        RootSpacer(height = 8.dp)
+
+        OptionalBlock(
+            modifier = Modifier.padding(vertical = 16.dp),
+            state = state,
+            onAction = onAction,
+        )
     }
 }

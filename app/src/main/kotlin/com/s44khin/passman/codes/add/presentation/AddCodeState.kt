@@ -8,6 +8,8 @@ data class AddCodeState(
     val name: String = "",
     val secretCode: String = "",
     val color: CodeColor = CodeColor.Blue,
+    val account: String = "",
+    val description: String = ""
 ) {
 
     fun toNewName(newName: String) = copy(name = newName)
@@ -15,4 +17,8 @@ data class AddCodeState(
     fun toNewSecretCode(newSecretCode: String) = copy(secretCode = newSecretCode)
 
     fun toNewColor(newColor: CodeColor) = copy(color = newColor)
+
+    fun toNewAccount(newAccount: String) = copy(account = newAccount)
+
+    fun toNewDescription(newDescription: String) = copy(description = newDescription)
 }

@@ -10,8 +10,8 @@ class InsertCodeMapper @Inject constructor() {
         secretCode: String,
         name: String,
         color: CodeColor,
-        account: String? = null,
-        description: String? = null
+        account: String?,
+        description: String?,
     ) = CodeEntity(
         secretCode = secretCode,
         name = name,

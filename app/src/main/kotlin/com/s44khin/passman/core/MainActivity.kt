@@ -7,10 +7,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.s44khin.passman.common.Constants
 import com.s44khin.passman.di.extensions.appComponent
 import com.s44khin.passman.navigation.AppBottomNav
@@ -43,6 +46,26 @@ class MainActivity : ComponentActivity() {
             val theme: ThemeVO = remember {
                 val str = appStorage.getString(key = Constants.THEME_KEY, ThemeVO.System.name)
                 ThemeVO.valueOf(str)
+            }
+
+            val systemUiController = rememberSystemUiController()
+
+            DisposableEffect(systemUiController) {
+                when (theme) {
+                    ThemeVO.Dark -> systemUiController.setStatusBarColor(
+                        color = Color.Transparent,
+                        darkIcons = false,
+                    )
+
+                    ThemeVO.Light -> systemUiController.setStatusBarColor(
+                        color = Color.Transparent,
+                        darkIcons = true,
+                    )
+
+                    else -> {}
+                }
+
+                onDispose { }
             }
 
             ProvideViewModelFactory(appViewModelFactory) {

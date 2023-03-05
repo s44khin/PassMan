@@ -19,7 +19,9 @@ class AddCodeViewModel @Inject constructor(
 
     override fun onAction(action: AddCodeAction) = when (action) {
         is AddCodeAction.BackClick -> screenRouter.back()
+        is AddCodeAction.ChangeAccount -> viewState = viewState.toNewAccount(action.newAccount)
         is AddCodeAction.ChangeColor -> viewState = viewState.toNewColor(action.newColor)
+        is AddCodeAction.ChangeDescription -> viewState = viewState.toNewDescription(action.newDescription)
         is AddCodeAction.ChangeName -> viewState = viewState.toNewName(action.newName)
         is AddCodeAction.ChangeSecretCode -> viewState = viewState.toNewSecretCode(action.newCode)
         is AddCodeAction.SaveClick -> saveClick()
@@ -30,7 +32,9 @@ class AddCodeViewModel @Inject constructor(
             insertCodeUseCase.execute(
                 secretCode = viewState.secretCode,
                 name = viewState.name,
-                color = viewState.color
+                color = viewState.color,
+                account = viewState.account.ifEmpty { null },
+                description = viewState.description.ifEmpty { null }
             )
 
             withContext(Dispatchers.Main) {

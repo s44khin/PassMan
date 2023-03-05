@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.preview)
     implementation(libs.compose.viewModel)
+    implementation(libs.compose.systemUiController)
     implementation(libs.dagger)
     implementation(libs.totp)
     implementation(libs.room)
