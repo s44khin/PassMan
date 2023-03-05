@@ -7,8 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.PersistableBundle
+import javax.inject.Inject
 
-class AppRouter(private val context: Context) {
+class AppRouter @Inject constructor(private val context: Context) {
 
     fun restart() {
         val packageManager = context.packageManager

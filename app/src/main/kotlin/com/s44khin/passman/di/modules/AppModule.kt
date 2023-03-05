@@ -37,12 +37,6 @@ class AppModule {
 
     @AppScope
     @Provides
-    fun provideScreenRouter(navHostController: NavHostController) = ScreenRouter(
-        navHostController = navHostController,
-    )
-
-    @AppScope
-    @Provides
     fun provideCodesDataBase(context: Context): CodesDataBase {
         return Room.databaseBuilder(
             context = context,
@@ -50,8 +44,4 @@ class AppModule {
             name = "codesDataBase"
         ).build()
     }
-
-    @AppScope
-    @Provides
-    fun provideAppRouter(context: Context) = AppRouter(context)
 }
