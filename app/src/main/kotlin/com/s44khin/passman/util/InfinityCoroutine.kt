@@ -10,7 +10,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 fun CoroutineScope.infinity(
     context: CoroutineContext = EmptyCoroutineContext,
-    delay: Long = 30000,
+    delay: Long = 1000,
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
 ): Job {

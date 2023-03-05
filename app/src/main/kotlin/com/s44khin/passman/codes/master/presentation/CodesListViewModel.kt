@@ -6,9 +6,9 @@ import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
 import com.s44khin.passman.core.BaseViewModel
 import com.s44khin.passman.navigation.ScreenRouter
+import com.s44khin.passman.util.infinity
 import dev.turingcomplete.kotlinonetimepassword.GoogleAuthenticator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
@@ -51,22 +51,18 @@ class CodesListViewModel @Inject constructor(
     }
 
     private fun updateCodes() {
-        viewModelScope.launch(Dispatchers.IO) {
-            while (true) {
-                val timer = getTimer()
+        viewModelScope.infinity(Dispatchers.IO) {
+            val timer = getTimer()
 
-                viewState = viewState.toNewList(
-                    newCodes = viewState.codes.map {
-                        it.copy(
-                            code = if (timer == 30) getCode(it.secretCode, false) else it.code,
-                            nextCode = if (timer == 30) getCode(it.secretCode, true) else it.nextCode,
-                            timer = timer,
-                        )
-                    }
-                )
-
-                delay(1000)
-            }
+            viewState = viewState.toNewList(
+                newCodes = viewState.codes.map {
+                    it.copy(
+                        code = if (timer == 30) getCode(it.secretCode, false) else it.code,
+                        nextCode = if (timer == 30) getCode(it.secretCode, true) else it.nextCode,
+                        timer = timer,
+                    )
+                }
+            )
         }
     }
 
