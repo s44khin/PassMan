@@ -53,6 +53,8 @@ fun CodesListItem(
                 onClick = {
                     if (inEdit) {
                         onAction(CodesListAction.CheckedClick(item.uid))
+                    } else {
+                        onAction(CodesListAction.CopyToClipboard(item.code))
                     }
                 }
             )

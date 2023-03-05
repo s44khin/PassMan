@@ -6,6 +6,7 @@ import com.s44khin.passman.codes.master.domain.GetCodesUseCase
 import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
 import com.s44khin.passman.common.Constants
+import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.BaseViewModel
 import com.s44khin.passman.navigation.ScreenRouter
@@ -18,6 +19,7 @@ import java.util.Date
 import javax.inject.Inject
 
 class CodesListViewModel @Inject constructor(
+    private val appRouter: AppRouter,
     private val deleteCodesUseCase: DeleteCodesUseCase,
     private val getCodesUseCase: GetCodesUseCase,
     private val screenRouter: ScreenRouter,
@@ -39,6 +41,7 @@ class CodesListViewModel @Inject constructor(
     override fun onAction(action: CodesListAction) = when (action) {
         is CodesListAction.AddClick -> addClick()
         is CodesListAction.CheckedClick -> viewState = viewState.toChecked(action.uid)
+        is CodesListAction.CopyToClipboard -> appRouter.copyToClipboard(action.code)
         is CodesListAction.DeleteClick -> deleteClick()
         is CodesListAction.StartEdit -> viewState = viewState.toEdit(action.uid)
         is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
