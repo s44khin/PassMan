@@ -2,11 +2,13 @@ package com.s44khin.passman.codes.master.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.common.Constants
+import com.s44khin.passman.codes.master.domain.DeleteCodesUseCase
 import com.s44khin.passman.codes.master.domain.GetCodesUseCase
 import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
 import com.s44khin.passman.core.BaseViewModel
 import com.s44khin.passman.navigation.ScreenRouter
+import com.s44khin.passman.util.filterMap
 import com.s44khin.passman.util.infinity
 import dev.turingcomplete.kotlinonetimepassword.GoogleAuthenticator
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +18,7 @@ import javax.inject.Inject
 
 class CodesListViewModel @Inject constructor(
     private val getCodesUseCase: GetCodesUseCase,
+    private val deleteCodesUseCase: DeleteCodesUseCase,
     private val screenRouter: ScreenRouter,
 ) : BaseViewModel<CodesListState, CodesListAction>(
     initState = CodesListState()
@@ -31,6 +34,10 @@ class CodesListViewModel @Inject constructor(
 
     override fun onAction(action: CodesListAction) = when (action) {
         is CodesListAction.AddClick -> addClick()
+        is CodesListAction.StartEdit -> viewState = viewState.toEdit(action.uid)
+        is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
+        is CodesListAction.CheckedClick -> viewState = viewState.toChecked(action.uid)
+        is CodesListAction.DeleteClick -> deleteClick()
     }
 
     private fun getData() {
@@ -88,5 +95,18 @@ class CodesListViewModel @Inject constructor(
 
     private fun addClick() {
         screenRouter.navigateTo(CodesNavigation.Add)
+    }
+
+    private fun deleteClick() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val deleteIds = viewState.codes.filterMap(
+                predicate = { it.checked },
+                transform = { it.uid }
+            )
+
+            deleteCodesUseCase(*deleteIds.toTypedArray())
+
+            viewState = viewState.deleteChecked()
+        }
     }
 }

@@ -1,8 +1,14 @@
 package com.s44khin.uikit.widgets
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -12,9 +18,11 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,6 +35,7 @@ private val TopNavigationShape = 24.dp
 @Immutable
 data class TopNavIcon(
     val icon: ImageVector,
+    val visible: Boolean = true,
     val onClick: () -> Unit,
 )
 
@@ -35,6 +44,8 @@ fun TopNav(
     modifier: Modifier = Modifier,
     navIcon: TopNavIcon? = null,
     label: String,
+    backgroundColor: Color = AppTheme.colors.background,
+    contentColor: Color = AppTheme.colors.textOnBackground,
     onLabelClick: () -> Unit = {},
     endIcon: TopNavIcon? = null,
 ) {
@@ -42,24 +53,32 @@ fun TopNav(
         modifier = modifier,
         navIcon = navIcon,
         label = label,
+        backgroundColor = backgroundColor,
+        contentColor = contentColor,
         onLabelClick = onLabelClick,
         endIcons = if (endIcon != null) listOf(endIcon) else emptyList(),
     )
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun TopNav(
     modifier: Modifier = Modifier,
     navIcon: TopNavIcon? = null,
     label: String,
+    backgroundColor: Color = AppTheme.colors.background,
+    contentColor: Color = AppTheme.colors.textOnBackground,
     onLabelClick: () -> Unit = {},
     endIcons: List<TopNavIcon>,
 ) {
+    val animatedBackgroundColor by animateColorAsState(backgroundColor)
+    val animatedContentColor by animateColorAsState(contentColor)
+
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(bottomStart = TopNavigationShape, bottomEnd = TopNavigationShape))
             .background(
-                color = AppTheme.colors.background,
+                color = animatedBackgroundColor,
                 shape = RoundedCornerShape(bottomStart = TopNavigationShape, bottomEnd = TopNavigationShape)
             )
             .statusBarsPadding()
@@ -67,15 +86,21 @@ fun TopNav(
             .height(TopNavigationHeight)
     ) {
         if (navIcon != null) {
-            IconButton(
-                modifier = Modifier.align(Alignment.CenterStart),
-                onClick = { navIcon.onClick() }
+            AnimatedVisibility(
+                visible = navIcon.visible,
+                enter = fadeIn() + scaleIn(),
+                exit = fadeOut() + scaleOut(),
             ) {
-                Icon(
-                    imageVector = navIcon.icon,
-                    contentDescription = navIcon.icon.name,
-                    tint = AppTheme.colors.textOnBackground,
-                )
+                IconButton(
+                    modifier = Modifier.align(Alignment.CenterStart),
+                    onClick = { navIcon.onClick() }
+                ) {
+                    Icon(
+                        imageVector = navIcon.icon,
+                        contentDescription = navIcon.icon.name,
+                        tint = animatedContentColor,
+                    )
+                }
             }
         }
 
@@ -85,19 +110,22 @@ fun TopNav(
                 .align(Alignment.Center),
             text = label,
             fontWeight = FontWeight.Bold,
-            color = AppTheme.colors.textOnBackground,
+            color = animatedContentColor,
         )
 
-        if (endIcons.isNotEmpty()) {
-            Row(modifier = Modifier.align(Alignment.CenterEnd)) {
-                endIcons.forEach { endNavIcon ->
-                    IconButton(onClick = { endNavIcon.onClick() }) {
-                        Icon(
-                            imageVector = endNavIcon.icon,
-                            contentDescription = endNavIcon.icon.name,
-                            tint = AppTheme.colors.textOnBackground,
-                        )
-                    }
+        endIcons.forEach { endNavIcon ->
+            AnimatedVisibility(
+                modifier = Modifier.align(Alignment.CenterEnd),
+                visible = endNavIcon.visible,
+                enter = fadeIn() + scaleIn(),
+                exit = fadeOut() + scaleOut(),
+            ) {
+                IconButton(onClick = { endNavIcon.onClick() }) {
+                    Icon(
+                        imageVector = endNavIcon.icon,
+                        contentDescription = endNavIcon.icon.name,
+                        tint = animatedContentColor,
+                    )
                 }
             }
         }

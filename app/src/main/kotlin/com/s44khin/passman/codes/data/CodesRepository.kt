@@ -11,4 +11,6 @@ class CodesRepository @Inject constructor(
     suspend fun getAllCodes() = codesDataBase.codesDao().getAll()
 
     suspend fun insertCodes(vararg codes: CodeEntity) = codesDataBase.codesDao().insertAll(*codes)
+
+    suspend fun deleteById(vararg ids: String) = codesDataBase.codesDao().deleteByIds(*ids)
 }

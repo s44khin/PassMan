@@ -12,4 +12,7 @@ interface CodesDao {
 
     @Insert
     suspend fun insertAll(vararg codes: CodeEntity)
+
+    @Query("DELETE FROM CodeEntity WHERE uid IN (:ids)")
+    suspend fun deleteByIds(vararg ids: String)
 }

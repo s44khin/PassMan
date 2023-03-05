@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -27,14 +29,29 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
 
         TopNav(
             label = stringResource(R.string.codes_label),
+            backgroundColor = if (state.inEdit) AppTheme.colors.primary else AppTheme.colors.background,
+            contentColor = if (state.inEdit) AppTheme.colors.textOnPrimary else AppTheme.colors.textOnBackground,
+            navIcon = TopNavIcon(
+                icon = Icons.Rounded.Close,
+                visible = state.inEdit,
+                onClick = { onAction(CodesListAction.StopEdit) }
+            ),
             onLabelClick = {
                 coroutineScope.launch {
                     scrollState.animateScrollTo(0)
                 }
             },
-            endIcon = TopNavIcon(
-                icon = Icons.Rounded.Add,
-                onClick = { onAction(CodesListAction.AddClick) }
+            endIcons = listOf(
+                TopNavIcon(
+                    icon = Icons.Rounded.Add,
+                    visible = !state.inEdit,
+                    onClick = { onAction(CodesListAction.AddClick) }
+                ),
+                TopNavIcon(
+                    icon = Icons.Rounded.Delete,
+                    visible = state.inEdit,
+                    onClick = { onAction(CodesListAction.DeleteClick) }
+                ),
             )
         )
 
@@ -42,7 +59,9 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
 
         CodesListScrollableContent(
             scrollState = scrollState,
-            list = state.codes
+            list = state.codes,
+            inEdit = state.inEdit,
+            onAction = onAction,
         )
 
         Spacer(height = 8.dp, color = AppTheme.colors.rootBackground)

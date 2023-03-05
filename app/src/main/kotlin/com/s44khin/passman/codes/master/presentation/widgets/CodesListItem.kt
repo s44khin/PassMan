@@ -1,10 +1,17 @@
 package com.s44khin.passman.codes.master.presentation.widgets
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
@@ -18,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.s44khin.passman.codes.master.presentation.CodesListAction
 import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
+import com.s44khin.uikit.widgets.AppCheckBox
 import com.s44khin.uikit.widgets.Spacer
 
 @Immutable
@@ -28,24 +37,38 @@ private data class State(
     val nextCode: String,
 )
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun ColumnScope.CodesListItem(item: TotpItemVO) {
-    Row(modifier = Modifier.padding(horizontal = 16.dp)) {
-        Bullet(
-            modifier = Modifier.align(Alignment.CenterVertically),
-            color = item.color.color
-        )
+fun CodesListItem(
+    item: TotpItemVO,
+    inEdit: Boolean,
+    onAction: (CodesListAction) -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .combinedClickable(
+                onLongClick = { onAction(CodesListAction.StartEdit(item.uid)) },
+                onClick = {
+                    if (inEdit) {
+                        onAction(CodesListAction.CheckedClick(item.uid))
+                    }
+                }
+            )
+            .padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Bullet(color = item.color.color)
 
         Spacer(width = 16.dp)
 
-        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
+        Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = item.name,
                 color = AppTheme.colors.textOnBackgroundVariant,
             )
 
-            Spacer(height = 8.dp)
+            Spacer(height = 4.dp)
 
             AnimatedContent(targetState = State(item.code, item.nextCode)) {
                 Row {
@@ -85,6 +108,17 @@ fun ColumnScope.CodesListItem(item: TotpItemVO) {
                     )
                 }
             }
+        }
+
+        AnimatedVisibility(
+            visible = inEdit,
+            enter = fadeIn() + scaleIn(),
+            exit = fadeOut() + scaleOut(),
+        ) {
+            AppCheckBox(
+                checked = item.checked,
+                onCheckedChange = { onAction(CodesListAction.CheckedClick(item.uid)) }
+            )
         }
     }
 }
