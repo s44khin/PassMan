@@ -1,6 +1,7 @@
 package com.s44khin.passman.codes.master.presentation
 
 import androidx.lifecycle.viewModelScope
+import com.s44khin.passman.codes.common.Constants
 import com.s44khin.passman.codes.master.domain.GetCodesUseCase
 import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
@@ -21,6 +22,10 @@ class CodesListViewModel @Inject constructor(
 ) {
 
     init {
+        screenRouter.onSignal(Constants.UPDATE_CODES_LIST) {
+            getData()
+        }
+
         getData()
     }
 

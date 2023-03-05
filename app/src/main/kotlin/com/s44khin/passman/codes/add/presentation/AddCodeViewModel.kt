@@ -2,6 +2,7 @@ package com.s44khin.passman.codes.add.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.add.domain.InsertCodeUseCase
+import com.s44khin.passman.codes.common.Constants
 import com.s44khin.passman.core.BaseViewModel
 import com.s44khin.passman.navigation.ScreenRouter
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +34,7 @@ class AddCodeViewModel @Inject constructor(
             )
 
             withContext(Dispatchers.Main) {
-                screenRouter.back()
+                screenRouter.backWithSignal(Constants.UPDATE_CODES_LIST)
             }
         }
     }
