@@ -27,7 +27,7 @@ class AddCodeViewModel @Inject constructor(
 
     private fun saveClick() {
         viewModelScope.launch(Dispatchers.IO) {
-            insertCodeUseCase(
+            insertCodeUseCase.execute(
                 secretCode = viewState.secretCode,
                 name = viewState.name,
                 color = viewState.color

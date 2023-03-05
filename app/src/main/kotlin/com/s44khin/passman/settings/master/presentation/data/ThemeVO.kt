@@ -15,8 +15,8 @@ val themeList = listOf(ThemeVO.System, ThemeVO.Dark, ThemeVO.Light)
 enum class ThemeVO {
     System, Dark, Light;
 
-    @get:StringRes
     val label: Int
+        @StringRes
         get() = when (this) {
             System -> R.string.settings_theme_system
             Dark -> R.string.settings_theme_dark

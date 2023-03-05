@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class GetCodesMapper @Inject constructor() {
 
-    operator fun invoke(codes: List<CodeEntity>) = codes.map {
+    fun map(codes: List<CodeEntity>) = codes.map {
         CodeVO(
             uid = it.uid,
             secretCode = it.secretCode,

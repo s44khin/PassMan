@@ -19,7 +19,7 @@ import com.s44khin.passman.core.Screen
 import com.s44khin.uikit.layouts.RootBox
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.Spacer
+import com.s44khin.uikit.widgets.RootSpacer
 import com.s44khin.uikit.widgets.TopNav
 import com.s44khin.uikit.widgets.TopNavIcon
 import kotlinx.coroutines.launch
@@ -44,7 +44,7 @@ fun AddCodeScreen() = Screen<AddCodeState, AddCodeAction, AddCodeViewModel> {
                 )
             )
 
-            Spacer(height = 8.dp, color = AppTheme.colors.rootBackground)
+            RootSpacer(height = 8.dp)
 
             AddCodeScrollableContent(
                 modifier = Modifier.weight(1f),
@@ -53,7 +53,7 @@ fun AddCodeScreen() = Screen<AddCodeState, AddCodeAction, AddCodeViewModel> {
                 onAction = onAction,
             )
 
-            Spacer(height = 8.dp, color = AppTheme.colors.rootBackground)
+            RootSpacer(height = 8.dp)
         }
 
         FloatingActionButton(

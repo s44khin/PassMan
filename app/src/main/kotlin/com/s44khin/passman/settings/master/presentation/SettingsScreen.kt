@@ -15,6 +15,7 @@ import com.s44khin.passman.R
 import com.s44khin.passman.core.Screen
 import com.s44khin.passman.settings.master.presentation.widgets.ThemeBlock
 import com.s44khin.uikit.layouts.RootColumn
+import com.s44khin.uikit.layouts.TitleBlock
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.RootSpacer
 import com.s44khin.uikit.widgets.Spacer
@@ -51,6 +52,6 @@ fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> 
             )
         }
 
-        Spacer(height = 8.dp, color = AppTheme.colors.rootBackground)
+        RootSpacer(height = 8.dp)
     }
 }

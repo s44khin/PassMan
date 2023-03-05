@@ -16,7 +16,7 @@ import com.s44khin.passman.codes.master.presentation.widgets.CodesListScrollable
 import com.s44khin.passman.core.Screen
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.Spacer
+import com.s44khin.uikit.widgets.RootSpacer
 import com.s44khin.uikit.widgets.TopNav
 import com.s44khin.uikit.widgets.TopNavIcon
 import kotlinx.coroutines.launch
@@ -55,7 +55,7 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
             )
         )
 
-        Spacer(height = 8.dp, color = AppTheme.colors.rootBackground)
+        RootSpacer(height = 8.dp)
 
         CodesListScrollableContent(
             scrollState = scrollState,
@@ -64,7 +64,7 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
             onAction = onAction,
         )
 
-        Spacer(height = 8.dp, color = AppTheme.colors.rootBackground)
+        RootSpacer(height = 8.dp)
     }
 }
 

@@ -14,7 +14,7 @@ import com.s44khin.passman.codes.add.presentation.AddCodeState
 import com.s44khin.uikit.widgets.RootSpacer
 
 @Composable
-fun ColumnScope.AddCodeScrollableContent(
+fun AddCodeScrollableContent(
     modifier: Modifier = Modifier,
     state: AddCodeState,
     scrollState: ScrollState,

@@ -1,14 +1,16 @@
 package com.s44khin.passman.codes.add.presentation.data
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 
 enum class CodeColor {
 
     Red, Green, Yellow, Blue, Orange, Brown, Pink, Purple;
 
-    @get:Composable
     val color: Color
+        @Composable
+        @ReadOnlyComposable
         get() = when (this) {
             Red -> Color(0xffb71c1c)
             Green -> Color(0xff1b5e20)

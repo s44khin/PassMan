@@ -5,6 +5,7 @@ import com.s44khin.passman.codes.add.presentation.data.CodeColor
 
 @Immutable
 data class TotpItemVO(
+
     val uid: String,
     val code: String,
     val nextCode: String,

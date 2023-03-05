@@ -7,6 +7,7 @@ import java.util.UUID
 
 @Entity
 data class CodeEntity(
+
     @PrimaryKey val uid: String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "secret_code") val secretCode: String,
     @ColumnInfo(name = "name") val name: String,

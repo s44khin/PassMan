@@ -5,6 +5,7 @@ import com.s44khin.passman.codes.add.presentation.data.CodeColor
 
 @Immutable
 data class CodeVO(
+
     val uid: String,
     val secretCode: String,
     val name: String,

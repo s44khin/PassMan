@@ -17,8 +17,8 @@ import java.util.Date
 import javax.inject.Inject
 
 class CodesListViewModel @Inject constructor(
-    private val getCodesUseCase: GetCodesUseCase,
     private val deleteCodesUseCase: DeleteCodesUseCase,
+    private val getCodesUseCase: GetCodesUseCase,
     private val screenRouter: ScreenRouter,
 ) : BaseViewModel<CodesListState, CodesListAction>(
     initState = CodesListState()
@@ -34,15 +34,15 @@ class CodesListViewModel @Inject constructor(
 
     override fun onAction(action: CodesListAction) = when (action) {
         is CodesListAction.AddClick -> addClick()
-        is CodesListAction.StartEdit -> viewState = viewState.toEdit(action.uid)
-        is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
         is CodesListAction.CheckedClick -> viewState = viewState.toChecked(action.uid)
         is CodesListAction.DeleteClick -> deleteClick()
+        is CodesListAction.StartEdit -> viewState = viewState.toEdit(action.uid)
+        is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
     }
 
     private fun getData() {
         viewModelScope.launch(Dispatchers.IO) {
-            val codes = getCodesUseCase()
+            val codes = getCodesUseCase.execute()
 
             viewState = viewState.toNewList(
                 newCodes = codes.map {
@@ -104,7 +104,7 @@ class CodesListViewModel @Inject constructor(
                 transform = { it.uid }
             )
 
-            deleteCodesUseCase(*deleteIds.toTypedArray())
+            deleteCodesUseCase.execute(*deleteIds.toTypedArray())
 
             viewState = viewState.deleteChecked()
         }

@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class InsertCodeMapper @Inject constructor() {
 
-    operator fun invoke(secretCode: String, name: String, color: CodeColor) = CodeEntity(
+    fun map(secretCode: String, name: String, color: CodeColor) = CodeEntity(
         secretCode = secretCode,
         name = name,
         color = color.name

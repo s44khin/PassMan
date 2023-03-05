@@ -7,5 +7,5 @@ class DeleteCodesUseCase @Inject constructor(
     private val repository: CodesRepository,
 ) {
 
-    suspend operator fun invoke(vararg ids: String) = repository.deleteById(*ids)
+    suspend fun execute(vararg ids: String) = repository.deleteById(*ids)
 }

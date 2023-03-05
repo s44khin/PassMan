@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
-import com.s44khin.passman.di.appComponent
+import com.s44khin.passman.di.extensions.appComponent
 import com.s44khin.passman.navigation.AppBottomNav
 import com.s44khin.passman.navigation.AppNavHost
 import com.s44khin.passman.settings.master.presentation.SettingsViewModel
