@@ -14,5 +14,6 @@ data class TotpItemVO(
     val color: CodeColor,
     val timer: Int,
     val checked: Boolean = false,
-    val account: String?
+    val account: String?,
+    val updateTimer: Int,
 )

@@ -13,7 +13,8 @@ class GetCodesMapper @Inject constructor() {
             secretCode = it.secretCode,
             name = it.name,
             color = CodeColor.valueOf(it.color),
-            account = it.account
+            account = it.account,
+            updateTimer = it.updateTimer
         )
     }
 }

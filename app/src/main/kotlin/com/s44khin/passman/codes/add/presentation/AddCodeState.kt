@@ -7,6 +7,7 @@ import com.s44khin.passman.codes.add.presentation.data.CodeColor
 data class AddCodeState(
     val name: String = "",
     val secretCode: String = "",
+    val updateTimer: String = "",
     val color: CodeColor = CodeColor.Blue,
     val account: String = "",
     val description: String = ""
@@ -21,4 +22,6 @@ data class AddCodeState(
     fun toNewAccount(newAccount: String) = copy(account = newAccount)
 
     fun toNewDescription(newDescription: String) = copy(description = newDescription)
+
+    fun toNewTimer(timer: String) = copy(updateTimer = timer)
 }

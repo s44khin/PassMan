@@ -10,5 +10,6 @@ data class CodeVO(
     val secretCode: String,
     val name: String,
     val color: CodeColor,
-    val account: String?
+    val account: String?,
+    val updateTimer: Int,
 )

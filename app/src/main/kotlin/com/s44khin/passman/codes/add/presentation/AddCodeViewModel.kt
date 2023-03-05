@@ -25,6 +25,7 @@ class AddCodeViewModel @Inject constructor(
         is AddCodeAction.ChangeName -> viewState = viewState.toNewName(action.newName)
         is AddCodeAction.ChangeSecretCode -> viewState = viewState.toNewSecretCode(action.newCode)
         is AddCodeAction.SaveClick -> saveClick()
+        is AddCodeAction.ChangTimer -> viewState = viewState.toNewTimer(action.newTimer)
     }
 
     private fun saveClick() {
@@ -34,7 +35,8 @@ class AddCodeViewModel @Inject constructor(
                 name = viewState.name,
                 color = viewState.color,
                 account = viewState.account.ifEmpty { null },
-                description = viewState.description.ifEmpty { null }
+                description = viewState.description.ifEmpty { null },
+                timer = viewState.updateTimer.toInt()
             )
 
             withContext(Dispatchers.Main) {

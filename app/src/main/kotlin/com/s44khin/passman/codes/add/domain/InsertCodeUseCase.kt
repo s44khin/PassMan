@@ -15,7 +15,8 @@ class InsertCodeUseCase @Inject constructor(
         color: CodeColor,
         account: String?,
         description: String?,
+        timer: Int,
     ) = repository.insertCodes(
-        mapper.map(secretCode, name, color, account, description)
+        mapper.map(secretCode, name, color, account, description, timer)
     )
 }

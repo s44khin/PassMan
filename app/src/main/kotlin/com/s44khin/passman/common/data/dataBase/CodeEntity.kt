@@ -14,4 +14,5 @@ data class CodeEntity(
     @ColumnInfo(name = "color") val color: String,
     @ColumnInfo(name = "account") val account: String?,
     @ColumnInfo(name = "description") val description: String?,
+    @ColumnInfo(name = "update_timer") val updateTimer: Int,
 )

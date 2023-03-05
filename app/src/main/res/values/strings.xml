@@ -3,6 +3,7 @@
     <string name="codes_label">Codes</string>
     <string name="codes_add_new_code_label">Add code</string>
     <string name="codes_secret_code">Secret code</string>
+    <string name="codes_update_timer">Update timer</string>
     <string name="codes_name">Name</string>
     <string name="codes_color">Color</string>
     <string name="codes_account">Account</string>
@@ -19,5 +20,5 @@
     <string name="settings_restart">Restart</string>
     <string name="settings_debug_add_data">Add debug data</string>
     <string name="settings_debug_delete_all">Delete all</string>
-    <string name="settings_debug" translatable="false">Debug</string>
+    <string name="settings_debug">Debug</string>
 </resources>
