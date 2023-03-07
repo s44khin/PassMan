@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.R
-import com.s44khin.passman.codes.master.presentation.CodesListAction
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.RootSpacer
 
@@ -28,13 +27,13 @@ fun ColumnScope.AddDialog(
     qrCode: () -> Unit,
     manually: () -> Unit,
 ) {
-    RootSpacer(height = 16.dp)
+    RootSpacer(height = 8.dp)
 
     AddDialogItem(
         icon = Icons.Rounded.QrCode,
         contentDescription = Icons.Rounded.QrCode.name,
         title = stringResource(R.string.settings_add_qr_code),
-        onClick = {}
+        onClick = { qrCode() }
     )
 
     Divider(startIndent = 16.dp)
