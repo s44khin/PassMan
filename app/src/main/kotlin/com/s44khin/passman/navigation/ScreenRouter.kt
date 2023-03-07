@@ -1,8 +1,10 @@
 package com.s44khin.passman.navigation
 
 import androidx.navigation.NavHostController
+import com.s44khin.passman.di.AppScope
 import javax.inject.Inject
 
+@AppScope
 class ScreenRouter @Inject constructor(
     private val navHostController: NavHostController,
 ) {
