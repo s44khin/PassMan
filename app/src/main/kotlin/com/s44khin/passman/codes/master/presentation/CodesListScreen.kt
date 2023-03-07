@@ -33,8 +33,10 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
                     coroutineScope.launch { bottomSheetState.hide() }
                 },
                 manually = {
-                    onAction(CodesListAction.AddClick)
-                    coroutineScope.launch { bottomSheetState.hide() }
+                    coroutineScope.launch {
+                        bottomSheetState.hide()
+                        onAction(CodesListAction.AddClick)
+                    }
                 }
             )
         },
