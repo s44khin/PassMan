@@ -42,12 +42,13 @@ class CodesListViewModel @Inject constructor(
     }
 
     override fun onAction(action: CodesListAction) = when (action) {
-        is CodesListAction.AddClick -> addClick()
+        is CodesListAction.ManuallyClick -> manuallyClick()
         is CodesListAction.CheckedClick -> viewState = viewState.toChecked(action.uid)
         is CodesListAction.CopyToClipboard -> appRouter.copyToClipboard(action.code)
         is CodesListAction.DeleteClick -> deleteClick()
         is CodesListAction.StartEdit -> viewState = viewState.toEdit(action.uid)
         is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
+        is CodesListAction.QrCodeClick -> qrCodeClick()
     }
 
     private fun getData() {
@@ -97,8 +98,12 @@ class CodesListViewModel @Inject constructor(
         )
     }
 
-    private fun addClick() {
+    private fun manuallyClick() {
         screenRouter.navigateTo(CodesNavigation.Add)
+    }
+
+    private fun qrCodeClick() {
+        screenRouter.navigateTo(CodesNavigation.Scanner)
     }
 
     private fun deleteClick() {

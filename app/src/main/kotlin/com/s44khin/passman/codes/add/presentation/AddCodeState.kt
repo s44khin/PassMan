@@ -7,7 +7,7 @@ import com.s44khin.passman.codes.add.presentation.data.CodeColor
 data class AddCodeState(
     val name: String = "",
     val secretCode: String = "",
-    val updateTimer: String = "",
+    val updateTimer: String = "30",
     val color: CodeColor = CodeColor.Blue,
     val account: String = "",
     val description: String = ""

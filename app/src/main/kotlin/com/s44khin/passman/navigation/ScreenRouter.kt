@@ -15,8 +15,12 @@ class ScreenRouter @Inject constructor(
         signalSubs[key] = action
     }
 
-    fun navigateTo(destination: NavDestination) {
-        navHostController.navigate(destination.route)
+    fun navigateTo(destination: NavDestination, popUpTo: NavDestination? = null) {
+        navHostController.navigate(destination.route) {
+            if (popUpTo != null) {
+                popUpTo(popUpTo.route)
+            }
+        }
     }
 
     fun back() {

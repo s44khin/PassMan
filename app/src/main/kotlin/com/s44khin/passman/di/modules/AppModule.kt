@@ -2,14 +2,11 @@ package com.s44khin.passman.di.modules
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavHostController
 import androidx.room.Room
 import com.s44khin.passman.common.data.dataBase.CodesDataBase
-import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.AppViewModelFactory
 import com.s44khin.passman.di.AppScope
-import com.s44khin.passman.navigation.ScreenRouter
 import dagger.Module
 import dagger.Provides
 import javax.inject.Provider

@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Done
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +30,21 @@ import com.s44khin.uikit.widgets.TopNavIcon
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddCodeScreen() = Screen<AddCodeState, AddCodeAction, AddCodeViewModel> {
+fun AddCodeScreen(
+    name: String? = null,
+    code: String? = null,
+    email: String? = null,
+) = Screen<AddCodeState, AddCodeAction, AddCodeViewModel> {
+    LaunchedEffect(name, code, email) {
+        if (name != null && code != null && email != null) {
+            onAction(
+                AddCodeAction.ArgsTaken(
+                    name = name, code = code, email = email
+                )
+            )
+        }
+    }
+
     RootBox(modifier = Modifier.imePadding()) {
         RootColumn {
             val scrollState = rememberScrollState()

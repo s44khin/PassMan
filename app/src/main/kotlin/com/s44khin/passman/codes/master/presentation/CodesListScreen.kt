@@ -30,12 +30,15 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
         bottomSheetContent = {
             AddDialog(
                 qrCode = {
-                    coroutineScope.launch { bottomSheetState.hide() }
+                    coroutineScope.launch {
+                        bottomSheetState.hide()
+                        onAction(CodesListAction.QrCodeClick)
+                    }
                 },
                 manually = {
                     coroutineScope.launch {
                         bottomSheetState.hide()
-                        onAction(CodesListAction.AddClick)
+                        onAction(CodesListAction.ManuallyClick)
                     }
                 }
             )

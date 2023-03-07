@@ -110,7 +110,7 @@ fun CodesList(
 
         AnimatedVisibility(
             modifier = Modifier
-                .padding(bottom = 16.dp, end = 8.dp)
+                .padding(bottom = 24.dp, end = 16.dp)
                 .align(Alignment.BottomEnd),
             visible = scrollState.value != scrollState.maxValue || scrollState.maxValue == 0,
             enter = scaleIn() + fadeIn(),

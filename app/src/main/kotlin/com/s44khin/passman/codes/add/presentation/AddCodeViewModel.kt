@@ -26,6 +26,7 @@ class AddCodeViewModel @Inject constructor(
         is AddCodeAction.ChangeSecretCode -> viewState = viewState.toNewSecretCode(action.newCode)
         is AddCodeAction.SaveClick -> saveClick()
         is AddCodeAction.ChangTimer -> viewState = viewState.toNewTimer(action.newTimer)
+        is AddCodeAction.ArgsTaken -> argsTaken(action.email, action.code, action.name)
     }
 
     private fun saveClick() {
@@ -43,5 +44,12 @@ class AddCodeViewModel @Inject constructor(
                 screenRouter.backWithSignal(Constants.UPDATE_CODES_LIST)
             }
         }
+    }
+
+    private fun argsTaken(email: String, code: String, name: String) {
+        viewState = viewState
+            .toNewAccount(email)
+            .toNewSecretCode(code)
+            .toNewName(name)
     }
 }
