@@ -33,18 +33,21 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            val rememberNavHostController = remember {
-                navHostController
-            }
+            val rememberNavHostController = remember { navHostController }
+            val rememberViewModelFactory = remember { appViewModelFactory }
 
-            ProvideViewModelFactory(appViewModelFactory) {
+            ProvideViewModelFactory(rememberViewModelFactory) {
                 AppTheme {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
                             .background(color = AppTheme.colors.rootBackground)
                     ) {
-                        AppNavHost(modifier = Modifier.weight(1f), navHostController = navHostController)
+                        AppNavHost(
+                            modifier = Modifier.weight(1f),
+                            navHostController = rememberNavHostController
+                        )
+
                         AppBottomNav(rememberNavHostController)
                     }
                 }

@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
 
-private val BottomNavigationHeight = 56.dp
+val BottomNavigationHeight = 56.dp
 
 @Composable
 fun BottomNav(

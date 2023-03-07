@@ -2,9 +2,12 @@ package com.s44khin.passman.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
@@ -15,13 +18,14 @@ inline fun <STATE : Any, ACTION : Any, reified VIEW_MODEL : BaseViewModel<STATE,
 
     val state by viewModel.state.collectAsState()
 
-    val scope = remember(state) {
+    val scope = remember {
         ScreenScopeImpl(
             state = state,
             onAction = viewModel::onAction
         )
     }
 
+    scope.state = state
     scope.content()
 }
 
@@ -33,8 +37,11 @@ interface ScreenScope<STATE : Any, ACTION : Any> {
     val onAction: (ACTION) -> Unit
 }
 
-@Immutable
+@Stable
 class ScreenScopeImpl<STATE : Any, ACTION : Any>(
-    override val state: STATE,
+    state: STATE,
     override val onAction: (ACTION) -> Unit,
-) : ScreenScope<STATE, ACTION>
+) : ScreenScope<STATE, ACTION> {
+
+    override var state: STATE by mutableStateOf(state)
+}
