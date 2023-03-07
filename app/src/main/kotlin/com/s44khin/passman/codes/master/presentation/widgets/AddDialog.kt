@@ -24,7 +24,10 @@ import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.RootSpacer
 
 @Composable
-fun ColumnScope.AddDialog(onAction: (CodesListAction) -> Unit) {
+fun ColumnScope.AddDialog(
+    qrCode: () -> Unit,
+    manually: () -> Unit,
+) {
     RootSpacer(height = 16.dp)
 
     AddDialogItem(
@@ -40,7 +43,7 @@ fun ColumnScope.AddDialog(onAction: (CodesListAction) -> Unit) {
         icon = Icons.Rounded.List,
         contentDescription = Icons.Rounded.QrCode.name,
         title = stringResource(R.string.settings_add_manually),
-        onClick = {}
+        onClick = { manually() }
     )
 }
 

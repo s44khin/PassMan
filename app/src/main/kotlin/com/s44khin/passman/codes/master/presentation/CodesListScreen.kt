@@ -27,7 +27,17 @@ fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewMod
     BottomSheetWrapper(
         sheetState = bottomSheetState,
         title = stringResource(R.string.codes_add_new_code_label),
-        bottomSheetContent = { AddDialog(onAction) },
+        bottomSheetContent = {
+            AddDialog(
+                qrCode = {
+                    coroutineScope.launch { bottomSheetState.hide() }
+                },
+                manually = {
+                    onAction(CodesListAction.AddClick)
+                    coroutineScope.launch { bottomSheetState.hide() }
+                }
+            )
+        },
         content = {
             CodesList(
                 state = state,
