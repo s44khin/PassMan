@@ -3,16 +3,16 @@ package com.s44khin.passman.core
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import com.s44khin.passman.di.extensions.appComponent
 import com.s44khin.passman.navigation.AppBottomNav
 import com.s44khin.passman.navigation.AppNavHost
+import com.s44khin.uikit.layouts.RootBox
 import com.s44khin.uikit.theme.AppTheme
 import javax.inject.Inject
 
@@ -38,17 +38,18 @@ class MainActivity : ComponentActivity() {
 
             ProvideViewModelFactory(rememberViewModelFactory) {
                 AppTheme {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(color = AppTheme.colors.rootBackground)
-                    ) {
-                        AppNavHost(
-                            modifier = Modifier.weight(1f),
-                            navHostController = rememberNavHostController
+                    RootBox {
+                        AppBottomNav(
+                            modifier = Modifier.align(Alignment.BottomCenter),
+                            navController = rememberNavHostController
                         )
 
-                        AppBottomNav(rememberNavHostController)
+                        AppNavHost(
+                            modifier = Modifier
+                                .align(Alignment.TopCenter)
+                                .fillMaxSize(),
+                            navHostController = rememberNavHostController
+                        )
                     }
                 }
             }

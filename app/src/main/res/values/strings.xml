@@ -8,6 +8,8 @@
     <string name="codes_color">Color</string>
     <string name="codes_account">Account</string>
     <string name="codes_description">Description</string>
+    <string name="settings_add_qr_code">QR code</string>
+    <string name="settings_add_manually">Manually</string>
     <string name="codes_required">Required</string>
     <string name="codes_optional">Optional</string>
     <string name="settings_label">Settings</string>

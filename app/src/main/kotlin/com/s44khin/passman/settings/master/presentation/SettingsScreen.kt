@@ -3,6 +3,7 @@ package com.s44khin.passman.settings.master.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -18,13 +19,19 @@ import com.s44khin.passman.core.Screen
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
 import com.s44khin.passman.settings.master.presentation.widgets.OtherBlock
 import com.s44khin.uikit.layouts.RootColumn
+import com.s44khin.uikit.widgets.BottomNavigationHeight
 import com.s44khin.uikit.widgets.RootSpacer
 import com.s44khin.uikit.widgets.TopNav
 import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> {
-    RootColumn(modifier = Modifier.fillMaxSize()) {
+    RootColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = BottomNavigationHeight)
+            .navigationBarsPadding()
+    ) {
         val scrollState = rememberScrollState()
         val coroutineScope = rememberCoroutineScope()
         val isDebug = remember { BuildConfig.DEBUG }

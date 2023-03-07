@@ -7,6 +7,7 @@ import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -39,12 +40,15 @@ private val bottomNavItemsRouts = listOf(
 )
 
 @Composable
-fun AppBottomNav(navController: NavController) {
+fun AppBottomNav(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
     if (currentDestination?.route in bottomNavItemsRouts) {
-        BottomNav {
+        BottomNav(modifier) {
             bottomNavItems.forEach { navItem ->
                 val selected = currentDestination?.hierarchy?.any { it.route == navItem.route } == true
 
