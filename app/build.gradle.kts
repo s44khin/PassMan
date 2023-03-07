@@ -52,6 +52,8 @@ android {
 
 dependencies {
 
+    implementation(project(":uikit"))
+
     implementation(libs.coreKtx)
     implementation(libs.appCompat)
     implementation(libs.appCompat)
@@ -67,7 +69,7 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.totp)
     implementation(libs.room)
-    implementation(project(mapOf("path" to ":uikit")))
+
     kapt(libs.dagger.compiler)
     kapt(libs.room.compiler)
 }
