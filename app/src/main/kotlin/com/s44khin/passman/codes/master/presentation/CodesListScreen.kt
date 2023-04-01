@@ -9,13 +9,13 @@ import androidx.compose.ui.res.stringResource
 import com.s44khin.passman.R
 import com.s44khin.passman.codes.master.presentation.widgets.AddDialog
 import com.s44khin.passman.codes.master.presentation.widgets.CodesList
-import com.s44khin.passman.core.Screen
+import com.s44khin.passman.core.BaseScreen
 import com.s44khin.uikit.util.BottomSheetWrapper
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CodesListScreen() = Screen<CodesListState, CodesListAction, CodesListViewModel> {
+fun CodesListScreen() = BaseScreen<CodesListState, CodesListAction, CodesListViewModel> {
     val bottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },

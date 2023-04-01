@@ -1,10 +1,13 @@
 package com.s44khin.passman.settings.master.presentation
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.common.Constants
+import com.s44khin.passman.core.ActionHandler
 import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.AppStorage
-import com.s44khin.passman.core.BaseViewModel
+import com.s44khin.passman.core.StateStore
+import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.settings.master.domain.DeleteAllUseCase
 import com.s44khin.passman.settings.master.domain.InsertCodesUseCase
 import com.s44khin.passman.settings.master.presentation.data.codeMock
@@ -17,7 +20,7 @@ class SettingsViewModel @Inject constructor(
     private val appStorage: AppStorage,
     private val deleteAllUseCase: DeleteAllUseCase,
     private val insertCodesUseCase: InsertCodesUseCase,
-) : BaseViewModel<SettingsState, SettingsAction>(
+) : ViewModel(), ActionHandler<SettingsAction>, StateStore<SettingsState> by StateStoreDelegate(
     initState = SettingsState(
         showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
     )

@@ -1,5 +1,6 @@
 package com.s44khin.passman.codes.master.presentation
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.master.domain.DeleteCodesUseCase
 import com.s44khin.passman.codes.master.domain.GetCodesUseCase
@@ -7,9 +8,11 @@ import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
 import com.s44khin.passman.common.Constants
 import com.s44khin.passman.common.TotpHelper
+import com.s44khin.passman.core.ActionHandler
 import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.AppStorage
-import com.s44khin.passman.core.BaseViewModel
+import com.s44khin.passman.core.StateStore
+import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.navigation.ScreenRouter
 import com.s44khin.passman.util.filterMap
 import com.s44khin.passman.util.infinity
@@ -25,7 +28,7 @@ class CodesListViewModel @Inject constructor(
     private val screenRouter: ScreenRouter,
     private val totpHelper: TotpHelper,
     appStorage: AppStorage,
-) : BaseViewModel<CodesListState, CodesListAction>(
+) : ViewModel(), ActionHandler<CodesListAction>, StateStore<CodesListState> by StateStoreDelegate(
     initState = CodesListState(
         showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
     )

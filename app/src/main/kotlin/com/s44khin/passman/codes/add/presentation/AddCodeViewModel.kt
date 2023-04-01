@@ -1,9 +1,12 @@
 package com.s44khin.passman.codes.add.presentation
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.add.domain.InsertCodeUseCase
 import com.s44khin.passman.common.Constants
-import com.s44khin.passman.core.BaseViewModel
+import com.s44khin.passman.core.ActionHandler
+import com.s44khin.passman.core.StateStore
+import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.navigation.ScreenRouter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +16,7 @@ import javax.inject.Inject
 class AddCodeViewModel @Inject constructor(
     private val insertCodeUseCase: InsertCodeUseCase,
     private val screenRouter: ScreenRouter,
-) : BaseViewModel<AddCodeState, AddCodeAction>(
+) : ViewModel(), ActionHandler<AddCodeAction>, StateStore<AddCodeState> by StateStoreDelegate(
     initState = AddCodeState()
 ) {
 

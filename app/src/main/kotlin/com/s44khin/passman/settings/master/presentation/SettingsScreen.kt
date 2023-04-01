@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.BuildConfig
 import com.s44khin.passman.R
-import com.s44khin.passman.core.Screen
+import com.s44khin.passman.core.BaseScreen
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
 import com.s44khin.passman.settings.master.presentation.widgets.OtherBlock
 import com.s44khin.uikit.layouts.RootColumn
@@ -25,7 +25,7 @@ import com.s44khin.uikit.widgets.TopNav
 import kotlinx.coroutines.launch
 
 @Composable
-fun SettingsScreen() = Screen<SettingsState, SettingsAction, SettingsViewModel> {
+fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewModel> {
     RootColumn(
         modifier = Modifier
             .fillMaxSize()

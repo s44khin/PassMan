@@ -1,9 +1,12 @@
 package com.s44khin.passman.codes.qrscanner.presentation
 
 import android.net.Uri
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.navigation.CodesNavigation
-import com.s44khin.passman.core.BaseViewModel
+import com.s44khin.passman.core.ActionHandler
+import com.s44khin.passman.core.StateStore
+import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.navigation.ScreenRouter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,7 +15,7 @@ import javax.inject.Inject
 
 class ScannerViewModel @Inject constructor(
     private val screenRouter: ScreenRouter,
-) : BaseViewModel<ScannerViewState, ScannerAction>(
+) : ViewModel(), ActionHandler<ScannerAction>, StateStore<ScannerViewState> by StateStoreDelegate(
     initState = ScannerViewState()
 ) {
 

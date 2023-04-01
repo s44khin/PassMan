@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.R
 import com.s44khin.passman.codes.add.presentation.widgets.AddCodeScrollableContent
-import com.s44khin.passman.core.Screen
+import com.s44khin.passman.core.BaseScreen
 import com.s44khin.uikit.layouts.RootBox
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.theme.AppTheme
@@ -34,7 +34,7 @@ fun AddCodeScreen(
     name: String? = null,
     code: String? = null,
     email: String? = null,
-) = Screen<AddCodeState, AddCodeAction, AddCodeViewModel> {
+) = BaseScreen<AddCodeState, AddCodeAction, AddCodeViewModel> {
     LaunchedEffect(name, code, email) {
         if (name != null && code != null && email != null) {
             onAction(

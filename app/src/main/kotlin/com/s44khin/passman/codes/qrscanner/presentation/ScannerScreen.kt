@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.s44khin.passman.codes.qrscanner.presentation.widgets.CameraPreview
-import com.s44khin.passman.core.Screen
+import com.s44khin.passman.core.BaseScreen
 import com.s44khin.uikit.layouts.RootColumn
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun ScannerScreen() = Screen<ScannerViewState, ScannerAction, ScannerViewModel> {
+fun ScannerScreen() = BaseScreen<ScannerViewState, ScannerAction, ScannerViewModel> {
     val cameraPermissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
     RootColumn(
         modifier = Modifier
@@ -26,7 +26,7 @@ fun ScannerScreen() = Screen<ScannerViewState, ScannerAction, ScannerViewModel> 
             Text(text = "add permission")
         }
 
-        CameraPreview() {
+        CameraPreview {
             onAction(ScannerAction.OnQrGetting(it))
         }
     }

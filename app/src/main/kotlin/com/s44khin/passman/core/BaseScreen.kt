@@ -8,12 +8,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-inline fun <STATE : Any, ACTION : Any, reified VIEW_MODEL : BaseViewModel<STATE, ACTION>> Screen(
+inline fun <STATE : Any, ACTION : Any, reified VIEW_MODEL> BaseScreen(
     content: @Composable ScreenScope<STATE, ACTION>.() -> Unit
-) {
+) where VIEW_MODEL : ViewModel, VIEW_MODEL : StateStore<STATE>, VIEW_MODEL : ActionHandler<ACTION> {
     val viewModel: VIEW_MODEL = viewModel(factory = LocalViewModelFactoryProvider.current)
 
     val state by viewModel.state.collectAsState()
