@@ -29,14 +29,16 @@ class CodesListViewModel @Inject constructor(
     private val totpHelper: TotpHelper,
     appStorage: AppStorage,
 ) : ViewModel(), ActionHandler<CodesListAction>, StateStore<CodesListState> by StateStoreDelegate(
-    initState = CodesListState(
-        showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
-    )
+    initState = CodesListState()
 ) {
 
     private var updateJob: Job? = null
 
     init {
+        viewState = viewState.copy(
+            showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
+        )
+
         screenRouter.onSignal(Constants.UPDATE_CODES_LIST) {
             getData()
         }
@@ -55,24 +57,28 @@ class CodesListViewModel @Inject constructor(
     }
 
     private fun getData() {
+        viewState = viewState.toLoading()
+
         viewModelScope.launch(Dispatchers.IO) {
             val codes = getCodesUseCase.execute()
 
-            viewState = viewState.toNewList(
-                newCodes = codes.map {
-                    TotpItemVO(
-                        uid = it.uid,
-                        name = it.name,
-                        secretCode = it.secretCode,
-                        nextCode = totpHelper.getCurrentCode(it.secretCode),
-                        code = totpHelper.getNextCode(it.secretCode, it.updateTimer),
-                        color = it.color,
-                        timer = totpHelper.getTimer(it.updateTimer),
-                        account = it.account,
-                        updateTimer = it.updateTimer,
-                    )
-                }
-            )
+            viewState = viewState
+                .toNewList(
+                    newCodes = codes.map {
+                        TotpItemVO(
+                            uid = it.uid,
+                            name = it.name,
+                            secretCode = it.secretCode,
+                            nextCode = totpHelper.getCurrentCode(it.secretCode),
+                            code = totpHelper.getNextCode(it.secretCode, it.updateTimer),
+                            color = it.color,
+                            timer = totpHelper.getTimer(it.updateTimer),
+                            account = it.account,
+                            updateTimer = it.updateTimer,
+                        )
+                    }
+                )
+                .toContent()
         }
 
         updateJob?.cancel()

@@ -6,13 +6,19 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Close
@@ -22,12 +28,14 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.s44khin.passman.R
 import com.s44khin.passman.codes.master.presentation.CodesListAction
+import com.s44khin.passman.codes.master.presentation.CodesListMode
 import com.s44khin.passman.codes.master.presentation.CodesListState
 import com.s44khin.uikit.layouts.RootBox
 import com.s44khin.uikit.layouts.RootColumn
@@ -97,13 +105,35 @@ fun CodesList(
 
             RootSpacer(height = 8.dp)
 
-            CodesListScrollableContent(
-                scrollState = scrollState,
-                list = state.codes,
-                showNextCode = state.showNextCode,
-                inEdit = state.inEdit,
-                onAction = onAction,
-            )
+            when (state.mode) {
+                CodesListMode.CONTENT -> {
+                    if (state.codes.isNotEmpty()) {
+                        CodesListScrollableContent(
+                            scrollState = scrollState,
+                            list = state.codes,
+                            showNextCode = state.showNextCode,
+                            inEdit = state.inEdit,
+                            onAction = onAction,
+                        )
+                    } else {
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(24.dp))
+                                .background(color = AppTheme.colors.background)
+                        ) {
+                            Text(
+                                modifier = Modifier.align(Alignment.Center),
+                                text = "You haven't added anything yet"
+                            )
+                        }
+                    }
+                }
+
+                CodesListMode.LOADING -> CircularProgressIndicator()
+                CodesListMode.ERROR -> TODO()
+            }
 
             RootSpacer(height = 8.dp)
         }

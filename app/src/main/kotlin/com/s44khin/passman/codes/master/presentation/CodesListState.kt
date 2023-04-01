@@ -6,6 +6,7 @@ import com.s44khin.passman.util.mapIf
 
 @Immutable
 data class CodesListState(
+    val mode: CodesListMode = CodesListMode.LOADING,
     val codes: List<TotpItemVO> = emptyList(),
     val inEdit: Boolean = false,
     val showNextCode: Boolean = true,
@@ -44,4 +45,14 @@ data class CodesListState(
         codes = codes.filter { !it.checked },
         inEdit = false,
     )
+
+    fun toContent() = copy(mode = CodesListMode.CONTENT)
+
+    fun toLoading() = copy(mode = CodesListMode.LOADING)
+
+    fun toError() = copy(mode = CodesListMode.ERROR)
+}
+
+enum class CodesListMode {
+    CONTENT, LOADING, ERROR
 }
