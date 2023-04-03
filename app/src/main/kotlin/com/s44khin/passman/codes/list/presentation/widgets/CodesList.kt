@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation.widgets
+package com.s44khin.passman.codes.list.presentation.widgets
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -34,9 +34,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.s44khin.passman.R
-import com.s44khin.passman.codes.master.presentation.CodesListAction
-import com.s44khin.passman.codes.master.presentation.CodesListMode
-import com.s44khin.passman.codes.master.presentation.CodesListState
+import com.s44khin.passman.codes.list.presentation.CodesListAction
+import com.s44khin.passman.codes.list.presentation.CodesListMode
+import com.s44khin.passman.codes.list.presentation.CodesListState
 import com.s44khin.uikit.layouts.RootBox
 import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.theme.AppTheme

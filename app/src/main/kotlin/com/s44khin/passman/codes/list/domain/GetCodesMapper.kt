@@ -1,7 +1,7 @@
-package com.s44khin.passman.codes.master.domain
+package com.s44khin.passman.codes.list.domain
 
 import com.s44khin.passman.codes.add.presentation.data.CodeColor
-import com.s44khin.passman.codes.master.presentation.data.CodeVO
+import com.s44khin.passman.codes.list.presentation.data.CodeVO
 import com.s44khin.passman.common.data.dataBase.CodeEntity
 import javax.inject.Inject
 

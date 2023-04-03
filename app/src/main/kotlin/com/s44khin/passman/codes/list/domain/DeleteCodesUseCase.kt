@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.domain
+package com.s44khin.passman.codes.list.domain
 
 import com.s44khin.passman.common.data.CodesRepository
 import javax.inject.Inject

@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.s44khin.passman.codes.add.presentation.AddCodeScreen
-import com.s44khin.passman.codes.master.presentation.CodesListScreen
+import com.s44khin.passman.codes.list.presentation.CodesListScreen
 import com.s44khin.passman.codes.qrscanner.presentation.ScannerScreen
 import com.s44khin.passman.navigation.NavDestination
 import com.s44khin.passman.navigation.extensions.composable

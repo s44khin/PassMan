@@ -1,7 +1,7 @@
-package com.s44khin.passman.codes.master.presentation
+package com.s44khin.passman.codes.list.presentation
 
 import androidx.compose.runtime.Immutable
-import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
+import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.passman.util.mapIf
 
 @Immutable

@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation
+package com.s44khin.passman.codes.list.presentation
 
 sealed class CodesListAction {
 

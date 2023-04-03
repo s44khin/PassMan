@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation
+package com.s44khin.passman.codes.list.presentation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import com.s44khin.passman.R
-import com.s44khin.passman.codes.master.presentation.widgets.AddDialog
-import com.s44khin.passman.codes.master.presentation.widgets.CodesList
+import com.s44khin.passman.codes.list.presentation.widgets.AddDialog
+import com.s44khin.passman.codes.list.presentation.widgets.CodesList
 import com.s44khin.passman.core.BaseScreen
 import com.s44khin.uikit.util.BottomSheetWrapper
 import kotlinx.coroutines.launch

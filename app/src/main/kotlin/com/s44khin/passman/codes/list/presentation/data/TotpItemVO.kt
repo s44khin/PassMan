@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation.data
+package com.s44khin.passman.codes.list.presentation.data
 
 import androidx.compose.runtime.Immutable
 import com.s44khin.passman.codes.add.presentation.data.CodeColor

@@ -1,10 +1,10 @@
-package com.s44khin.passman.codes.master.presentation
+package com.s44khin.passman.codes.list.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.s44khin.passman.codes.master.domain.DeleteCodesUseCase
-import com.s44khin.passman.codes.master.domain.GetCodesUseCase
-import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
+import com.s44khin.passman.codes.list.domain.DeleteCodesUseCase
+import com.s44khin.passman.codes.list.domain.GetCodesUseCase
+import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.passman.codes.navigation.CodesNavigation
 import com.s44khin.passman.common.Constants
 import com.s44khin.passman.common.TotpHelper

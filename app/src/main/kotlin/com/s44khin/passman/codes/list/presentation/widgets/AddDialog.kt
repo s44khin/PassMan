@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation.widgets
+package com.s44khin.passman.codes.list.presentation.widgets
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.ColumnScope

@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation.widgets
+package com.s44khin.passman.codes.list.presentation.widgets
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.s44khin.passman.codes.master.presentation.CodesListAction
-import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
+import com.s44khin.passman.codes.list.presentation.CodesListAction
+import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.AppCheckBox
 import com.s44khin.uikit.widgets.Spacer

@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.master.presentation.widgets
+package com.s44khin.passman.codes.list.presentation.widgets
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.s44khin.passman.codes.master.presentation.CodesListAction
-import com.s44khin.passman.codes.master.presentation.data.TotpItemVO
+import com.s44khin.passman.codes.list.presentation.CodesListAction
+import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
 
 @Composable
