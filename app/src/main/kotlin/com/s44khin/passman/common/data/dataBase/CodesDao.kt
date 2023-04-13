@@ -18,4 +18,7 @@ interface CodesDao {
 
     @Query("DELETE FROM CodeEntity")
     suspend fun deleteAll()
+
+    @Query("UPDATE CodeEntity SET pinned = NOT pinned WHERE uid in (:ids)")
+    suspend fun update(vararg ids: String)
 }

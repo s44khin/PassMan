@@ -23,6 +23,7 @@ fun ColorBlock(
     TitleBlock(
         modifier = modifier,
         title = stringResource(R.string.codes_color),
+        spacerHeight = 8.dp,
     ) {
         Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
             Spacer(width = 16.dp)

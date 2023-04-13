@@ -1,21 +1,21 @@
 package com.s44khin.uikit.widgets
 
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.s44khin.uikit.theme.AppTheme
 
 @Composable
-fun AppCheckBox(
+fun AppRadioButton(
     modifier: Modifier = Modifier,
-    checked: Boolean,
-    onCheckedChange: ((Boolean) -> Unit),
+    selected: Boolean,
+    onClick: (() -> Unit),
 ) {
-    Checkbox(
+    RadioButton(
         modifier = modifier,
-        checked = checked,
-        colors = CheckboxDefaults.colors(checkedColor = AppTheme.colors.primary),
-        onCheckedChange = onCheckedChange,
+        selected = selected,
+        colors = RadioButtonDefaults.colors(selectedColor = AppTheme.colors.primary),
+        onClick = onClick,
     )
 }

@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.RootSpacer
+import com.s44khin.uikit.widgets.Spacer
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -50,7 +50,7 @@ fun BottomSheetWrapper(
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(24.dp))
                     .background(
-                        color = AppTheme.colors.rootBackground,
+                        color = AppTheme.colors.background,
                         shape = RoundedCornerShape(24.dp)
                     )
             ) {
@@ -65,7 +65,7 @@ fun BottomSheetWrapper(
 
                 bottomSheetContent()
 
-                RootSpacer(height = 16.dp)
+                Spacer(height = 16.dp)
                 Spacer(modifier = Modifier.navigationBarsPadding())
             }
         },

@@ -12,4 +12,5 @@ data class CodeVO(
     val color: CodeColor,
     val account: String?,
     val updateTimer: Int,
+    val pinned: Boolean,
 )

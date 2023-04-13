@@ -24,6 +24,7 @@ class ScannerViewModel @Inject constructor(
 
     override fun onAction(action: ScannerAction) = when (action) {
         is ScannerAction.OnQrGetting -> onQrGetting(action.qr)
+        is ScannerAction.BackClick -> screenRouter.back()
     }
 
     private fun onQrGetting(qr: String) {

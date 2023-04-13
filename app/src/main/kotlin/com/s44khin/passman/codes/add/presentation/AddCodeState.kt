@@ -13,6 +13,9 @@ data class AddCodeState(
     val description: String = ""
 ) {
 
+    val buttonIsEnabled: Boolean
+        get() = name.isNotEmpty() && secretCode.isNotEmpty() && updateTimer.isNotEmpty()
+
     fun toNewName(newName: String) = copy(name = newName)
 
     fun toNewSecretCode(newSecretCode: String) = copy(secretCode = newSecretCode)

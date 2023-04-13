@@ -9,7 +9,8 @@ data class CodesListState(
     val mode: CodesListMode = CodesListMode.LOADING,
     val codes: List<TotpItemVO> = emptyList(),
     val inEdit: Boolean = false,
-    val showNextCode: Boolean = true,
+    val showNextCode: Boolean = false,
+    val showColor: Boolean = true,
 ) {
 
     fun toNewList(newCodes: List<TotpItemVO>) = copy(codes = newCodes)

@@ -16,17 +16,16 @@ import androidx.compose.ui.unit.dp
 import com.s44khin.passman.BuildConfig
 import com.s44khin.passman.R
 import com.s44khin.passman.core.BaseScreen
+import com.s44khin.passman.settings.master.presentation.widgets.CodesBlock
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
-import com.s44khin.passman.settings.master.presentation.widgets.OtherBlock
-import com.s44khin.uikit.layouts.RootColumn
 import com.s44khin.uikit.widgets.BottomNavigationHeight
-import com.s44khin.uikit.widgets.RootSpacer
+import com.s44khin.uikit.widgets.Spacer
 import com.s44khin.uikit.widgets.TopNav
 import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewModel> {
-    RootColumn(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(bottom = BottomNavigationHeight)
@@ -45,7 +44,7 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
             },
         )
 
-        RootSpacer(height = 8.dp)
+        Spacer(height = 8.dp)
 
         Column(
             modifier = Modifier
@@ -53,14 +52,16 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
         ) {
-            OtherBlock(
-                modifier = Modifier.padding(vertical = 16.dp),
+            Spacer(height = 8.dp)
+
+            CodesBlock(
+                modifier = Modifier.padding(),
                 state = state,
                 onAction = onAction,
             )
 
             if (isDebug) {
-                RootSpacer(height = 8.dp)
+                Spacer(height = 8.dp)
 
                 DebugBlock(
                     modifier = Modifier.padding(top = 16.dp),
@@ -68,7 +69,5 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
                 )
             }
         }
-
-        RootSpacer(height = 8.dp)
     }
 }

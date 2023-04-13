@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 fun CodesListScreen() = BaseScreen<CodesListState, CodesListAction, CodesListViewModel> {
     val bottomSheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
-        confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded },
-        skipHalfExpanded = true,
+        confirmValueChange = { it != ModalBottomSheetValue.HalfExpanded },
+        skipHalfExpanded = false
     )
 
     val coroutineScope = rememberCoroutineScope()

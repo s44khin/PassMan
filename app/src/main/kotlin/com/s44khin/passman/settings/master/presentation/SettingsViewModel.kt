@@ -2,12 +2,11 @@ package com.s44khin.passman.settings.master.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.s44khin.passman.common.Constants
 import com.s44khin.passman.core.ActionHandler
 import com.s44khin.passman.core.AppRouter
-import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.StateStore
 import com.s44khin.passman.core.StateStoreDelegate
+import com.s44khin.passman.settings.master.SettingsRepository
 import com.s44khin.passman.settings.master.domain.DeleteAllUseCase
 import com.s44khin.passman.settings.master.domain.InsertCodesUseCase
 import com.s44khin.passman.settings.master.presentation.data.codeMock
@@ -17,12 +16,13 @@ import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
     private val appRouter: AppRouter,
-    private val appStorage: AppStorage,
     private val deleteAllUseCase: DeleteAllUseCase,
     private val insertCodesUseCase: InsertCodesUseCase,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel(), ActionHandler<SettingsAction>, StateStore<SettingsState> by StateStoreDelegate(
     initState = SettingsState(
-        showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
+        showNextCode = settingsRepository.showNextCode,
+        showColor = settingsRepository.showColor,
     )
 ) {
 
@@ -30,9 +30,9 @@ class SettingsViewModel @Inject constructor(
 
     override fun onAction(action: SettingsAction) = when (action) {
         is SettingsAction.AddDebugData -> addDebugData()
-        is SettingsAction.DeleteAll -> deleteAll()
+        is SettingsAction.ChangeShowColor -> changeShowColor()
         is SettingsAction.ChangeShowNextCode -> changeShowNextCode()
-        is SettingsAction.Restart -> restart()
+        is SettingsAction.DeleteAll -> deleteAll()
     }
 
     private fun deleteAll() {
@@ -49,15 +49,24 @@ class SettingsViewModel @Inject constructor(
 
     private fun changeShowNextCode() {
         viewState = viewState.changeShowNextCode()
-        appStorage.putBoolean(key = Constants.SHOW_NEXT_CODE_KEY, value = viewState.showNextCode)
+        settingsRepository.showNextCode = !settingsRepository.showNextCode
         viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
+        update()
+    }
+
+    private fun changeShowColor() {
+        viewState = viewState.changeShowColor()
+        settingsRepository.showColor = !settingsRepository.showColor
+        viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
+        update()
     }
 
     private fun checkButtonEnabled(): Boolean = with(viewState) {
-        showNextCode != savedState.showNextCode
+        showNextCode != savedState.showNextCode ||
+                showColor != savedState.showColor
     }
 
-    private fun restart() {
-        appRouter.restart()
+    private fun update() = viewModelScope.launch(Dispatchers.IO) {
+        settingsRepository.postUpdate()
     }
 }

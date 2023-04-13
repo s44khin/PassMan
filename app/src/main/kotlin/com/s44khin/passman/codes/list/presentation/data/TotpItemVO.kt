@@ -16,4 +16,5 @@ data class TotpItemVO(
     val checked: Boolean = false,
     val account: String?,
     val updateTimer: Int,
+    val pinned: Boolean = false,
 )

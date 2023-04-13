@@ -1,44 +1,49 @@
 package com.s44khin.uikit.widgets
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
 
-val BottomNavigationHeight = 56.dp
+val BottomNavigationHeight = 56.5.dp
 
 @Composable
 fun BottomNav(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
-    Row(
-        modifier = modifier
-            .background(
-                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-                color = AppTheme.colors.background
-            )
-            .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-            .navigationBarsPadding()
-            .fillMaxWidth()
-            .height(BottomNavigationHeight)
-            .selectableGroup()
+    Column(modifier = modifier.fillMaxWidth()) {
+        Divider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 0.5.dp
+        )
 
-    ) {
-        content()
+        Surface(elevation = 0.dp) {
+            Row(
+                modifier = Modifier
+                    .background(color = AppTheme.colors.background)
+                    .navigationBarsPadding()
+                    .fillMaxWidth()
+                    .height(BottomNavigationHeight - 0.5.dp)
+                    .selectableGroup()
+            ) {
+                content()
+            }
+        }
     }
 }
 

@@ -20,14 +20,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.R
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.RootSpacer
+import com.s44khin.uikit.widgets.Spacer
 
 @Composable
 fun ColumnScope.AddDialog(
     qrCode: () -> Unit,
     manually: () -> Unit,
 ) {
-    RootSpacer(height = 8.dp)
+    Spacer(height = 8.dp)
 
     AddDialogItem(
         icon = Icons.Rounded.QrCode,
@@ -66,7 +66,7 @@ private fun AddDialogItem(
             tint = AppTheme.colors.textOnBackground,
         )
 
-        RootSpacer(width = 8.dp)
+        Spacer(width = 8.dp)
 
         Text(
             modifier = Modifier.weight(1f),

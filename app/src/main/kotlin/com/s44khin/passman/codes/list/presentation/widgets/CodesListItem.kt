@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.AppCheckBox
+import com.s44khin.uikit.widgets.AppRadioButton
 import com.s44khin.uikit.widgets.Spacer
 
 @Immutable
@@ -43,6 +43,7 @@ fun CodesListItem(
     item: TotpItemVO,
     inEdit: Boolean,
     showNextCode: Boolean,
+    showColor: Boolean,
     onAction: (CodesListAction) -> Unit,
 ) {
     Row(
@@ -61,7 +62,9 @@ fun CodesListItem(
             .padding(start = 16.dp, top = 8.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Bullet(color = item.color.color)
+        if (showColor) {
+            Bullet(color = item.color.color, isPinned = item.pinned)
+        }
 
         Spacer(width = 16.dp)
 
@@ -138,9 +141,9 @@ fun CodesListItem(
             enter = fadeIn() + slideInHorizontally { it },
             exit = fadeOut() + slideOutHorizontally { it },
         ) {
-            AppCheckBox(
-                checked = item.checked,
-                onCheckedChange = { onAction(CodesListAction.CheckedClick(item.uid)) }
+            AppRadioButton(
+                selected = item.checked,
+                onClick = { onAction(CodesListAction.CheckedClick(item.uid)) }
             )
         }
     }

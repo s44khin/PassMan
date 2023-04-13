@@ -14,7 +14,6 @@ import androidx.navigation.NavHostController
 import com.s44khin.passman.di.extensions.appComponent
 import com.s44khin.passman.navigation.AppBottomNav
 import com.s44khin.passman.navigation.AppNavHost
-import com.s44khin.uikit.layouts.RootBox
 import com.s44khin.uikit.theme.AppTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,19 +45,17 @@ class MainActivity : ComponentActivity() {
 
             ProvideViewModelFactory(rememberViewModelFactory) {
                 AppTheme {
-                    RootBox {
-                        AppBottomNav(
-                            modifier = Modifier.align(Alignment.BottomCenter),
-                            navController = rememberNavHostController
-                        )
+                    AppBottomNav(
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        navController = rememberNavHostController
+                    )
 
-                        AppNavHost(
-                            modifier = Modifier
-                                .align(Alignment.TopCenter)
-                                .fillMaxSize(),
-                            navHostController = rememberNavHostController
-                        )
-                    }
+                    AppNavHost(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .fillMaxSize(),
+                        navHostController = rememberNavHostController
+                    )
                 }
             }
         }

@@ -1,8 +1,8 @@
 package com.s44khin.passman.codes.list.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.s44khin.passman.codes.list.domain.ChangePinnedCodesUseCase
 import com.s44khin.passman.codes.list.domain.DeleteCodesUseCase
 import com.s44khin.passman.codes.list.domain.GetCodesUseCase
 import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
@@ -11,10 +11,10 @@ import com.s44khin.passman.common.Constants
 import com.s44khin.passman.common.TotpHelper
 import com.s44khin.passman.core.ActionHandler
 import com.s44khin.passman.core.AppRouter
-import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.core.StateStore
 import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.navigation.ScreenRouter
+import com.s44khin.passman.settings.master.SettingsRepository
 import com.s44khin.passman.util.filterMap
 import com.s44khin.passman.util.infinity
 import kotlinx.coroutines.Dispatchers
@@ -27,24 +27,24 @@ class CodesListViewModel @Inject constructor(
     private val deleteCodesUseCase: DeleteCodesUseCase,
     private val getCodesUseCase: GetCodesUseCase,
     private val screenRouter: ScreenRouter,
+    private val settingsRepository: SettingsRepository,
     private val totpHelper: TotpHelper,
-    appStorage: AppStorage,
+    private val changePinnedCodesUseCase: ChangePinnedCodesUseCase,
 ) : ViewModel(), ActionHandler<CodesListAction>, StateStore<CodesListState> by StateStoreDelegate(
-    initState = CodesListState()
+    initState = CodesListState(
+        showNextCode = settingsRepository.showNextCode,
+        showColor = settingsRepository.showColor
+    )
 ) {
 
     private var updateJob: Job? = null
 
     init {
-        viewState = viewState.copy(
-            showNextCode = appStorage.getBoolean(key = Constants.SHOW_NEXT_CODE_KEY, defaultValue = true)
-        )
-
-        screenRouter.onSignal(Constants.UPDATE_CODES_LIST) {
-            getData()
-        }
+        subscribeToNavSignals()
+        subscribeToSettingsUpdate()
 
         getData()
+        updateSettings()
     }
 
     override fun onAction(action: CodesListAction) = when (action) {
@@ -55,6 +55,7 @@ class CodesListViewModel @Inject constructor(
         is CodesListAction.StartEdit -> viewState = viewState.toEdit(action.uid)
         is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
         is CodesListAction.QrCodeClick -> qrCodeClick()
+        is CodesListAction.PinClick -> pinClick()
     }
 
     private fun getData() {
@@ -76,8 +77,9 @@ class CodesListViewModel @Inject constructor(
                             timer = totpHelper.getTimer(it.updateTimer),
                             account = it.account,
                             updateTimer = it.updateTimer,
+                            pinned = it.pinned,
                         )
-                    }
+                    }.sortedBy { !it.pinned }
                 )
                 .toContent()
         }
@@ -114,7 +116,6 @@ class CodesListViewModel @Inject constructor(
 
     private fun qrCodeClick() {
         screenRouter.navigateTo(CodesNavigation.Scanner)
-        Log.e("ScannerViewModel", "qr click")
     }
 
     private fun deleteClick() {
@@ -127,6 +128,40 @@ class CodesListViewModel @Inject constructor(
             deleteCodesUseCase.execute(*deleteIds.toTypedArray())
 
             viewState = viewState.deleteChecked()
+        }
+    }
+
+    private fun subscribeToNavSignals() {
+        screenRouter.onSignal(Constants.UPDATE_CODES_LIST) {
+            getData()
+        }
+    }
+
+    private fun subscribeToSettingsUpdate() = viewModelScope.launch(Dispatchers.IO) {
+        settingsRepository.events.collect { event ->
+            when (event) {
+                SettingsRepository.SettingsEvents.UPDATE -> updateSettings()
+            }
+        }
+    }
+
+    private fun updateSettings() {
+        viewState = viewState.copy(
+            showColor = settingsRepository.showColor,
+            showNextCode = settingsRepository.showNextCode,
+        )
+    }
+
+    private fun pinClick() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val pinnedIds = viewState.codes.filterMap(
+                predicate = { it.checked },
+                transform = { it.uid }
+            )
+
+            changePinnedCodesUseCase.execute(*pinnedIds.toTypedArray())
+            getData()
+            viewState = viewState.stopEdit()
         }
     }
 }

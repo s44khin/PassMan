@@ -3,14 +3,13 @@ package com.s44khin.passman.codes.add.presentation.widgets
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.codes.add.presentation.AddCodeAction
 import com.s44khin.passman.codes.add.presentation.AddCodeState
-import com.s44khin.uikit.widgets.RootSpacer
+import com.s44khin.uikit.widgets.Spacer
 
 @Composable
 fun AddCodeScrollableContent(
@@ -24,26 +23,27 @@ fun AddCodeScrollableContent(
             .fillMaxWidth()
             .verticalScroll(scrollState)
     ) {
+        Spacer(height = 24.dp)
+
         RequiredBlock(
-            modifier = Modifier.padding(vertical = 16.dp),
             state = state,
             onAction = onAction,
         )
 
-        RootSpacer(height = 8.dp)
+        Spacer(height = 24.dp)
 
         ColorBlock(
-            modifier = Modifier.padding(vertical = 16.dp),
             state = state,
             onAction = onAction
         )
 
-        RootSpacer(height = 8.dp)
+        Spacer(height = 24.dp)
 
         OptionalBlock(
-            modifier = Modifier.padding(vertical = 16.dp),
             state = state,
             onAction = onAction,
         )
+
+        Spacer(height = 24.dp)
     }
 }

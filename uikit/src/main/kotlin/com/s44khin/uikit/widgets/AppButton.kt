@@ -1,5 +1,10 @@
 package com.s44khin.uikit.widgets
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -17,8 +22,8 @@ fun AppButton(
     onClick: () -> Unit,
 ) {
     Button(
-        modifier = modifier,
-        shape = RoundedCornerShape(24.dp),
+        modifier = modifier.height(48.dp),
+        shape = RoundedCornerShape(12.dp),
         content = { Text(text = text) },
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
@@ -27,4 +32,28 @@ fun AppButton(
         ),
         onClick = onClick
     )
+}
+
+@Composable
+fun BottomButton(
+    text: String,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .navigationBarsPadding()
+    ) {
+        AppDivider(modifier = Modifier.fillMaxWidth())
+
+        AppButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            text = text,
+            enabled = enabled,
+            onClick = onClick
+        )
+    }
 }

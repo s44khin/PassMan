@@ -8,5 +8,6 @@ sealed class CodesListAction {
     object ManuallyClick : CodesListAction()
     object QrCodeClick : CodesListAction()
     object DeleteClick : CodesListAction()
+    object PinClick : CodesListAction()
     object StopEdit : CodesListAction()
 }

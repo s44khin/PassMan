@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -19,7 +17,6 @@ import com.s44khin.uikit.theme.AppTheme
 @NonRestartableComposable
 fun ColumnScope.Spacer(height: Dp, color: Color = AppTheme.colors.background) = Spacer(
     modifier = Modifier
-        .fillMaxWidth()
         .height(height)
         .background(color = color)
 )
@@ -28,25 +25,6 @@ fun ColumnScope.Spacer(height: Dp, color: Color = AppTheme.colors.background) = 
 @NonRestartableComposable
 fun RowScope.Spacer(width: Dp, color: Color = AppTheme.colors.background) = Spacer(
     modifier = Modifier
-        .fillMaxHeight()
-        .width(width)
-        .background(color = color)
-)
-
-@Composable
-@NonRestartableComposable
-fun ColumnScope.RootSpacer(height: Dp, color: Color = AppTheme.colors.rootBackground) = Spacer(
-    modifier = Modifier
-        .fillMaxWidth()
-        .height(height)
-        .background(color = color)
-)
-
-@Composable
-@NonRestartableComposable
-fun RowScope.RootSpacer(width: Dp, color: Color = AppTheme.colors.rootBackground) = Spacer(
-    modifier = Modifier
-        .fillMaxHeight()
         .width(width)
         .background(color = color)
 )

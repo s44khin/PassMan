@@ -4,6 +4,6 @@ sealed class SettingsAction {
 
     object AddDebugData : SettingsAction()
     object ChangeShowNextCode : SettingsAction()
+    object ChangeShowColor : SettingsAction()
     object DeleteAll : SettingsAction()
-    object Restart : SettingsAction()
 }
