@@ -86,7 +86,7 @@ fun CameraPreview(onQrGetting: (String) -> Unit) {
                         imageAnalysis
                     )
                 } catch (e: Exception) {
-                    Log.d("TAG", "CameraPreview: ${e.localizedMessage}")
+                    Log.e("ScannerViewModel", e.message ?: "")
                 }
             }, ContextCompat.getMainExecutor(context))
         }

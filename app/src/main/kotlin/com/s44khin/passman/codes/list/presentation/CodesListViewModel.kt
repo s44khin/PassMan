@@ -1,5 +1,6 @@
 package com.s44khin.passman.codes.list.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.list.domain.DeleteCodesUseCase
@@ -113,6 +114,7 @@ class CodesListViewModel @Inject constructor(
 
     private fun qrCodeClick() {
         screenRouter.navigateTo(CodesNavigation.Scanner)
+        Log.e("ScannerViewModel", "qr click")
     }
 
     private fun deleteClick() {

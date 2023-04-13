@@ -10,7 +10,6 @@ sealed class AddCodeAction {
     data class ChangTimer(val newTimer: String) : AddCodeAction()
     data class ChangeAccount(val newAccount: String) : AddCodeAction()
     data class ChangeDescription(val newDescription: String) : AddCodeAction()
-    data class ArgsTaken(val email: String, val code: String, val name: String) : AddCodeAction()
     object BackClick : AddCodeAction()
     object SaveClick : AddCodeAction()
 }

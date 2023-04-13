@@ -3,6 +3,7 @@ package com.s44khin.passman.codes.add.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.codes.add.domain.InsertCodeUseCase
+import com.s44khin.passman.codes.add.presentation.data.AddCodeArgsRamCache
 import com.s44khin.passman.common.Constants
 import com.s44khin.passman.core.ActionHandler
 import com.s44khin.passman.core.StateStore
@@ -14,11 +15,23 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AddCodeViewModel @Inject constructor(
+    private val addCodeArgsRamCache: AddCodeArgsRamCache,
     private val insertCodeUseCase: InsertCodeUseCase,
     private val screenRouter: ScreenRouter,
 ) : ViewModel(), ActionHandler<AddCodeAction>, StateStore<AddCodeState> by StateStoreDelegate(
     initState = AddCodeState()
 ) {
+
+    init {
+        addCodeArgsRamCache.args?.let { args ->
+            argsTaken(
+                email = args.email,
+                code = args.code,
+                name = args.name,
+                period = args.period,
+            )
+        }
+    }
 
     override fun onAction(action: AddCodeAction) = when (action) {
         is AddCodeAction.BackClick -> screenRouter.back()
@@ -29,7 +42,6 @@ class AddCodeViewModel @Inject constructor(
         is AddCodeAction.ChangeSecretCode -> viewState = viewState.toNewSecretCode(action.newCode)
         is AddCodeAction.SaveClick -> saveClick()
         is AddCodeAction.ChangTimer -> viewState = viewState.toNewTimer(action.newTimer)
-        is AddCodeAction.ArgsTaken -> argsTaken(action.email, action.code, action.name)
     }
 
     private fun saveClick() {
@@ -49,10 +61,11 @@ class AddCodeViewModel @Inject constructor(
         }
     }
 
-    private fun argsTaken(email: String, code: String, name: String) {
+    private fun argsTaken(email: String, code: String, name: String, period: Int) {
         viewState = viewState
             .toNewAccount(email)
             .toNewSecretCode(code)
             .toNewName(name)
+            .toNewTimer(period.toString())
     }
 }

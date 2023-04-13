@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.navigation.NavHostController
 import com.s44khin.passman.core.MainActivity
 import com.s44khin.passman.di.modules.AppModule
+import com.s44khin.passman.di.modules.ClearableModule
 import com.s44khin.passman.di.modules.ViewModelsModule
 import dagger.BindsInstance
 import dagger.Component
@@ -11,8 +12,9 @@ import dagger.Component
 @AppScope
 @Component(
     modules = [
-        ViewModelsModule::class,
         AppModule::class,
+        ClearableModule::class,
+        ViewModelsModule::class,
     ]
 )
 interface AppComponent {
