@@ -42,7 +42,7 @@ fun BottomSheetWrapper(
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetBackgroundColor = Color.Transparent,
-        sheetShape = RoundedCornerShape(24.dp),
+        sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
         sheetElevation = 0.dp,
         sheetContent = {
             Column(
@@ -66,9 +66,8 @@ fun BottomSheetWrapper(
                 bottomSheetContent()
 
                 RootSpacer(height = 16.dp)
+                Spacer(modifier = Modifier.navigationBarsPadding())
             }
-
-            Spacer(modifier = Modifier.navigationBarsPadding())
         },
         content = content
     )

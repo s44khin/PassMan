@@ -28,7 +28,6 @@ dagger = "2.45"
 google-services = "17.0.0"
 room = "2.5.0"
 totp = "2.4.0"
-timber = "5.0.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradle" }
@@ -58,4 +57,3 @@ mlkit = { module = "com.google.mlkit:barcode-scanning", version.ref = "google-se
 room = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 totp = { module = "dev.turingcomplete:kotlin-onetimepassword", version.ref = "totp" }
-timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }

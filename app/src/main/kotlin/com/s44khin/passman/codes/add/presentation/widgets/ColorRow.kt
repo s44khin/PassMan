@@ -38,6 +38,8 @@ fun ColorBlock(
                     Spacer(width = 8.dp)
                 }
             }
+
+            Spacer(width = 16.dp)
         }
     }
 }
