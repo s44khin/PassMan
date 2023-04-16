@@ -58,7 +58,7 @@ fun EditPopup(
 
         IconButton(
             modifier = Modifier.padding(vertical = 4.dp),
-            onClick = { onPinClick() }
+            onClick = { onDeleteClick() }
         ) {
             Icon(
                 imageVector = Icons.Outlined.Delete,
@@ -71,7 +71,7 @@ fun EditPopup(
 
         IconButton(
             modifier = Modifier.padding(vertical = 4.dp),
-            onClick = { onPinClick() }
+            onClick = { onCloseClick() }
         ) {
             Icon(
                 imageVector = Icons.Rounded.Close,

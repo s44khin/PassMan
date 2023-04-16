@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,6 +16,7 @@ import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.util.statusBarsHeight
+import com.s44khin.uikit.widgets.AppDivider
 
 @Composable
 fun ColumnScope.CodesListScrollableContent(
@@ -48,10 +48,7 @@ fun ColumnScope.CodesListScrollableContent(
             )
 
             if (index != list.lastIndex) {
-                Divider(
-                    startIndent = 48.dp,
-                    thickness = 0.5.dp
-                )
+                AppDivider(startIndent = 48.dp)
             }
         }
     }

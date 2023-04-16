@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -20,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.R
 import com.s44khin.uikit.theme.AppTheme
+import com.s44khin.uikit.widgets.AppDivider
 import com.s44khin.uikit.widgets.Spacer
 
 @Composable
@@ -36,7 +36,7 @@ fun ColumnScope.AddDialog(
         onClick = { qrCode() }
     )
 
-    Divider(startIndent = 16.dp)
+    AppDivider(startIndent = 16.dp)
 
     AddDialogItem(
         icon = Icons.Rounded.List,

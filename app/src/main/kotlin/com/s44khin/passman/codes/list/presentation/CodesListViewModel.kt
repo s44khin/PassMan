@@ -71,10 +71,10 @@ class CodesListViewModel @Inject constructor(
                             uid = it.uid,
                             name = it.name,
                             secretCode = it.secretCode,
-                            nextCode = totpHelper.getCurrentCode(it.secretCode),
-                            code = totpHelper.getNextCode(it.secretCode, it.updateTimer),
+                            nextCode = totpHelper.getNextCode(it.secretCode, it.updateTimer),
+                            code = totpHelper.getCurrentCode(it.secretCode),
                             color = it.color,
-                            timer = totpHelper.getTimer(it.updateTimer),
+                            timer = totpHelper.getTimer2(it.updateTimer),
                             account = it.account,
                             updateTimer = it.updateTimer,
                             pinned = it.pinned,
@@ -91,7 +91,7 @@ class CodesListViewModel @Inject constructor(
     private fun updateCodes() = viewModelScope.infinity(Dispatchers.IO) {
         viewState = viewState.toNewList(
             newCodes = viewState.codes.map {
-                val timer = totpHelper.getTimer(it.updateTimer)
+                val timer = totpHelper.getTimer2(it.updateTimer)
 
                 it.copy(
                     code = if (timer == it.updateTimer) {
@@ -141,6 +141,7 @@ class CodesListViewModel @Inject constructor(
         settingsRepository.events.collect { event ->
             when (event) {
                 SettingsRepository.SettingsEvents.UPDATE -> updateSettings()
+                SettingsRepository.SettingsEvents.UPDATE_DATA -> getData()
             }
         }
     }

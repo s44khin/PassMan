@@ -31,7 +31,11 @@ class SettingsRepository @Inject constructor(
         _events.emit(value = SettingsEvents.UPDATE)
     }
 
+    suspend fun postUpdateData() {
+        _events.emit(value = SettingsEvents.UPDATE_DATA)
+    }
+
     enum class SettingsEvents {
-        UPDATE
+        UPDATE, UPDATE_DATA
     }
 }

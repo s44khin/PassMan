@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -27,10 +26,7 @@ fun BottomNav(
     content: @Composable RowScope.() -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        Divider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 0.5.dp
-        )
+        AppDivider(modifier = Modifier.fillMaxWidth())
 
         Surface(elevation = 0.dp) {
             Row(

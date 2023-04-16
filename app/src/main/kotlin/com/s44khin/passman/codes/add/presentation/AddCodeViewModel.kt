@@ -52,7 +52,7 @@ class AddCodeViewModel @Inject constructor(
                 color = viewState.color,
                 account = viewState.account.ifEmpty { null },
                 description = viewState.description.ifEmpty { null },
-                timer = viewState.updateTimer.toInt()
+                timer = 30,
             )
 
             withContext(Dispatchers.Main) {
@@ -66,6 +66,5 @@ class AddCodeViewModel @Inject constructor(
             .toNewAccount(email)
             .toNewSecretCode(code)
             .toNewName(name)
-            .toNewTimer(period.toString())
     }
 }

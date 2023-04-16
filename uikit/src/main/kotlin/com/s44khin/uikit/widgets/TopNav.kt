@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -127,9 +126,6 @@ fun TopNav(
             }
         }
 
-        Divider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 0.5.dp
-        )
+        AppDivider(modifier = Modifier.fillMaxWidth())
     }
 }

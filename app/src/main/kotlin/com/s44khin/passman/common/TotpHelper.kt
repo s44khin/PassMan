@@ -1,6 +1,8 @@
 package com.s44khin.passman.common
 
 import dev.turingcomplete.kotlinonetimepassword.GoogleAuthenticator
+import java.time.LocalDateTime
+import java.time.temporal.ChronoField
 import java.util.Date
 import javax.inject.Inject
 
@@ -10,25 +12,20 @@ class TotpHelper @Inject constructor() {
 
     fun getNextCode(secretCode: String, updateTimer: Int) = getCode(secretCode, updateTimer.toLong() * 1000)
 
-    fun getTimer(updateTimer: Int): Int {
-        var seconds = (System.currentTimeMillis() % 100000) / 1000
+    fun getTimer2(updateTimer: Int): Int {
+        val now = LocalDateTime.now()
+        var nowSeconds = now.second
 
-        while (seconds >= updateTimer) {
-            seconds -= updateTimer
+        while (nowSeconds >= updateTimer) {
+            nowSeconds -= updateTimer
         }
 
-        return updateTimer - seconds.toInt()
+        return updateTimer - nowSeconds
     }
 
     private fun getCode(secretCode: String, additionalTimer: Long): String {
-        val timestamp = Date(System.currentTimeMillis() + additionalTimer)
+        val timestamp =
+            Date(System.currentTimeMillis() - LocalDateTime.now().get(ChronoField.MILLI_OF_SECOND) + additionalTimer)
         return GoogleAuthenticator(secretCode.toByteArray()).generate(timestamp)
     }
-
-//    sealed class GenerateResult {
-//
-//        data class Success(val code: String) : GenerateResult()
-//
-//        object Invalid : GenerateResult()
-//    }
 }

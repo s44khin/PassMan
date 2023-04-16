@@ -104,11 +104,11 @@ internal val darkColors: AppColors
     @Composable
     get() = AppColors(
         primary = Color(0xffe65100),
-        background = Color(0xff222222),
+        background = Color(0xFF000000),
         borderOnBackground = Color(0x40FFFFFF),
         textOnPrimary = Color(0xFFFFFFFF),
         textOnBackground = Color(0xffffffff),
         textOnBackgroundVariant = Color(0x80FFFFFF),
         textBoxBackground = Color(0xff141414),
-        divider = MaterialTheme.colors.onSurface.copy(alpha = 0.12f)
+        divider = Color(0xFF444444)
     )

@@ -7,7 +7,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,19 +23,15 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.CodesListMode
 import com.s44khin.passman.codes.list.presentation.CodesListState
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.widgets.BottomNavigationHeight
-import com.s44khin.uikit.widgets.TransparentStatusBar
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -54,23 +49,6 @@ fun CodesList(
         val scrollState = rememberScrollState()
 
         Column(modifier = Modifier.fillMaxSize()) {
-            val systemUiController = rememberSystemUiController()
-            val isSystemInDarkTheme = isSystemInDarkTheme()
-
-            DisposableEffect(systemUiController, state.inEdit) {
-                systemUiController.setStatusBarColor(
-                    color = Color.Transparent,
-                    darkIcons = false
-                )
-
-                onDispose {
-                    systemUiController.setStatusBarColor(
-                        color = Color.Transparent,
-                        darkIcons = !isSystemInDarkTheme
-                    )
-                }
-            }
-
             when (state.mode) {
                 CodesListMode.CONTENT -> {
                     if (state.codes.isNotEmpty()) {
@@ -118,8 +96,6 @@ fun CodesList(
                 onCloseClick = { onAction(CodesListAction.StopEdit) }
             )
         }
-
-        TransparentStatusBar()
 
         AnimatedVisibility(
             modifier = Modifier

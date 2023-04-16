@@ -38,12 +38,14 @@ class SettingsViewModel @Inject constructor(
     private fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
             deleteAllUseCase.execute()
+            updateData()
         }
     }
 
     private fun addDebugData() {
         viewModelScope.launch(Dispatchers.IO) {
             insertCodesUseCase.execute(*codeMock)
+            updateData()
         }
     }
 
@@ -51,14 +53,14 @@ class SettingsViewModel @Inject constructor(
         viewState = viewState.changeShowNextCode()
         settingsRepository.showNextCode = !settingsRepository.showNextCode
         viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
-        update()
+        updateSettings()
     }
 
     private fun changeShowColor() {
         viewState = viewState.changeShowColor()
         settingsRepository.showColor = !settingsRepository.showColor
         viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
-        update()
+        updateSettings()
     }
 
     private fun checkButtonEnabled(): Boolean = with(viewState) {
@@ -66,7 +68,11 @@ class SettingsViewModel @Inject constructor(
                 showColor != savedState.showColor
     }
 
-    private fun update() = viewModelScope.launch(Dispatchers.IO) {
+    private fun updateSettings() = viewModelScope.launch(Dispatchers.IO) {
         settingsRepository.postUpdate()
+    }
+
+    private fun updateData() = viewModelScope.launch(Dispatchers.IO) {
+        settingsRepository.postUpdateData()
     }
 }
