@@ -1,16 +1,44 @@
 package com.s44khin.uikit.widgets
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
+
+sealed class AppColumnItemType {
+
+    data class RadioButton(
+        val label: String,
+        val isSelected: Boolean,
+        val onClick: () -> Unit
+    ) : AppColumnItemType()
+
+
+    data class Chevron(
+        val label: String,
+        val onClick: () -> Unit
+    ) : AppColumnItemType()
+
+    data class TextField(
+        val label: String,
+        val value: String,
+        val onValueChange: (String) -> Unit,
+    ) : AppColumnItemType()
+}
 
 @Composable
 fun AppColumn(
@@ -29,5 +57,67 @@ fun AppColumn(
             .fillMaxWidth()
     ) {
         content()
+    }
+}
+
+@Composable
+fun AppColumn(
+    modifier: Modifier = Modifier,
+    content: List<AppColumnItemType>
+) {
+    AppColumn(modifier = modifier) {
+        content.forEachIndexed { index, appColumnItemType ->
+            when (appColumnItemType) {
+                is AppColumnItemType.Chevron -> Row(
+                    modifier = Modifier
+                        .clickable { appColumnItemType.onClick() }
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = appColumnItemType.label,
+                        color = AppTheme.colors.textOnBackground,
+                    )
+
+                    Icon(
+                        imageVector = Icons.Rounded.ChevronRight,
+                        contentDescription = Icons.Rounded.ChevronRight.name,
+                        tint = AppTheme.colors.textOnBackgroundVariant,
+                    )
+                }
+
+                is AppColumnItemType.RadioButton -> Row(
+                    modifier = Modifier
+                        .clickable { appColumnItemType.onClick() }
+                        .padding(start = 16.dp, top = 6.dp, end = 6.dp, bottom = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = appColumnItemType.label,
+                        color = AppTheme.colors.textOnBackground
+                    )
+
+                    AppRadioButton(
+                        selected = appColumnItemType.isSelected,
+                        onClick = appColumnItemType.onClick
+                    )
+                }
+
+                is AppColumnItemType.TextField -> AppTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(0.dp),
+                    borderColor = AppTheme.colors.background,
+                    value = appColumnItemType.value,
+                    label = appColumnItemType.label,
+                    onValueChange = { appColumnItemType.onValueChange(it) },
+                )
+            }
+
+            if (index != content.lastIndex) {
+                AppDivider(startIndent = 12.dp)
+            }
+        }
     }
 }

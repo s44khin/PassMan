@@ -42,6 +42,7 @@ fun AppTextField(
     maxLines: Int = 1,
     shape: Shape = RoundedCornerShape(24.dp),
     borderColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+    contentColor: Color = AppTheme.colors.textOnBackground,
     hintOverflow: TextOverflow = TextOverflow.Clip,
     backgroundColor: Color = AppTheme.colors.background,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -72,7 +73,10 @@ fun AppTextField(
             0.00f to AppTheme.colors.primary,
             1.00f to AppTheme.colors.primary,
         ),
-        textStyle = TextStyle.Default.copy(fontSize = 18.sp)
+        textStyle = TextStyle.Default.copy(
+            fontSize = 18.sp,
+            color = contentColor,
+        )
     ) { innerTextField ->
         Box(
             modifier = Modifier

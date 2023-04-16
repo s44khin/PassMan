@@ -2,6 +2,7 @@
     <string name="app_name">PassMan</string>
     <string name="codes_label">Codes</string>
     <string name="codes_add_new_code_label">Add code</string>
+    <string name="codes_is_pinned">Is pinned</string>
     <string name="codes_add_confirm">Confirm</string>
     <string name="codes_secret_code">Secret code</string>
     <string name="codes_update_timer">Update timer</string>
