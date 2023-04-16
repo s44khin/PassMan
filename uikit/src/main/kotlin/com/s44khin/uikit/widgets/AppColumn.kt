@@ -36,6 +36,7 @@ sealed class AppColumnItemType {
     data class TextField(
         val label: String,
         val value: String,
+        val inError: Boolean = false,
         val onValueChange: (String) -> Unit,
     ) : AppColumnItemType()
 }
@@ -109,6 +110,11 @@ fun AppColumn(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(0.dp),
                     borderColor = AppTheme.colors.background,
+                    contentColor = if (appColumnItemType.inError) {
+                        AppTheme.colors.error
+                    } else {
+                        AppTheme.colors.textOnBackground
+                    },
                     value = appColumnItemType.value,
                     label = appColumnItemType.label,
                     onValueChange = { appColumnItemType.onValueChange(it) },

@@ -22,6 +22,7 @@ open class AppColors internal constructor(
     textBoxBackground: Color,
     divider: Color,
     overlay: Color,
+    error: Color,
 ) {
     var primary by mutableStateOf(primary)
         private set
@@ -50,6 +51,9 @@ open class AppColors internal constructor(
     var overlay by mutableStateOf(overlay)
         private set
 
+    var error by mutableStateOf(error)
+        private set
+
     internal fun copy() = AppColors(
         primary = primary,
         background = background,
@@ -60,6 +64,7 @@ open class AppColors internal constructor(
         textBoxBackground = textBoxBackground,
         divider = divider,
         overlay = overlay,
+        error = error,
     )
 
     internal fun update(other: AppColors) {
@@ -72,6 +77,7 @@ open class AppColors internal constructor(
         textBoxBackground = other.textBoxBackground
         divider = other.divider
         overlay = other.overlay
+        error = other.error
     }
 }
 
@@ -105,6 +111,7 @@ internal val lightColors: AppColors
         textBoxBackground = Color(0xffedeef0),
         divider = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
         overlay = Color(0xBFFFFFFF),
+        error = Color(0xFFFF0000),
     )
 
 internal val darkColors: AppColors
@@ -119,4 +126,5 @@ internal val darkColors: AppColors
         textBoxBackground = Color(0xff141414),
         divider = Color(0xFF444444),
         overlay = Color(0xBF000000),
+        error = Color(0xFFFF0000),
     )

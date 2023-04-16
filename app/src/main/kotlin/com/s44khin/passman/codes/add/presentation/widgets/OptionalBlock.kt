@@ -34,8 +34,8 @@ fun OptionalBlock(
                 ),
                 AppColumnItemType.RadioButton(
                     label = stringResource(R.string.codes_is_pinned),
-                    isSelected = false,
-                    onClick = {}
+                    isSelected = state.isPinned,
+                    onClick = { onAction(AddCodeAction.ChangePinned) }
                 )
             )
         )

@@ -23,6 +23,14 @@ class TotpHelper @Inject constructor() {
         return updateTimer - nowSeconds
     }
 
+    fun isValid(secretCode: String) = try {
+        GoogleAuthenticator(secretCode.toByteArray()).generate(Date(System.currentTimeMillis()))
+        true
+    } catch (ex: Exception) {
+        false
+    }
+
+
     private fun getCode(secretCode: String, additionalTimer: Long): String {
         val timestamp =
             Date(System.currentTimeMillis() - LocalDateTime.now().get(ChronoField.MILLI_OF_SECOND) + additionalTimer)

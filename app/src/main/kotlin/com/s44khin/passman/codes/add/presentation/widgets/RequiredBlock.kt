@@ -29,6 +29,7 @@ fun RequiredBlock(
                 ),
                 AppColumnItemType.TextField(
                     value = state.secretCode,
+                    inError = state.secretCodeInError,
                     label = stringResource(R.string.codes_secret_code),
                     onValueChange = { onAction(AddCodeAction.ChangeSecretCode(it)) }
                 ),

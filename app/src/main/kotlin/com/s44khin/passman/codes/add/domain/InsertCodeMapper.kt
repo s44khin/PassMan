@@ -13,12 +13,14 @@ class InsertCodeMapper @Inject constructor() {
         account: String?,
         description: String?,
         timer: Int,
+        pinned: Boolean,
     ) = CodeEntity(
         secretCode = secretCode,
         name = name,
         color = color.name,
         account = account,
         description = description,
-        updateTimer = timer
+        updateTimer = timer,
+        pinned = pinned,
     )
 }
