@@ -14,6 +14,7 @@ class SettingsRepository @Inject constructor(
     private companion object {
         const val SHOW_NEXT_CODE_KEY = "show_next_code_key"
         const val SHOW_COLOR_KEY = "show_color_key"
+        const val SHOW_LABEL = "show_label"
     }
 
     private val _events = MutableSharedFlow<SettingsEvents>()
@@ -26,6 +27,10 @@ class SettingsRepository @Inject constructor(
     var showColor: Boolean
         get() = appStorage.getBoolean(key = SHOW_COLOR_KEY, defaultValue = true)
         set(value) = appStorage.putBoolean(key = SHOW_COLOR_KEY, value = value)
+
+    var showLabel: Boolean
+        get() = appStorage.getBoolean(key = SHOW_LABEL, defaultValue = false)
+        set(value) = appStorage.putBoolean(key = SHOW_LABEL, value = value)
 
     suspend fun postUpdate() {
         _events.emit(value = SettingsEvents.UPDATE)

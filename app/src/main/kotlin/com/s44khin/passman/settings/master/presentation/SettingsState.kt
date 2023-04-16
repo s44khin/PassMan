@@ -3,7 +3,7 @@ package com.s44khin.passman.settings.master.presentation
 data class SettingsState(
     val showNextCode: Boolean = false,
     val showColor: Boolean = false,
-    val buttonEnabled: Boolean = false,
+    val alwaysShowLabel: Boolean = false,
 ) {
 
     fun changeShowNextCode() = copy(
@@ -14,7 +14,7 @@ data class SettingsState(
         showColor = !showColor
     )
 
-    fun changeButtonEnabled(buttonEnabled: Boolean) = copy(
-        buttonEnabled = buttonEnabled
+    fun changeShowLabel() = copy(
+        alwaysShowLabel = !alwaysShowLabel
     )
 }

@@ -10,4 +10,6 @@ sealed class CodesListAction {
     object DeleteClick : CodesListAction()
     object PinClick : CodesListAction()
     object StopEdit : CodesListAction()
+    object OnAddClick : CodesListAction()
+    object OnAddDisabled : CodesListAction()
 }

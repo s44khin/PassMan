@@ -42,6 +42,7 @@ private val bottomNavItemsRouts = listOf(
 @Composable
 fun AppBottomNav(
     modifier: Modifier = Modifier,
+    alwaysShowLabels: Boolean,
     navController: NavController
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -56,6 +57,7 @@ fun AppBottomNav(
                     selected = selected,
                     icon = navItem.icon,
                     label = stringResource(navItem.label),
+                    alwaysShowLabel = alwaysShowLabels,
                     onClick = {
                         navController.navigate(navItem.route) {
                             if (!selected) {

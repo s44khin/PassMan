@@ -20,6 +20,8 @@
     <string name="settings_theme_dark">Dark</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_codes">Codes</string>
+    <string name="settings_app">App</string>
+    <string name="settings_always_show_label">Always show label</string>
     <string name="settings_show_next_code">Show next code</string>
     <string name="settings_show_color">Show color</string>
     <string name="settings_restart">Restart</string>

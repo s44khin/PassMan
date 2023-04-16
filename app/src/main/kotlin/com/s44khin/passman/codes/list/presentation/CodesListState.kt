@@ -11,9 +11,12 @@ data class CodesListState(
     val inEdit: Boolean = false,
     val showNextCode: Boolean = false,
     val showColor: Boolean = true,
+    val isAddEnabled: Boolean = false,
 ) {
 
     fun toNewList(newCodes: List<TotpItemVO>) = copy(codes = newCodes)
+
+    fun toEmpty() = copy(mode = CodesListMode.EMPTY)
 
     fun toEdit(uid: String) = copy(
         inEdit = true,
@@ -52,8 +55,12 @@ data class CodesListState(
     fun toLoading() = copy(mode = CodesListMode.LOADING)
 
     fun toError() = copy(mode = CodesListMode.ERROR)
+
+    fun toAddEnabled() = copy(isAddEnabled = true)
+
+    fun stopAdd() = copy(isAddEnabled = false)
 }
 
 enum class CodesListMode {
-    CONTENT, LOADING, ERROR
+    CONTENT, LOADING, ERROR, EMPTY
 }

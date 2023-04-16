@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.s44khin.passman.BuildConfig
 import com.s44khin.passman.R
 import com.s44khin.passman.core.BaseScreen
+import com.s44khin.passman.settings.master.presentation.widgets.AppBlock
 import com.s44khin.passman.settings.master.presentation.widgets.CodesBlock
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
 import com.s44khin.uikit.widgets.BottomNavigationHeight
@@ -54,17 +55,22 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
         ) {
             Spacer(height = 8.dp)
 
+            AppBlock(
+                state = state,
+                onAction = onAction
+            )
+
+            Spacer(height = 16.dp)
+
             CodesBlock(
-                modifier = Modifier.padding(),
                 state = state,
                 onAction = onAction,
             )
 
             if (isDebug) {
-                Spacer(height = 8.dp)
+                Spacer(height = 16.dp)
 
                 DebugBlock(
-                    modifier = Modifier.padding(top = 16.dp),
                     onAction = onAction
                 )
             }

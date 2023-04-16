@@ -23,6 +23,7 @@ class SettingsViewModel @Inject constructor(
     initState = SettingsState(
         showNextCode = settingsRepository.showNextCode,
         showColor = settingsRepository.showColor,
+        alwaysShowLabel = settingsRepository.showLabel,
     )
 ) {
 
@@ -33,6 +34,7 @@ class SettingsViewModel @Inject constructor(
         is SettingsAction.ChangeShowColor -> changeShowColor()
         is SettingsAction.ChangeShowNextCode -> changeShowNextCode()
         is SettingsAction.DeleteAll -> deleteAll()
+        is SettingsAction.ChangeShowLabel -> changeShowLabel()
     }
 
     private fun deleteAll() {
@@ -52,14 +54,21 @@ class SettingsViewModel @Inject constructor(
     private fun changeShowNextCode() {
         viewState = viewState.changeShowNextCode()
         settingsRepository.showNextCode = !settingsRepository.showNextCode
-        viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
+
         updateSettings()
     }
 
     private fun changeShowColor() {
         viewState = viewState.changeShowColor()
         settingsRepository.showColor = !settingsRepository.showColor
-        viewState = viewState.changeButtonEnabled(buttonEnabled = checkButtonEnabled())
+
+        updateSettings()
+    }
+
+    private fun changeShowLabel() {
+        viewState = viewState.changeShowLabel()
+        settingsRepository.showLabel = !settingsRepository.showLabel
+
         updateSettings()
     }
 

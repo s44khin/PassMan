@@ -56,6 +56,8 @@ class CodesListViewModel @Inject constructor(
         is CodesListAction.StopEdit -> viewState = viewState.stopEdit()
         is CodesListAction.QrCodeClick -> qrCodeClick()
         is CodesListAction.PinClick -> pinClick()
+        is CodesListAction.OnAddClick -> viewState = viewState.toAddEnabled()
+        is CodesListAction.OnAddDisabled -> viewState = viewState.stopAdd()
     }
 
     private fun getData() {
@@ -64,28 +66,33 @@ class CodesListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val codes = getCodesUseCase.execute()
 
-            viewState = viewState
-                .toNewList(
-                    newCodes = codes.map {
-                        TotpItemVO(
-                            uid = it.uid,
-                            name = it.name,
-                            secretCode = it.secretCode,
-                            nextCode = totpHelper.getNextCode(it.secretCode, it.updateTimer),
-                            code = totpHelper.getCurrentCode(it.secretCode),
-                            color = it.color,
-                            timer = totpHelper.getTimer2(it.updateTimer),
-                            account = it.account,
-                            updateTimer = it.updateTimer,
-                            pinned = it.pinned,
-                        )
-                    }.sortedBy { !it.pinned }
-                )
-                .toContent()
-        }
+            if (codes.isNotEmpty()) {
+                viewState = viewState
+                    .toNewList(
+                        newCodes = codes.map {
+                            TotpItemVO(
+                                uid = it.uid,
+                                name = it.name,
+                                secretCode = it.secretCode,
+                                nextCode = totpHelper.getNextCode(it.secretCode, it.updateTimer),
+                                code = totpHelper.getCurrentCode(it.secretCode),
+                                color = it.color,
+                                timer = totpHelper.getTimer2(it.updateTimer),
+                                account = it.account,
+                                updateTimer = it.updateTimer,
+                                pinned = it.pinned,
+                            )
+                        }.sortedBy { !it.pinned }
+                    )
+                    .toContent()
 
-        updateJob?.cancel()
-        updateJob = updateCodes()
+                updateJob?.cancel()
+                updateJob = updateCodes()
+            } else {
+                updateJob = null
+                viewState = viewState.toEmpty()
+            }
+        }
     }
 
     private fun updateCodes() = viewModelScope.infinity(Dispatchers.IO) {
@@ -112,10 +119,12 @@ class CodesListViewModel @Inject constructor(
 
     private fun manuallyClick() {
         screenRouter.navigateTo(CodesNavigation.Add)
+        viewState = viewState.stopAdd()
     }
 
     private fun qrCodeClick() {
         screenRouter.navigateTo(CodesNavigation.Scanner)
+        viewState = viewState.stopAdd()
     }
 
     private fun deleteClick() {
