@@ -3,19 +3,18 @@ package com.s44khin.passman.settings.master.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.s44khin.passman.core.ActionHandler
-import com.s44khin.passman.core.AppRouter
 import com.s44khin.passman.core.StateStore
 import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.settings.master.SettingsRepository
 import com.s44khin.passman.settings.master.domain.DeleteAllUseCase
 import com.s44khin.passman.settings.master.domain.InsertCodesUseCase
+import com.s44khin.passman.settings.master.presentation.data.ThemeMode
 import com.s44khin.passman.settings.master.presentation.data.codeMock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
-    private val appRouter: AppRouter,
     private val deleteAllUseCase: DeleteAllUseCase,
     private val insertCodesUseCase: InsertCodesUseCase,
     private val settingsRepository: SettingsRepository,
@@ -24,10 +23,10 @@ class SettingsViewModel @Inject constructor(
         showNextCode = settingsRepository.showNextCode,
         showColor = settingsRepository.showColor,
         alwaysShowLabel = settingsRepository.showLabel,
+        themeMode = settingsRepository.theme,
+        showAccount = settingsRepository.showAccount,
     )
 ) {
-
-    private val savedState = viewState.copy()
 
     override fun onAction(action: SettingsAction) = when (action) {
         is SettingsAction.AddDebugData -> addDebugData()
@@ -35,6 +34,10 @@ class SettingsViewModel @Inject constructor(
         is SettingsAction.ChangeShowNextCode -> changeShowNextCode()
         is SettingsAction.DeleteAll -> deleteAll()
         is SettingsAction.ChangeShowLabel -> changeShowLabel()
+        is SettingsAction.OnDarkThemeClick -> onDarkThemeClick()
+        is SettingsAction.OnLightThemeClick -> onLightThemeClick()
+        is SettingsAction.OnSystemThemeClick -> onSystemThemeClick()
+        is SettingsAction.ChangeShowAccount -> onChangeShowAccount()
     }
 
     private fun deleteAll() {
@@ -72,9 +75,11 @@ class SettingsViewModel @Inject constructor(
         updateSettings()
     }
 
-    private fun checkButtonEnabled(): Boolean = with(viewState) {
-        showNextCode != savedState.showNextCode ||
-                showColor != savedState.showColor
+    private fun onChangeShowAccount() {
+        viewState = viewState.changeShowAccount()
+        settingsRepository.showAccount = !settingsRepository.showAccount
+
+        updateSettings()
     }
 
     private fun updateSettings() = viewModelScope.launch(Dispatchers.IO) {
@@ -83,5 +88,26 @@ class SettingsViewModel @Inject constructor(
 
     private fun updateData() = viewModelScope.launch(Dispatchers.IO) {
         settingsRepository.postUpdateData()
+    }
+
+    private fun onSystemThemeClick() {
+        viewState = viewState.toSystemTheme()
+        settingsRepository.theme = ThemeMode.System
+
+        updateSettings()
+    }
+
+    private fun onLightThemeClick() {
+        viewState = viewState.toLightTheme()
+        settingsRepository.theme = ThemeMode.Light
+
+        updateSettings()
+    }
+
+    private fun onDarkThemeClick() {
+        viewState = viewState.toDarkTheme()
+        settingsRepository.theme = ThemeMode.Dark
+
+        updateSettings()
     }
 }

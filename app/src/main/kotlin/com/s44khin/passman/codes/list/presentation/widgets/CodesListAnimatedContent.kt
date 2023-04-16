@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -31,6 +30,8 @@ import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.CodesListState
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.util.clickableWithoutRipple
+import com.s44khin.uikit.widgets.AppFab
+import com.s44khin.uikit.widgets.AppFabData
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -69,80 +70,43 @@ fun BoxScope.CodesListAnimatedContent(
         )
     }
 
-    AnimatedVisibility(
-        modifier = Modifier
-            .padding(bottom = 164.dp, end = 24.dp)
-            .align(Alignment.BottomEnd),
-        visible = state.isAddEnabled,
-        enter = scaleIn() + fadeIn(),
-        exit = scaleOut() + fadeOut()
-    ) {
-        FloatingActionButton(
-            modifier = Modifier.size(40.dp),
-            backgroundColor = AppTheme.colors.primary,
-            contentColor = AppTheme.colors.textOnPrimary,
-            onClick = { onAction(CodesListAction.ManuallyClick) }
-        ) {
-            Icon(
-                modifier = Modifier.size(18.dp),
-                imageVector = Icons.Outlined.Edit,
-                contentDescription = Icons.Outlined.Edit.name
-            )
-        }
-    }
-
-    AnimatedVisibility(
-        modifier = Modifier
-            .padding(bottom = 104.dp, end = 24.dp)
-            .align(Alignment.BottomEnd),
-        visible = state.isAddEnabled,
-        enter = scaleIn() + fadeIn(),
-        exit = scaleOut() + fadeOut()
-    ) {
-        FloatingActionButton(
-            modifier = Modifier.size(40.dp),
-            backgroundColor = AppTheme.colors.primary,
-            contentColor = AppTheme.colors.textOnPrimary,
-            onClick = { onAction(CodesListAction.QrCodeClick) }
-        ) {
-            Icon(
-                modifier = Modifier.size(18.dp),
-                imageVector = Icons.Outlined.QrCode,
-                contentDescription = Icons.Outlined.QrCode.name
-            )
-        }
-    }
-
-    AnimatedVisibility(
-        modifier = Modifier
-            .padding(bottom = 24.dp, end = 16.dp)
-            .align(Alignment.BottomEnd),
+    AppFab(
+        isOpen = state.isAddEnabled,
         visible = (scrollState.value != scrollState.maxValue || scrollState.maxValue == 0) && !state.inEdit,
-        enter = scaleIn() + fadeIn(),
-        exit = scaleOut() + fadeOut()
-    ) {
-        FloatingActionButton(
-            backgroundColor = AppTheme.colors.primary,
-            contentColor = AppTheme.colors.textOnPrimary,
-            onClick = {
-                onAction(
-                    if (state.isAddEnabled) {
-                        CodesListAction.OnAddDisabled
-                    } else {
-                        CodesListAction.OnAddClick
-                    }
+        appFabDataList = listOf(
+            AppFabData(
+                icon = Icons.Outlined.QrCode,
+                onClick = { onAction(CodesListAction.QrCodeClick) },
+            ),
+            AppFabData(
+                icon = Icons.Outlined.Edit,
+                onClick = { onAction(CodesListAction.ManuallyClick) },
+            ),
+        ),
+        mainFabContent = {
+            FloatingActionButton(
+                backgroundColor = AppTheme.colors.primary,
+                contentColor = AppTheme.colors.textOnPrimary,
+                onClick = {
+                    onAction(
+                        if (state.isAddEnabled) {
+                            CodesListAction.OnAddDisabled
+                        } else {
+                            CodesListAction.OnAddClick
+                        }
+                    )
+                }
+            ) {
+                val animatedRotation by animateFloatAsState(
+                    targetValue = if (state.isAddEnabled) 45f else 0f
+                )
+
+                Icon(
+                    modifier = Modifier.rotate(animatedRotation),
+                    imageVector = Icons.Rounded.Add,
+                    contentDescription = Icons.Rounded.Add.name,
                 )
             }
-        ) {
-            val animatedRotation by animateFloatAsState(
-                targetValue = if (state.isAddEnabled) 45f else 0f
-            )
-
-            Icon(
-                modifier = Modifier.rotate(animatedRotation),
-                imageVector = Icons.Rounded.Add,
-                contentDescription = Icons.Rounded.Add.name,
-            )
         }
-    }
+    )
 }

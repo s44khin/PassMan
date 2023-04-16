@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.AppRadioButton
+import com.s44khin.uikit.widgets.AppCheckBox
 import com.s44khin.uikit.widgets.Spacer
 
 @Immutable
@@ -44,6 +44,7 @@ fun CodesListItem(
     inEdit: Boolean,
     showNextCode: Boolean,
     showColor: Boolean,
+    showAccount: Boolean,
     onAction: (CodesListAction) -> Unit,
 ) {
     Row(
@@ -75,7 +76,7 @@ fun CodesListItem(
                     color = AppTheme.colors.textOnBackgroundVariant,
                 )
 
-                if (item.account != null) {
+                if (item.account != null && showAccount) {
                     Spacer(width = 2.dp)
 
                     Text(
@@ -141,7 +142,7 @@ fun CodesListItem(
             enter = fadeIn() + slideInHorizontally { it },
             exit = fadeOut() + slideOutHorizontally { it },
         ) {
-            AppRadioButton(
+            AppCheckBox(
                 selected = item.checked,
                 onClick = { onAction(CodesListAction.CheckedClick(item.uid)) }
             )

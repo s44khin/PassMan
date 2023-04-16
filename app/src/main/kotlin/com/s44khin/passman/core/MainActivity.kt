@@ -5,6 +5,7 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.s44khin.passman.di.extensions.appComponent
 import com.s44khin.passman.navigation.AppBottomNav
 import com.s44khin.passman.navigation.AppNavHost
@@ -55,9 +57,21 @@ class MainActivity : ComponentActivity(), StateStore<MainState> by StateStoreDel
             val rememberNavHostController = remember { navHostController }
             val rememberViewModelFactory = remember { appViewModelFactory }
             val viewState by state.collectAsState()
+            val systemUiController = rememberSystemUiController()
 
-            ProvideViewModelFactory(rememberViewModelFactory) {
-                AppTheme {
+            AppTheme(isDarkTheme = viewState.theme.isDarkTheme) {
+                val statusBarColor = AppTheme.colors.statusBar
+                val isDarkIcons = viewState.theme.isStatusBarDarkIcons
+
+                LaunchedEffect(viewState.theme) {
+                    systemUiController.setStatusBarColor(
+                        color = statusBarColor,
+                        darkIcons = isDarkIcons
+                    )
+                }
+
+                ProvideViewModelFactory(rememberViewModelFactory) {
+
                     AppBottomNav(
                         modifier = Modifier.align(Alignment.BottomCenter),
                         alwaysShowLabels = viewState.alwaysShowLabel,
@@ -93,7 +107,8 @@ class MainActivity : ComponentActivity(), StateStore<MainState> by StateStoreDel
 
     private fun updateSettings() {
         viewState = viewState.copy(
-            alwaysShowLabel = settingsRepository.showLabel
+            alwaysShowLabel = settingsRepository.showLabel,
+            theme = settingsRepository.theme,
         )
     }
 }

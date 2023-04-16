@@ -33,7 +33,8 @@ class CodesListViewModel @Inject constructor(
 ) : ViewModel(), ActionHandler<CodesListAction>, StateStore<CodesListState> by StateStoreDelegate(
     initState = CodesListState(
         showNextCode = settingsRepository.showNextCode,
-        showColor = settingsRepository.showColor
+        showColor = settingsRepository.showColor,
+        showAccount = settingsRepository.showAccount,
     )
 ) {
 
@@ -159,6 +160,7 @@ class CodesListViewModel @Inject constructor(
         viewState = viewState.copy(
             showColor = settingsRepository.showColor,
             showNextCode = settingsRepository.showNextCode,
+            showAccount = settingsRepository.showAccount,
         )
     }
 

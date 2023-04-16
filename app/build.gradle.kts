@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.compose.accompanist.systemUiController)
     implementation(libs.compose.accompanist.permissions)
     implementation(libs.compose.activity)
+    implementation(libs.compose.constraintLayout)
     implementation(libs.compose.foundation)
     implementation(libs.compose.icons)
     implementation(libs.compose.material)

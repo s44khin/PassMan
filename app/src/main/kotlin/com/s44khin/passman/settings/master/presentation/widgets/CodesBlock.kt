@@ -32,6 +32,11 @@ fun CodesBlock(
                     isSelected = state.showColor,
                     onClick = { onAction(SettingsAction.ChangeShowColor) },
                 ),
+                AppColumnItemType.RadioButton(
+                    label = stringResource(R.string.settings_show_account),
+                    isSelected = state.showAccount,
+                    onClick = { onAction(SettingsAction.ChangeShowAccount) },
+                ),
             )
         )
     }

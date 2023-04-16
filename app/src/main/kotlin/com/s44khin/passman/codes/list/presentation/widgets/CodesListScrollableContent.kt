@@ -25,6 +25,7 @@ fun ColumnScope.CodesListScrollableContent(
     showNextCode: Boolean,
     showColor: Boolean,
     inEdit: Boolean,
+    showAccount: Boolean,
     onAction: (CodesListAction) -> Unit
 ) {
     val animatedSpacer by animateDpAsState(targetValue = if (inEdit) 80.dp else 0.dp)
@@ -44,6 +45,7 @@ fun ColumnScope.CodesListScrollableContent(
                 inEdit = inEdit,
                 showNextCode = showNextCode,
                 showColor = showColor,
+                showAccount = showAccount,
                 onAction = onAction
             )
 

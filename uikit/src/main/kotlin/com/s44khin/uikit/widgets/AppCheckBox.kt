@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import com.s44khin.uikit.theme.AppTheme
 
 @Composable
-fun AppRadioButton(
+fun AppCheckBox(
     modifier: Modifier = Modifier,
     selected: Boolean,
     onClick: (() -> Unit),
@@ -15,7 +15,10 @@ fun AppRadioButton(
     RadioButton(
         modifier = modifier,
         selected = selected,
-        colors = RadioButtonDefaults.colors(selectedColor = AppTheme.colors.primary),
+        colors = RadioButtonDefaults.colors(
+            selectedColor = AppTheme.colors.primary,
+            unselectedColor = AppTheme.colors.textOnBackgroundVariant,
+        ),
         onClick = onClick,
     )
 }

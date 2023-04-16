@@ -17,6 +17,7 @@ camerax = "1.2.1"
 compose-accompanist = "0.28.0"
 compose-activity = "1.7.0"
 compose-compiler = "1.4.5"
+compose-constraintLayout = "1.0.1"
 compose-foundation = "1.4.1"
 compose-icons = "1.4.1"
 compose-material = "1.4.1"
@@ -43,6 +44,7 @@ camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" 
 compose-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "compose-accompanist" }
 compose-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "compose-accompanist" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
+compose-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "compose-constraintLayout" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-foundation" }
 compose-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-icons" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose-material" }

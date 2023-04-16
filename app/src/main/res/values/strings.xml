@@ -3,6 +3,7 @@
     <string name="codes_label">Codes</string>
     <string name="codes_add_new_code_label">Add code</string>
     <string name="codes_is_pinned">Is pinned</string>
+    <string name="codes_list_empty">You haven\'t added anything yet</string>
     <string name="codes_add_confirm">Confirm</string>
     <string name="codes_secret_code">Secret code</string>
     <string name="codes_update_timer">Update timer</string>
@@ -24,9 +25,13 @@
     <string name="settings_always_show_label">Always show label</string>
     <string name="settings_show_next_code">Show next code</string>
     <string name="settings_show_color">Show color</string>
+    <string name="settings_show_account">Show account</string>
     <string name="settings_restart">Restart</string>
     <string name="settings_debug_add_data">Add debug data</string>
     <string name="settings_debug_delete_all">Delete all</string>
     <string name="settings_debug">Debug</string>
     <string name="scanner_label">Scanner</string>
+    <string name="scanner_warning">Point the camera at the QR code</string>
+    <string name="scanner_permission">You must give permission to the camera</string>
+    <string name="scanner_permission_button">Give permission</string>
 </resources>

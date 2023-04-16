@@ -51,7 +51,7 @@ fun AddCodeScreen() = BaseScreen<AddCodeState, AddCodeAction, AddCodeViewModel> 
             )
 
             BottomButton(
-                text = stringResource(R.string.codes_add_confirm),
+                label = stringResource(R.string.codes_add_confirm),
                 enabled = state.buttonIsEnabled,
                 onClick = { onAction(AddCodeAction.SaveClick) }
             )

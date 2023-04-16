@@ -23,6 +23,8 @@ open class AppColors internal constructor(
     divider: Color,
     overlay: Color,
     error: Color,
+    statusBar: Color,
+    isDark: Boolean,
 ) {
     var primary by mutableStateOf(primary)
         private set
@@ -54,6 +56,12 @@ open class AppColors internal constructor(
     var error by mutableStateOf(error)
         private set
 
+    var statusBar by mutableStateOf(statusBar)
+        private set
+
+    var isDark by mutableStateOf(isDark)
+        private set
+
     internal fun copy() = AppColors(
         primary = primary,
         background = background,
@@ -65,6 +73,8 @@ open class AppColors internal constructor(
         divider = divider,
         overlay = overlay,
         error = error,
+        statusBar = statusBar,
+        isDark = isDark,
     )
 
     internal fun update(other: AppColors) {
@@ -78,6 +88,8 @@ open class AppColors internal constructor(
         divider = other.divider
         overlay = other.overlay
         error = other.error
+        statusBar = other.statusBar
+        isDark = isDark
     }
 }
 
@@ -112,6 +124,8 @@ internal val lightColors: AppColors
         divider = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
         overlay = Color(0xBFFFFFFF),
         error = Color(0xFFFF0000),
+        statusBar = Color(0xBFFFFFFF),
+        isDark = false
     )
 
 internal val darkColors: AppColors
@@ -127,4 +141,6 @@ internal val darkColors: AppColors
         divider = Color(0xFF444444),
         overlay = Color(0xBF000000),
         error = Color(0xFFFF0000),
+        statusBar = Color(0xBF000000),
+        isDark = true
     )

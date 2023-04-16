@@ -66,7 +66,9 @@ fun AppButton(
             )
     ) {
         Text(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 16.dp),
             text = label,
             color = animatedContentColor,
         )
@@ -75,7 +77,7 @@ fun AppButton(
 
 @Composable
 fun BottomButton(
-    text: String,
+    label: String,
     enabled: Boolean = true,
     onClick: () -> Unit,
 ) {
@@ -90,9 +92,24 @@ fun BottomButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            label = text,
+            label = label,
             enabled = enabled,
             onClick = onClick
         )
     }
+}
+
+@Composable
+fun AppButtonSmall(
+    modifier: Modifier = Modifier,
+    label: String,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+) {
+    AppButton(
+        modifier = modifier.height(36.dp),
+        label = label,
+        enabled = enabled,
+        onClick = onClick,
+    )
 }

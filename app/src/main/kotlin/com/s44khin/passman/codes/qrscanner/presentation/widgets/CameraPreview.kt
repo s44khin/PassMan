@@ -1,7 +1,6 @@
 package com.s44khin.passman.codes.qrscanner.presentation.widgets
 
 import android.util.Log
-import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -15,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -23,6 +23,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
 import com.s44khin.passman.codes.common.BarCodeAnalyser
+import com.s44khin.uikit.theme.AppTheme
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -37,15 +38,12 @@ fun CameraPreview(onQrGetting: (String) -> Unit) {
     AndroidView(
         factory = { AndroidViewContext ->
             PreviewView(AndroidViewContext).apply {
-                scaleType = PreviewView.ScaleType.FIT_CENTER
-                layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                )
+                scaleType = PreviewView.ScaleType.FILL_CENTER
                 implementationMode = PreviewView.ImplementationMode.COMPATIBLE
             }
         },
         modifier = Modifier
+            .clip(AppTheme.shapes.small)
             .size(280.dp)
             .aspectRatio(1f),
         update = { previewView ->

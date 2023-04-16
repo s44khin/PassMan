@@ -12,6 +12,7 @@ data class CodesListState(
     val showNextCode: Boolean = false,
     val showColor: Boolean = true,
     val isAddEnabled: Boolean = false,
+    val showAccount: Boolean = true,
 ) {
 
     fun toNewList(newCodes: List<TotpItemVO>) = copy(codes = newCodes)

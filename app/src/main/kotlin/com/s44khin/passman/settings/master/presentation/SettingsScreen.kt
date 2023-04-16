@@ -19,6 +19,7 @@ import com.s44khin.passman.core.BaseScreen
 import com.s44khin.passman.settings.master.presentation.widgets.AppBlock
 import com.s44khin.passman.settings.master.presentation.widgets.CodesBlock
 import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
+import com.s44khin.passman.settings.master.presentation.widgets.ThemeBlock
 import com.s44khin.uikit.widgets.BottomNavigationHeight
 import com.s44khin.uikit.widgets.Spacer
 import com.s44khin.uikit.widgets.TopNav
@@ -45,15 +46,13 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
             },
         )
 
-        Spacer(height = 8.dp)
-
         Column(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
                 .verticalScroll(scrollState)
         ) {
-            Spacer(height = 8.dp)
+            Spacer(height = 16.dp)
 
             AppBlock(
                 state = state,
@@ -67,6 +66,13 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
                 onAction = onAction,
             )
 
+            Spacer(height = 16.dp)
+
+            ThemeBlock(
+                state = state,
+                onAction = onAction
+            )
+
             if (isDebug) {
                 Spacer(height = 16.dp)
 
@@ -74,6 +80,8 @@ fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewMod
                     onAction = onAction
                 )
             }
+
+            Spacer(height = 16.dp)
         }
     }
 }

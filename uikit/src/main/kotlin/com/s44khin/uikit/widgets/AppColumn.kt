@@ -100,7 +100,7 @@ fun AppColumn(
                         color = AppTheme.colors.textOnBackground
                     )
 
-                    AppRadioButton(
+                    AppCheckBox(
                         selected = appColumnItemType.isSelected,
                         onClick = appColumnItemType.onClick
                     )
