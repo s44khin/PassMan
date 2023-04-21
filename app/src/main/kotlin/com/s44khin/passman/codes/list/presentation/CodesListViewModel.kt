@@ -82,6 +82,7 @@ class CodesListViewModel @Inject constructor(
                                 account = it.account,
                                 updateTimer = it.updateTimer,
                                 pinned = it.pinned,
+                                showNextCode = it.showNextCode,
                             )
                         }.sortedBy { !it.pinned }
                     )

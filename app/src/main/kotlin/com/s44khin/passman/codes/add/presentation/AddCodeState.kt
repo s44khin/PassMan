@@ -13,10 +13,9 @@ data class AddCodeState(
     val account: String = "",
     val description: String = "",
     val isPinned: Boolean = false,
+    val showNextCode: Boolean = true,
+    val showNextCodeAvailable: Boolean = false,
 ) {
-
-    val buttonIsEnabled: Boolean
-        get() = name.isNotEmpty() && secretCode.isNotEmpty() && updateTimer.isNotEmpty() && !secretCodeInError
 
     fun toNewName(newName: String) = copy(name = newName)
 
@@ -31,6 +30,8 @@ data class AddCodeState(
     fun toNewTimer(timer: String) = copy(updateTimer = timer)
 
     fun toChangeIsPinned() = copy(isPinned = !isPinned)
+
+    fun toChangeShowNextCode() = copy(showNextCode = !showNextCode)
 
     fun toSecretCodeError() = copy(
         secretCodeInError = true

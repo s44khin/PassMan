@@ -32,26 +32,29 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BottomSheetWrapper(
+    modifier: Modifier = Modifier,
     title: String,
     sheetState: ModalBottomSheetState,
     bottomSheetContent: @Composable ColumnScope.() -> Unit,
     content: @Composable () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
 
     ModalBottomSheetLayout(
+        modifier = modifier,
         sheetState = sheetState,
         sheetBackgroundColor = Color.Transparent,
-        sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+        sheetShape = shape,
         sheetElevation = 0.dp,
         sheetContent = {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(24.dp))
+                    .clip(shape)
                     .background(
                         color = AppTheme.colors.background,
-                        shape = RoundedCornerShape(24.dp)
+                        shape = shape
                     )
             ) {
                 BottomSheetTopBar(

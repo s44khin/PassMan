@@ -4,14 +4,12 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,21 +25,20 @@ import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
 
 @Composable
-fun AppButton(
+fun AppButtonOutlined(
     modifier: Modifier = Modifier,
     label: String,
     enabled: Boolean = true,
-    backgroundColor: Color = AppTheme.colors.primary,
-    contentColor: Color = AppTheme.colors.textOnPrimary,
+    borderColor: Color = AppTheme.colors.borderOnBackground,
     shape: Shape = AppTheme.shapes.large,
     onClick: () -> Unit,
 ) {
     val animatedBackgroundColor by animateColorAsState(
-        targetValue = if (enabled) backgroundColor else AppTheme.colors.divider
+        targetValue = if (enabled) AppTheme.colors.background else AppTheme.colors.divider
     )
 
     val animatedContentColor by animateColorAsState(
-        targetValue = if (enabled) contentColor else AppTheme.colors.textOnBackgroundVariant
+        targetValue = if (enabled) AppTheme.colors.textOnBackground else AppTheme.colors.textOnBackgroundVariant
     )
 
     val interactionSource = remember { MutableInteractionSource() }
@@ -62,6 +59,11 @@ fun AppButton(
                 color = animatedBackgroundColor,
                 shape = shape,
             )
+            .border(
+                width = 0.5.dp,
+                shape = shape,
+                color = borderColor,
+            )
             .clip(shape)
             .clickable(
                 interactionSource = interactionSource,
@@ -81,73 +83,20 @@ fun AppButton(
 }
 
 @Composable
-fun BottomButton(
-    label: String,
-    enabled: Boolean = true,
-    shape: Shape = AppTheme.shapes.small,
-    backgroundColor: Color = AppTheme.colors.primary,
-    contentColor: Color = AppTheme.colors.textOnPrimary,
-    onClick: () -> Unit,
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .navigationBarsPadding()
-    ) {
-        AppDivider(modifier = Modifier.fillMaxWidth())
-
-        AppButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            label = label,
-            enabled = enabled,
-            shape = shape,
-            backgroundColor = backgroundColor,
-            contentColor = contentColor,
-            onClick = onClick
-        )
-    }
-}
-
-@Composable
-fun AppButtonSmall(
+fun AppButtonMediumOutlined(
     modifier: Modifier = Modifier,
     label: String,
     enabled: Boolean = true,
+    borderColor: Color = AppTheme.colors.borderOnBackground,
     shape: Shape = AppTheme.shapes.small,
-    backgroundColor: Color = AppTheme.colors.primary,
-    contentColor: Color = AppTheme.colors.textOnPrimary,
     onClick: () -> Unit,
 ) {
-    AppButton(
-        modifier = modifier.height(36.dp),
-        label = label,
-        enabled = enabled,
-        shape = shape,
-        backgroundColor = backgroundColor,
-        contentColor = contentColor,
-        onClick = onClick,
-    )
-}
-
-@Composable
-fun AppButtonMedium(
-    modifier: Modifier = Modifier,
-    label: String,
-    enabled: Boolean = true,
-    shape: Shape = AppTheme.shapes.small,
-    backgroundColor: Color = AppTheme.colors.primary,
-    contentColor: Color = AppTheme.colors.textOnPrimary,
-    onClick: () -> Unit,
-) {
-    AppButton(
+    AppButtonOutlined(
         modifier = modifier.height(42.dp),
         label = label,
         enabled = enabled,
         shape = shape,
-        backgroundColor = backgroundColor,
-        contentColor = contentColor,
+        borderColor = borderColor,
         onClick = onClick,
     )
 }

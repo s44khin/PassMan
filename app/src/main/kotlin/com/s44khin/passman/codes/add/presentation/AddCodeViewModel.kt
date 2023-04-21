@@ -10,6 +10,7 @@ import com.s44khin.passman.core.ActionHandler
 import com.s44khin.passman.core.StateStore
 import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.navigation.ScreenRouter
+import com.s44khin.passman.settings.master.SettingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,8 +21,11 @@ class AddCodeViewModel @Inject constructor(
     private val insertCodeUseCase: InsertCodeUseCase,
     private val screenRouter: ScreenRouter,
     private val totpHelper: TotpHelper,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel(), ActionHandler<AddCodeAction>, StateStore<AddCodeState> by StateStoreDelegate(
-    initState = AddCodeState()
+    initState = AddCodeState(
+        showNextCodeAvailable = settingsRepository.showNextCode,
+    )
 ) {
 
     init {
@@ -36,15 +40,16 @@ class AddCodeViewModel @Inject constructor(
     }
 
     override fun onAction(action: AddCodeAction) = when (action) {
+        is AddCodeAction.ChangeShowNextCode -> viewState = viewState.toChangeShowNextCode()
         is AddCodeAction.BackClick -> screenRouter.back()
+        is AddCodeAction.ChangTimer -> viewState = viewState.toNewTimer(action.newTimer)
         is AddCodeAction.ChangeAccount -> viewState = viewState.toNewAccount(action.newAccount)
         is AddCodeAction.ChangeColor -> viewState = viewState.toNewColor(action.newColor)
         is AddCodeAction.ChangeDescription -> viewState = viewState.toNewDescription(action.newDescription)
         is AddCodeAction.ChangeName -> viewState = viewState.toNewName(action.newName)
+        is AddCodeAction.ChangePinned -> viewState = viewState.toChangeIsPinned()
         is AddCodeAction.ChangeSecretCode -> onInputSecretCode(action.newCode)
         is AddCodeAction.SaveClick -> saveClick()
-        is AddCodeAction.ChangTimer -> viewState = viewState.toNewTimer(action.newTimer)
-        is AddCodeAction.ChangePinned -> viewState = viewState.toChangeIsPinned()
     }
 
     private fun saveClick() {
@@ -60,6 +65,7 @@ class AddCodeViewModel @Inject constructor(
                     description = viewState.description.ifEmpty { null },
                     timer = 30,
                     pinned = viewState.isPinned,
+                    showNextCode = viewState.showNextCode,
                 )
 
                 withContext(Dispatchers.Main) {

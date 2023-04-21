@@ -1,87 +1,55 @@
 package com.s44khin.passman.settings.master.presentation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.activity.compose.BackHandler
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import com.s44khin.passman.BuildConfig
 import com.s44khin.passman.R
+import com.s44khin.passman.common.presentation.confirmDialog.ConfirmDialog
+import com.s44khin.passman.common.presentation.confirmDialog.ConfirmDialogButton
 import com.s44khin.passman.core.BaseScreen
-import com.s44khin.passman.settings.master.presentation.widgets.AppBlock
-import com.s44khin.passman.settings.master.presentation.widgets.CodesBlock
-import com.s44khin.passman.settings.master.presentation.widgets.DebugBlock
-import com.s44khin.passman.settings.master.presentation.widgets.ThemeBlock
-import com.s44khin.uikit.widgets.BottomNavigationHeight
-import com.s44khin.uikit.widgets.Spacer
-import com.s44khin.uikit.widgets.TopNav
-import kotlinx.coroutines.launch
+import com.s44khin.passman.settings.master.presentation.widgets.SettingsScreenContent
+import com.s44khin.uikit.util.BottomSheetWrapper
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SettingsScreen() = BaseScreen<SettingsState, SettingsAction, SettingsViewModel> {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = BottomNavigationHeight)
-            .navigationBarsPadding()
-    ) {
-        val scrollState = rememberScrollState()
-        val coroutineScope = rememberCoroutineScope()
-        val isDebug = remember { BuildConfig.DEBUG }
+    BackHandler(enabled = sheetState.currentValue != ModalBottomSheetValue.Hidden) {
+        hideSheet()
+    }
 
-        TopNav(
-            label = stringResource(R.string.settings_label),
-            onLabelClick = {
-                coroutineScope.launch {
-                    scrollState.animateScrollTo(0)
-                }
-            },
-        )
-
-        Column(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-                .verticalScroll(scrollState)
-        ) {
-            Spacer(height = 16.dp)
-
-            AppBlock(
-                state = state,
-                onAction = onAction
+    BottomSheetWrapper(
+        title = stringResource(R.string.settings_are_you_sure),
+        sheetState = sheetState,
+        bottomSheetContent = {
+            ConfirmDialog(
+                subtitle = stringResource(R.string.settings_not_safe),
+                firstButton = ConfirmDialogButton(
+                    label = stringResource(R.string.settings_confirm),
+                    onClick = {
+                        onAction(SettingsAction.ChangeShowNextCode)
+                        hideSheet()
+                    }
+                ),
+                secondButton = ConfirmDialogButton(
+                    label = stringResource(R.string.common_cancel),
+                    onClick = { hideSheet() }
+                )
             )
-
-            Spacer(height = 16.dp)
-
-            CodesBlock(
+        },
+        content = {
+            SettingsScreenContent(
                 state = state,
                 onAction = onAction,
+                onShowNextCodeClick = {
+                    if (!state.showNextCode) {
+                        showSheet()
+                    } else {
+                        onAction(SettingsAction.ChangeShowNextCode)
+                    }
+                }
             )
-
-            Spacer(height = 16.dp)
-
-            ThemeBlock(
-                state = state,
-                onAction = onAction
-            )
-
-            if (isDebug) {
-                Spacer(height = 16.dp)
-
-                DebugBlock(
-                    onAction = onAction
-                )
-            }
-
-            Spacer(height = 16.dp)
         }
-    }
+    )
 }

@@ -14,6 +14,7 @@ class InsertCodeMapper @Inject constructor() {
         description: String?,
         timer: Int,
         pinned: Boolean,
+        showNextCode: Boolean,
     ) = CodeEntity(
         secretCode = secretCode,
         name = name,
@@ -22,5 +23,6 @@ class InsertCodeMapper @Inject constructor() {
         description = description,
         updateTimer = timer,
         pinned = pinned,
+        showNextCode = showNextCode,
     )
 }

@@ -21,7 +21,7 @@ fun OptionalBlock(
         title = stringResource(R.string.codes_optional),
     ) {
         AppColumn(
-            content = listOf(
+            content = mutableListOf(
                 AppColumnItemType.TextField(
                     value = state.account,
                     label = stringResource(R.string.codes_account),
@@ -36,8 +36,18 @@ fun OptionalBlock(
                     label = stringResource(R.string.codes_is_pinned),
                     isSelected = state.isPinned,
                     onClick = { onAction(AddCodeAction.ChangePinned) }
-                )
-            )
+                ),
+            ).apply {
+                if (state.showNextCodeAvailable) {
+                    add(
+                        AppColumnItemType.RadioButton(
+                            label = stringResource(R.string.codes_add_new_show_next_code),
+                            isSelected = state.showNextCode,
+                            onClick = { onAction(AddCodeAction.ChangeShowNextCode) }
+                        )
+                    )
+                }
+            }
         )
     }
 }

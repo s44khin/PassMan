@@ -13,4 +13,5 @@ data class CodeVO(
     val account: String?,
     val updateTimer: Int,
     val pinned: Boolean,
+    val showNextCode: Boolean,
 )

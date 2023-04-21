@@ -15,6 +15,7 @@ fun CodesBlock(
     modifier: Modifier = Modifier,
     state: SettingsState,
     onAction: (SettingsAction) -> Unit,
+    onShowNextCodeClick: () -> Unit,
 ) {
     TitleBlock(
         modifier = modifier,
@@ -25,7 +26,7 @@ fun CodesBlock(
                 AppColumnItemType.RadioButton(
                     label = stringResource(R.string.settings_show_next_code),
                     isSelected = state.showNextCode,
-                    onClick = { onAction(SettingsAction.ChangeShowNextCode) }
+                    onClick = { onShowNextCodeClick() }
                 ),
                 AppColumnItemType.RadioButton(
                     label = stringResource(R.string.settings_show_color),

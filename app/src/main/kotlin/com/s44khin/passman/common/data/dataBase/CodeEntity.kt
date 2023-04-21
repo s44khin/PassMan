@@ -16,4 +16,5 @@ data class CodeEntity(
     @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "update_timer") val updateTimer: Int,
     @ColumnInfo(name = "pinned") val pinned: Boolean = false,
+    @ColumnInfo(name = "show_next_code") val showNextCode: Boolean,
 )

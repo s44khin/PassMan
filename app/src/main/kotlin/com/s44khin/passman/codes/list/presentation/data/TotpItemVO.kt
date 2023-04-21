@@ -17,4 +17,5 @@ data class TotpItemVO(
     val account: String?,
     val updateTimer: Int,
     val pinned: Boolean = false,
+    val showNextCode: Boolean,
 )

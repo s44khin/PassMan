@@ -12,5 +12,6 @@ sealed class AddCodeAction {
     data class ChangeSecretCode(val newCode: String) : AddCodeAction()
     object BackClick : AddCodeAction()
     object ChangePinned : AddCodeAction()
+    object ChangeShowNextCode : AddCodeAction()
     object SaveClick : AddCodeAction()
 }

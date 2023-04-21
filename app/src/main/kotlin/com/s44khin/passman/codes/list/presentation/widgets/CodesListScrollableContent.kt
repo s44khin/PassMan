@@ -43,7 +43,7 @@ fun ColumnScope.CodesListScrollableContent(
             CodesListItem(
                 item = totpItem,
                 inEdit = inEdit,
-                showNextCode = showNextCode,
+                showNextCode = showNextCode && totpItem.showNextCode,
                 showColor = showColor,
                 showAccount = showAccount,
                 onAction = onAction

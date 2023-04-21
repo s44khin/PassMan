@@ -11,6 +11,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "1337asdvasd229b",
@@ -19,6 +20,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "13asdvadsv37228c",
@@ -27,6 +29,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337232ttui0e",
@@ -35,6 +38,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "133723erwg1f",
@@ -43,6 +47,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337232t",
@@ -51,6 +56,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337233y",
@@ -59,6 +65,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337234u",
@@ -67,6 +74,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "1337235i",
@@ -75,6 +83,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337236o",
@@ -83,6 +92,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "133722dv8a",
@@ -91,6 +101,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337asdvasd229b",
@@ -99,6 +110,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "13asdvadsv37228c",
@@ -107,6 +119,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "1337232ttui0e",
@@ -115,6 +128,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "133723erwg1f",
@@ -123,6 +137,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "1337232t",
@@ -131,6 +146,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337233y",
@@ -139,6 +155,7 @@ val codeMock = arrayOf(
         account = null,
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
     CodeEntity(
         secretCode = "1337234u",
@@ -147,6 +164,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337235i",
@@ -155,6 +173,7 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = false,
     ),
     CodeEntity(
         secretCode = "1337236o",
@@ -163,5 +182,6 @@ val codeMock = arrayOf(
         account = "sample@email.com",
         description = "",
         updateTimer = 30,
+        showNextCode = true,
     ),
 )

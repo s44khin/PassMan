@@ -15,7 +15,8 @@ class GetCodesMapper @Inject constructor() {
             color = CodeColor.valueOf(it.color),
             account = it.account,
             updateTimer = it.updateTimer,
-            pinned = it.pinned
+            pinned = it.pinned,
+            showNextCode = it.showNextCode,
         )
     }
 }
