@@ -1,7 +1,7 @@
 package com.s44khin.passman.codes.add.domain
 
-import com.s44khin.passman.codes.add.presentation.data.CodeColor
 import com.s44khin.passman.common.data.CodesRepository
+import com.s44khin.uikit.theme.PrimaryColor
 import javax.inject.Inject
 
 class InsertCodeUseCase @Inject constructor(
@@ -12,7 +12,7 @@ class InsertCodeUseCase @Inject constructor(
     suspend fun execute(
         secretCode: String,
         name: String,
-        color: CodeColor,
+        color: PrimaryColor,
         account: String?,
         description: String?,
         timer: Int,

@@ -64,7 +64,7 @@ fun CodesListItem(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (showColor) {
-            Bullet(color = item.color.color, isPinned = item.pinned)
+            Bullet(color = item.color.primary, isPinned = item.pinned)
         }
 
         Spacer(width = 16.dp)

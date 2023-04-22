@@ -12,8 +12,12 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 
 @Composable
-fun AppTheme(isDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable BoxScope.() -> Unit) {
-    ProvideAppColors(colors = if (isDarkTheme) darkColors else lightColors) {
+fun AppTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
+    primaryColor: PrimaryColor = PrimaryColor.ORANGE,
+    content: @Composable BoxScope.() -> Unit
+) {
+    ProvideAppColors(colors = if (isDarkTheme) darkColors(primaryColor) else lightColors(primaryColor)) {
         MaterialTheme {
             CompositionLocalProvider(
                 LocalRippleTheme provides AppRippleTheme(AppTheme.colors)

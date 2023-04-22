@@ -10,6 +10,7 @@ import com.s44khin.passman.settings.master.domain.DeleteAllUseCase
 import com.s44khin.passman.settings.master.domain.InsertCodesUseCase
 import com.s44khin.passman.settings.master.presentation.data.ThemeMode
 import com.s44khin.passman.settings.master.presentation.data.codeMock
+import com.s44khin.uikit.theme.PrimaryColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,6 +26,7 @@ class SettingsViewModel @Inject constructor(
         alwaysShowLabel = settingsRepository.showLabel,
         themeMode = settingsRepository.theme,
         showAccount = settingsRepository.showAccount,
+        color = settingsRepository.primaryColor,
     )
 ) {
 
@@ -38,6 +40,7 @@ class SettingsViewModel @Inject constructor(
         is SettingsAction.OnLightThemeClick -> onLightThemeClick()
         is SettingsAction.OnSystemThemeClick -> onSystemThemeClick()
         is SettingsAction.ChangeShowAccount -> onChangeShowAccount()
+        is SettingsAction.ChangeColor -> onChangeColor(action.newColor)
     }
 
     private fun deleteAll() {
@@ -107,6 +110,13 @@ class SettingsViewModel @Inject constructor(
     private fun onDarkThemeClick() {
         viewState = viewState.toDarkTheme()
         settingsRepository.theme = ThemeMode.Dark
+
+        updateSettings()
+    }
+
+    private fun onChangeColor(newColor: PrimaryColor) {
+        viewState = viewState.toNewColor(newColor)
+        settingsRepository.primaryColor = newColor
 
         updateSettings()
     }

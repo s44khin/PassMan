@@ -1,20 +1,20 @@
-package com.s44khin.passman.codes.add.presentation.widgets
+package com.s44khin.passman.settings.master.presentation.widgets
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.R
-import com.s44khin.passman.codes.add.presentation.AddCodeAction
-import com.s44khin.passman.codes.add.presentation.AddCodeState
 import com.s44khin.passman.common.presentation.widgets.ColorCarousel
+import com.s44khin.passman.settings.master.presentation.SettingsAction
+import com.s44khin.passman.settings.master.presentation.SettingsState
 import com.s44khin.uikit.layouts.TitleBlock
 
 @Composable
 fun ColorBlock(
     modifier: Modifier = Modifier,
-    state: AddCodeState,
-    onAction: (AddCodeAction) -> Unit,
+    state: SettingsState,
+    onAction: (SettingsAction) -> Unit,
 ) {
     TitleBlock(
         modifier = modifier,
@@ -23,7 +23,7 @@ fun ColorBlock(
     ) {
         ColorCarousel(
             selectedItem = state.color,
-            onColorClick = { onAction(AddCodeAction.ChangeColor(it)) }
+            onColorClick = { onAction(SettingsAction.ChangeColor(it)) }
         )
     }
 }

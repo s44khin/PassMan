@@ -1,4 +1,4 @@
-package com.s44khin.passman.codes.add.presentation.widgets
+package com.s44khin.passman.common.presentation.widgets
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -24,14 +24,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.s44khin.passman.codes.add.presentation.data.CodeColor
+import com.s44khin.uikit.theme.PrimaryColor
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun ColorRowItem(
+fun ColorCarouselItem(
     modifier: Modifier = Modifier,
     selected: Boolean,
-    codeColor: CodeColor,
+    color: PrimaryColor,
     onClick: () -> Unit
 ) {
     Box(
@@ -39,7 +39,7 @@ fun ColorRowItem(
             .height(42.dp)
             .aspectRatio(1f)
             .clip(RoundedCornerShape(24.dp))
-            .background(color = codeColor.color)
+            .background(color = color.primary)
             .clickable { onClick() }
     ) {
         val animatedAlpha by animateFloatAsState(

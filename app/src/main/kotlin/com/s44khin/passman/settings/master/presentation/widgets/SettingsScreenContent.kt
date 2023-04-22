@@ -75,6 +75,13 @@ fun SettingsScreenContent(
                 onAction = onAction
             )
 
+            Spacer(height = 16.dp)
+
+            ColorBlock(
+                state = state,
+                onAction = onAction
+            )
+
             if (isDebug) {
                 Spacer(height = 16.dp)
 

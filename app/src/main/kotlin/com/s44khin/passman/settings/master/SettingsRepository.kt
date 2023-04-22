@@ -3,6 +3,7 @@ package com.s44khin.passman.settings.master
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.di.AppScope
 import com.s44khin.passman.settings.master.presentation.data.ThemeMode
+import com.s44khin.uikit.theme.PrimaryColor
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
@@ -17,7 +18,8 @@ class SettingsRepository @Inject constructor(
         const val SHOW_COLOR_KEY = "show_color_key"
         const val SHOW_LABEL_KEY = "show_label_key"
         const val THEME_KEY = "theme_key"
-        const val SHOW_ACCOUNT_KEY = "SHOW_ACCOUNT_KEY"
+        const val SHOW_ACCOUNT_KEY = "show_account_key"
+        const val PRIMARY_COLOR_KEY = "primary_color_key"
     }
 
     private val _events = MutableSharedFlow<SettingsEvents>()
@@ -42,6 +44,15 @@ class SettingsRepository @Inject constructor(
     var theme: ThemeMode
         get() = ThemeMode.valueOf(appStorage.getString(key = THEME_KEY, defaultValue = ThemeMode.System.name))
         set(value) = appStorage.putString(key = THEME_KEY, value = value.name)
+
+    var primaryColor: PrimaryColor
+        get() = PrimaryColor.valueOf(
+            appStorage.getString(
+                key = PRIMARY_COLOR_KEY,
+                defaultValue = PrimaryColor.ORANGE.name
+            )
+        )
+        set(value) = appStorage.putString(key = PRIMARY_COLOR_KEY, value = value.name)
 
     suspend fun postUpdate() {
         _events.emit(value = SettingsEvents.UPDATE)

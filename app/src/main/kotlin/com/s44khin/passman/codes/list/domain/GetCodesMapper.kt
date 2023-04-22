@@ -1,8 +1,8 @@
 package com.s44khin.passman.codes.list.domain
 
-import com.s44khin.passman.codes.add.presentation.data.CodeColor
 import com.s44khin.passman.codes.list.presentation.data.CodeVO
 import com.s44khin.passman.common.data.dataBase.CodeEntity
+import com.s44khin.uikit.theme.PrimaryColor
 import javax.inject.Inject
 
 class GetCodesMapper @Inject constructor() {
@@ -12,7 +12,7 @@ class GetCodesMapper @Inject constructor() {
             uid = it.uid,
             secretCode = it.secretCode,
             name = it.name,
-            color = CodeColor.valueOf(it.color),
+            color = PrimaryColor.valueOf(it.color),
             account = it.account,
             updateTimer = it.updateTimer,
             pinned = it.pinned,

@@ -59,7 +59,10 @@ class MainActivity : ComponentActivity(), StateStore<MainState> by StateStoreDel
             val viewState by state.collectAsState()
             val systemUiController = rememberSystemUiController()
 
-            AppTheme(isDarkTheme = viewState.theme.isDarkTheme) {
+            AppTheme(
+                isDarkTheme = viewState.theme.isDarkTheme,
+                primaryColor = viewState.primaryColor,
+            ) {
                 val statusBarColor = AppTheme.colors.statusBar
                 val isDarkIcons = viewState.theme.isStatusBarDarkIcons
 
@@ -109,6 +112,7 @@ class MainActivity : ComponentActivity(), StateStore<MainState> by StateStoreDel
         viewState = viewState.copy(
             alwaysShowLabel = settingsRepository.showLabel,
             theme = settingsRepository.theme,
+            primaryColor = settingsRepository.primaryColor,
         )
     }
 }

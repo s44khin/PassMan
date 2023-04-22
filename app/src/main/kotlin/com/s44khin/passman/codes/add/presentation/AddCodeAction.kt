@@ -1,12 +1,12 @@
 package com.s44khin.passman.codes.add.presentation
 
-import com.s44khin.passman.codes.add.presentation.data.CodeColor
+import com.s44khin.uikit.theme.PrimaryColor
 
 sealed class AddCodeAction {
 
     data class ChangTimer(val newTimer: String) : AddCodeAction()
     data class ChangeAccount(val newAccount: String) : AddCodeAction()
-    data class ChangeColor(val newColor: CodeColor) : AddCodeAction()
+    data class ChangeColor(val newColor: PrimaryColor) : AddCodeAction()
     data class ChangeDescription(val newDescription: String) : AddCodeAction()
     data class ChangeName(val newName: String) : AddCodeAction()
     data class ChangeSecretCode(val newCode: String) : AddCodeAction()

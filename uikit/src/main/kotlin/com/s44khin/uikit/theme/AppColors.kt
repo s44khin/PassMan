@@ -16,7 +16,7 @@ open class AppColors internal constructor(
     primary: Color,
     background: Color,
     borderOnBackground: Color,
-    textOnPrimary: Color,
+    onPrimary: Color,
     textOnBackground: Color,
     textOnBackgroundVariant: Color,
     textBoxBackground: Color,
@@ -35,7 +35,7 @@ open class AppColors internal constructor(
     var borderOnBackground by mutableStateOf(borderOnBackground)
         private set
 
-    var textOnPrimary by mutableStateOf(textOnPrimary)
+    var textOnPrimary by mutableStateOf(onPrimary)
         private set
 
     var textOnBackground by mutableStateOf(textOnBackground)
@@ -66,7 +66,7 @@ open class AppColors internal constructor(
         primary = primary,
         background = background,
         borderOnBackground = borderOnBackground,
-        textOnPrimary = textOnPrimary,
+        onPrimary = textOnPrimary,
         textOnBackground = textOnBackground,
         textOnBackgroundVariant = textOnBackgroundVariant,
         textBoxBackground = textBoxBackground,
@@ -111,36 +111,34 @@ internal fun ProvideAppColors(
     CompositionLocalProvider(LocalAppColorsProvider provides newColors, content = content)
 }
 
-internal val lightColors: AppColors
-    @Composable
-    get() = AppColors(
-        primary = Color(0xffe65100),
-        background = Color(0xffffffff),
-        borderOnBackground = Color(0x40000000),
-        textOnPrimary = Color(0xFFFFFFFF),
-        textOnBackground = Color(0xff000000),
-        textOnBackgroundVariant = Color(0x80000000),
-        textBoxBackground = Color(0xffedeef0),
-        divider = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
-        overlay = Color(0xBFFFFFFF),
-        error = Color(0xFFFF0000),
-        statusBar = Color(0xBFFFFFFF),
-        isDark = false
-    )
+@Composable
+internal fun lightColors(primary: PrimaryColor) = AppColors(
+    primary = primary.primary,
+    background = Color(0xffffffff),
+    borderOnBackground = Color(0x40000000),
+    onPrimary = primary.onPrimary,
+    textOnBackground = Color(0xff000000),
+    textOnBackgroundVariant = Color(0x80000000),
+    textBoxBackground = Color(0xffedeef0),
+    divider = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+    overlay = Color(0xBFFFFFFF),
+    error = Color(0xFFFF0000),
+    statusBar = Color(0xBFFFFFFF),
+    isDark = false
+)
 
-internal val darkColors: AppColors
-    @Composable
-    get() = AppColors(
-        primary = Color(0xffe65100),
-        background = Color(0xFF000000),
-        borderOnBackground = Color(0x40FFFFFF),
-        textOnPrimary = Color(0xFFFFFFFF),
-        textOnBackground = Color(0xffffffff),
-        textOnBackgroundVariant = Color(0x80FFFFFF),
-        textBoxBackground = Color(0xff141414),
-        divider = Color(0xFF444444),
-        overlay = Color(0xBF000000),
-        error = Color(0xFFFF0000),
-        statusBar = Color(0xBF000000),
-        isDark = true
-    )
+@Composable
+internal fun darkColors(primary: PrimaryColor) = AppColors(
+    primary = primary.primary,
+    background = Color(0xFF000000),
+    borderOnBackground = Color(0x40FFFFFF),
+    onPrimary = primary.onPrimary,
+    textOnBackground = Color(0xffffffff),
+    textOnBackgroundVariant = Color(0x80FFFFFF),
+    textBoxBackground = Color(0xff141414),
+    divider = Color(0xFF444444),
+    overlay = Color(0xBF000000),
+    error = Color(0xFFFF0000),
+    statusBar = Color(0xBF000000),
+    isDark = true
+)

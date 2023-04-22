@@ -1,7 +1,7 @@
 package com.s44khin.passman.codes.add.presentation
 
 import androidx.compose.runtime.Immutable
-import com.s44khin.passman.codes.add.presentation.data.CodeColor
+import com.s44khin.uikit.theme.PrimaryColor
 
 @Immutable
 data class AddCodeState(
@@ -9,7 +9,7 @@ data class AddCodeState(
     val secretCode: String = "",
     val secretCodeInError: Boolean = false,
     val updateTimer: String = "30",
-    val color: CodeColor = CodeColor.Blue,
+    val color: PrimaryColor = PrimaryColor.BLUE,
     val account: String = "",
     val description: String = "",
     val isPinned: Boolean = false,
@@ -21,7 +21,7 @@ data class AddCodeState(
 
     fun toNewSecretCode(newSecretCode: String) = copy(secretCode = newSecretCode)
 
-    fun toNewColor(newColor: CodeColor) = copy(color = newColor)
+    fun toNewColor(newColor: PrimaryColor) = copy(color = newColor)
 
     fun toNewAccount(newAccount: String) = copy(account = newAccount)
 
