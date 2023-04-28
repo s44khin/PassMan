@@ -62,6 +62,13 @@ fun SettingsScreenContent(
 
             Spacer(height = 16.dp)
 
+            StartScreenBlock(
+                state = state,
+                onAction = onAction
+            )
+
+            Spacer(height = 16.dp)
+
             CodesBlock(
                 state = state,
                 onAction = onAction,

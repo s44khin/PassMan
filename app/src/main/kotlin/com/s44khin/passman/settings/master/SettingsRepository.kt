@@ -2,6 +2,7 @@ package com.s44khin.passman.settings.master
 
 import com.s44khin.passman.core.AppStorage
 import com.s44khin.passman.di.AppScope
+import com.s44khin.passman.settings.master.presentation.data.StartScreen
 import com.s44khin.passman.settings.master.presentation.data.ThemeMode
 import com.s44khin.uikit.theme.PrimaryColor
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -20,6 +21,7 @@ class SettingsRepository @Inject constructor(
         const val THEME_KEY = "theme_key"
         const val SHOW_ACCOUNT_KEY = "show_account_key"
         const val PRIMARY_COLOR_KEY = "primary_color_key"
+        const val START_SCREEN_KEY = "start_screen_key"
     }
 
     private val _events = MutableSharedFlow<SettingsEvents>()
@@ -53,6 +55,15 @@ class SettingsRepository @Inject constructor(
             )
         )
         set(value) = appStorage.putString(key = PRIMARY_COLOR_KEY, value = value.name)
+
+    var startScreen: StartScreen
+        get() = StartScreen.valueOf(
+            appStorage.getString(
+                key = START_SCREEN_KEY,
+                defaultValue = StartScreen.Codes.name,
+            )
+        )
+        set(value) = appStorage.putString(key = START_SCREEN_KEY, value = value.name)
 
     suspend fun postUpdate() {
         _events.emit(value = SettingsEvents.UPDATE)

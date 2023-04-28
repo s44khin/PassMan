@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
@@ -85,7 +86,10 @@ class MainActivity : ComponentActivity(), StateStore<MainState> by StateStoreDel
                         modifier = Modifier
                             .align(Alignment.TopCenter)
                             .fillMaxSize(),
-                        navHostController = rememberNavHostController
+                        startScreen = rememberSaveable {
+                            viewState.startScreen
+                        },
+                        navHostController = rememberNavHostController,
                     )
                 }
             }
@@ -113,6 +117,7 @@ class MainActivity : ComponentActivity(), StateStore<MainState> by StateStoreDel
             alwaysShowLabel = settingsRepository.showLabel,
             theme = settingsRepository.theme,
             primaryColor = settingsRepository.primaryColor,
+            startScreen = settingsRepository.startScreen,
         )
     }
 }

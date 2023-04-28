@@ -3,6 +3,7 @@ package com.s44khin.passman.navigation
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Code
+import androidx.compose.material.icons.rounded.Password
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -16,6 +17,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.s44khin.passman.R
 import com.s44khin.passman.codes.navigation.CodesNavigation
+import com.s44khin.passman.passwords.navigation.PasswordsNavigation
 import com.s44khin.passman.settings.navigation.SettingsNavigation
 import com.s44khin.uikit.widgets.BottomNav
 import com.s44khin.uikit.widgets.BottomNavItem
@@ -28,15 +30,22 @@ private val bottomNavItems = listOf(
     ),
 
     AppBottomNavItem(
+        icon = Icons.Rounded.Password,
+        label = R.string.passwords_label,
+        route = PasswordsNavigation.List.route
+    ),
+
+    AppBottomNavItem(
         icon = Icons.Rounded.Settings,
         label = R.string.settings_label,
         route = SettingsNavigation.List.route
-    )
+    ),
 )
 
 private val bottomNavItemsRouts = listOf(
     CodesNavigation.List.route,
-    SettingsNavigation.List.route
+    PasswordsNavigation.List.route,
+    SettingsNavigation.List.route,
 )
 
 @Composable

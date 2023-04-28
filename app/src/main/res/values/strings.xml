@@ -36,10 +36,13 @@
     <string name="settings_not_safe">It may not be safe</string>
     <string name="settings_show_next_code">Show next code</string>
     <string name="settings_theme">Theme</string>
+    <string name="settings_start_screen">Start screen</string>
     <string name="settings_are_you_sure">Are you sure?</string>
     <string name="settings_theme_dark">Dark</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_system">System</string>
     <string name="common_exit">Exit</string>
     <string name="common_cancel">Cancel</string>
+
+    <string name="passwords_label">Passwords</string>
 </resources>

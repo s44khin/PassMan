@@ -11,7 +11,9 @@ sealed class SettingsAction {
     object ChangeShowLabel : SettingsAction()
     object ChangeShowNextCode : SettingsAction()
     object DeleteAll : SettingsAction()
+    object OnCodesScreenClick : SettingsAction()
     object OnDarkThemeClick : SettingsAction()
     object OnLightThemeClick : SettingsAction()
+    object OnPasswordsScreenClick : SettingsAction()
     object OnSystemThemeClick : SettingsAction()
 }

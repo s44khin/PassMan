@@ -8,6 +8,7 @@ import com.s44khin.passman.core.StateStoreDelegate
 import com.s44khin.passman.settings.master.SettingsRepository
 import com.s44khin.passman.settings.master.domain.DeleteAllUseCase
 import com.s44khin.passman.settings.master.domain.InsertCodesUseCase
+import com.s44khin.passman.settings.master.presentation.data.StartScreen
 import com.s44khin.passman.settings.master.presentation.data.ThemeMode
 import com.s44khin.passman.settings.master.presentation.data.codeMock
 import com.s44khin.uikit.theme.PrimaryColor
@@ -27,20 +28,23 @@ class SettingsViewModel @Inject constructor(
         themeMode = settingsRepository.theme,
         showAccount = settingsRepository.showAccount,
         color = settingsRepository.primaryColor,
+        startScreen = settingsRepository.startScreen,
     )
 ) {
 
     override fun onAction(action: SettingsAction) = when (action) {
         is SettingsAction.AddDebugData -> addDebugData()
+        is SettingsAction.ChangeColor -> onChangeColor(action.newColor)
+        is SettingsAction.ChangeShowAccount -> onChangeShowAccount()
         is SettingsAction.ChangeShowColor -> changeShowColor()
+        is SettingsAction.ChangeShowLabel -> changeShowLabel()
         is SettingsAction.ChangeShowNextCode -> changeShowNextCode()
         is SettingsAction.DeleteAll -> deleteAll()
-        is SettingsAction.ChangeShowLabel -> changeShowLabel()
+        is SettingsAction.OnCodesScreenClick -> onCodesScreenClick()
         is SettingsAction.OnDarkThemeClick -> onDarkThemeClick()
         is SettingsAction.OnLightThemeClick -> onLightThemeClick()
+        is SettingsAction.OnPasswordsScreenClick -> onPasswordScreenClick()
         is SettingsAction.OnSystemThemeClick -> onSystemThemeClick()
-        is SettingsAction.ChangeShowAccount -> onChangeShowAccount()
-        is SettingsAction.ChangeColor -> onChangeColor(action.newColor)
     }
 
     private fun deleteAll() {
@@ -117,6 +121,20 @@ class SettingsViewModel @Inject constructor(
     private fun onChangeColor(newColor: PrimaryColor) {
         viewState = viewState.toNewColor(newColor)
         settingsRepository.primaryColor = newColor
+
+        updateSettings()
+    }
+
+    private fun onCodesScreenClick() {
+        viewState = viewState.toCodesStartScreen()
+        settingsRepository.startScreen = StartScreen.Codes
+
+        updateSettings()
+    }
+
+    private fun onPasswordScreenClick() {
+        viewState = viewState.toPasswordsStartScreen()
+        settingsRepository.startScreen = StartScreen.Passwords
 
         updateSettings()
     }

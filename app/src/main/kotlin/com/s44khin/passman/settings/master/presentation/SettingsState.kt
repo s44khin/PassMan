@@ -1,5 +1,6 @@
 package com.s44khin.passman.settings.master.presentation
 
+import com.s44khin.passman.settings.master.presentation.data.StartScreen
 import com.s44khin.passman.settings.master.presentation.data.ThemeMode
 import com.s44khin.uikit.theme.PrimaryColor
 
@@ -10,6 +11,7 @@ data class SettingsState(
     val showAccount: Boolean = true,
     val themeMode: ThemeMode = ThemeMode.System,
     val color: PrimaryColor = PrimaryColor.ORANGE,
+    val startScreen: StartScreen = StartScreen.Codes,
 ) {
 
     fun changeShowNextCode() = copy(
@@ -42,5 +44,13 @@ data class SettingsState(
 
     fun toNewColor(newColor: PrimaryColor) = copy(
         color = newColor,
+    )
+
+    fun toCodesStartScreen() = copy(
+        startScreen = StartScreen.Codes,
+    )
+
+    fun toPasswordsStartScreen() = copy(
+        startScreen = StartScreen.Passwords,
     )
 }
