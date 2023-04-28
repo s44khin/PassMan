@@ -23,17 +23,17 @@ fun CodesBlock(
     ) {
         AppColumn(
             content = listOf(
-                AppColumnItemType.RadioButton(
+                AppColumnItemType.Switch(
                     label = stringResource(R.string.settings_show_next_code),
                     isSelected = state.showNextCode,
                     onClick = { onShowNextCodeClick() }
                 ),
-                AppColumnItemType.RadioButton(
+                AppColumnItemType.Switch(
                     label = stringResource(R.string.settings_show_color),
                     isSelected = state.showColor,
                     onClick = { onAction(SettingsAction.ChangeShowColor) },
                 ),
-                AppColumnItemType.RadioButton(
+                AppColumnItemType.Switch(
                     label = stringResource(R.string.settings_show_account),
                     isSelected = state.showAccount,
                     onClick = { onAction(SettingsAction.ChangeShowAccount) },

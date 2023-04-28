@@ -24,8 +24,8 @@ import com.s44khin.passman.settings.master.presentation.SettingsState
 import com.s44khin.passman.settings.master.presentation.data.ThemeMode
 import com.s44khin.uikit.layouts.TitleBlock
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.AppCheckBox
 import com.s44khin.uikit.widgets.AppDivider
+import com.s44khin.uikit.widgets.AppRadioButton
 import com.s44khin.uikit.widgets.AppRow
 import com.s44khin.uikit.widgets.Spacer
 
@@ -95,7 +95,7 @@ private fun RowScope.ThemeBlockItem(
             color = AppTheme.colors.textOnBackground,
         )
 
-        AppCheckBox(
+        AppRadioButton(
             selected = selected,
             onClick = onClick
         )

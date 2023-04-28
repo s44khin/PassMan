@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Block
 import androidx.compose.material3.CircularProgressIndicator
@@ -38,12 +38,12 @@ fun CodesListScreen() = BaseScreen<CodesListState, CodesListAction, CodesListVie
             .padding(bottom = BottomNavigationHeight)
             .navigationBarsPadding()
     ) {
-        val scrollState = rememberScrollState()
+        val scrollState = rememberLazyListState()
 
         Column(modifier = Modifier.fillMaxSize()) {
             when (state.mode) {
                 CodesListMode.CONTENT -> CodesListScrollableContent(
-                    scrollState = scrollState,
+                    state = scrollState,
                     list = state.codes,
                     showNextCode = state.showNextCode,
                     showColor = state.showColor,

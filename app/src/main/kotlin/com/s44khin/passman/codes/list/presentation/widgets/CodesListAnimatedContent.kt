@@ -7,13 +7,13 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.QrCode
@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.CodesListState
+import com.s44khin.passman.util.isScrolledToTheEnd
 import com.s44khin.uikit.theme.AppTheme
 import com.s44khin.uikit.util.clickableWithoutRipple
 import com.s44khin.uikit.widgets.AppFab
@@ -37,7 +38,7 @@ import com.s44khin.uikit.widgets.AppFabData
 @Composable
 fun BoxScope.CodesListAnimatedContent(
     state: CodesListState,
-    scrollState: ScrollState,
+    scrollState: LazyListState,
     onAction: (CodesListAction) -> Unit,
 ) {
     AnimatedVisibility(
@@ -72,7 +73,7 @@ fun BoxScope.CodesListAnimatedContent(
 
     AppFab(
         isOpen = state.isAddEnabled,
-        visible = (scrollState.value != scrollState.maxValue || scrollState.maxValue == 0) && !state.inEdit,
+        visible = (!scrollState.isScrolledToTheEnd()) && !state.inEdit,
         appFabDataList = listOf(
             AppFabData(
                 icon = Icons.Outlined.QrCode,

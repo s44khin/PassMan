@@ -22,7 +22,7 @@ fun AppBlock(
     ) {
         AppColumn(
             content = listOf(
-                AppColumnItemType.RadioButton(
+                AppColumnItemType.Switch(
                     label = stringResource(R.string.settings_always_show_label),
                     isSelected = state.alwaysShowLabel,
                     onClick = { onAction(SettingsAction.ChangeShowLabel) }

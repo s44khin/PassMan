@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import com.s44khin.uikit.theme.AppTheme
 
 @Composable
-fun AppCheckBox(
+fun AppRadioButton(
     modifier: Modifier = Modifier,
     selected: Boolean,
     onClick: (() -> Unit),

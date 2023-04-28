@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.s44khin.passman.codes.list.presentation.CodesListAction
 import com.s44khin.passman.codes.list.presentation.data.TotpItemVO
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.AppCheckBox
+import com.s44khin.uikit.widgets.AppRadioButton
 import com.s44khin.uikit.widgets.Spacer
 
 @Immutable
@@ -142,7 +142,7 @@ fun CodesListItem(
             enter = fadeIn() + slideInHorizontally { it },
             exit = fadeOut() + slideOutHorizontally { it },
         ) {
-            AppCheckBox(
+            AppRadioButton(
                 selected = item.checked,
                 onClick = { onAction(CodesListAction.CheckedClick(item.uid)) }
             )

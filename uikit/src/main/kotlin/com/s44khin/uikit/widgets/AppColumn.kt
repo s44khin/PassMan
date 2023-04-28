@@ -27,6 +27,12 @@ sealed class AppColumnItemType {
         val onClick: () -> Unit
     ) : AppColumnItemType()
 
+    data class Switch(
+        val label: String,
+        val isSelected: Boolean,
+        val onClick: () -> Unit,
+    ) : AppColumnItemType()
+
 
     data class Chevron(
         val label: String,
@@ -100,9 +106,27 @@ fun AppColumn(
                         color = AppTheme.colors.textOnBackground
                     )
 
-                    AppCheckBox(
+                    AppRadioButton(
                         selected = appColumnItemType.isSelected,
                         onClick = appColumnItemType.onClick
+                    )
+                }
+
+                is AppColumnItemType.Switch -> Row(
+                    modifier = Modifier
+                        .clickable { appColumnItemType.onClick() }
+                        .padding(start = 16.dp, top = 6.dp, end = 16.dp, bottom = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = appColumnItemType.label,
+                        color = AppTheme.colors.textOnBackground
+                    )
+
+                    AppSwitch(
+                        checked = appColumnItemType.isSelected,
+                        onCheckedChange = appColumnItemType.onClick
                     )
                 }
 
