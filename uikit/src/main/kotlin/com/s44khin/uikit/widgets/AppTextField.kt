@@ -12,8 +12,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,7 +41,7 @@ fun AppTextField(
     enabled: Boolean = true,
     maxLines: Int = 1,
     shape: Shape = RoundedCornerShape(24.dp),
-    borderColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+    borderColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
     contentColor: Color = AppTheme.colors.textOnBackground,
     hintOverflow: TextOverflow = TextOverflow.Clip,
     backgroundColor: Color = AppTheme.colors.background,

@@ -1,6 +1,7 @@
 package com.s44khin.passman.codes.add.presentation.widgets
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,7 +27,7 @@ fun AddCodeContent(
     onAction: (AddCodeAction) -> Unit,
     onBackClick: () -> Unit,
 ) {
-    Column {
+    Column(modifier = Modifier.imePadding()) {
         val scrollState = rememberScrollState()
         val coroutineScope = rememberCoroutineScope()
 

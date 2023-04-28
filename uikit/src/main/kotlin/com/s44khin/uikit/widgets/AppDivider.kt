@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Divider
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
@@ -16,8 +16,7 @@ import com.s44khin.uikit.theme.AppTheme
 
 @Composable
 fun ColumnScope.AppDivider(modifier: Modifier = Modifier, startIndent: Dp = 0.dp) = Divider(
-    modifier = modifier,
-    startIndent = startIndent,
+    modifier = modifier.padding(start = startIndent),
     thickness = 0.5.dp,
     color = AppTheme.colors.divider
 )

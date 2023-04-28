@@ -1,102 +1,48 @@
 package com.s44khin.uikit.util
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
-import com.s44khin.uikit.widgets.Spacer
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetWrapper(
     modifier: Modifier = Modifier,
-    title: String,
-    sheetState: ModalBottomSheetState,
-    bottomSheetContent: @Composable ColumnScope.() -> Unit,
-    content: @Composable () -> Unit
+    bottomSheetIsOpen: Boolean,
+    onDismissRequest: () -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
-    val coroutineScope = rememberCoroutineScope()
-    val shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+    val bottomSheetState = rememberModalBottomSheetState()
+    var _bottomSheetIsOpen by remember { mutableStateOf(false) }
 
-    ModalBottomSheetLayout(
-        modifier = modifier,
-        sheetState = sheetState,
-        sheetBackgroundColor = Color.Transparent,
-        sheetShape = shape,
-        sheetElevation = 0.dp,
-        sheetContent = {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(shape)
-                    .background(
-                        color = AppTheme.colors.background,
-                        shape = shape
-                    )
-            ) {
-                BottomSheetTopBar(
-                    title = title,
-                    onDismiss = {
-                        coroutineScope.launch {
-                            sheetState.hide()
-                        }
-                    },
-                )
-
-                bottomSheetContent()
-
-                Spacer(height = 16.dp)
-                Spacer(modifier = Modifier.navigationBarsPadding())
-            }
-        },
-        content = content
-    )
-}
-
-@Composable
-private fun BottomSheetTopBar(title: String, onDismiss: () -> Unit) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(
-            modifier = Modifier
-                .weight(1f)
-                .padding(horizontal = 16.dp),
-            text = title,
-            fontWeight = FontWeight.Bold,
-            color = AppTheme.colors.textOnBackground,
-        )
-
-        IconButton(onClick = onDismiss) {
-            Icon(
-                imageVector = Icons.Rounded.Close,
-                contentDescription = Icons.Rounded.Close.name,
-                tint = AppTheme.colors.textOnBackground
-            )
+    LaunchedEffect(bottomSheetIsOpen) {
+        if (bottomSheetIsOpen) {
+            _bottomSheetIsOpen = true
+            delay(250)
+            bottomSheetState.show()
+        } else {
+            this.launch { bottomSheetState.hide() }.invokeOnCompletion { _bottomSheetIsOpen = false }
         }
+    }
+
+    if (_bottomSheetIsOpen) {
+        ModalBottomSheet(
+            modifier = modifier,
+            sheetState = bottomSheetState,
+            content = content,
+            containerColor = AppTheme.colors.background,
+            onDismissRequest = onDismissRequest
+        )
     }
 }

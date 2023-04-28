@@ -7,27 +7,27 @@ versionCode = "1"
 versionName = "0.0.1"
 
 #plugins
-coreKtx = "1.9.0"
+coreKtx = "1.10.0"
 gradle = "7.4.2"
 kotlin = "1.8.20"
 
 #libs
 appCompat = "1.6.1"
-camerax = "1.2.1"
+camerax = "1.2.2"
 compose-accompanist = "0.28.0"
-compose-activity = "1.7.0"
+compose-activity = "1.7.1"
 compose-compiler = "1.4.5"
 compose-constraintLayout = "1.0.1"
-compose-foundation = "1.4.1"
-compose-icons = "1.4.1"
-compose-material = "1.4.1"
+compose-foundation = "1.4.2"
+compose-icons = "1.4.2"
+compose-material = "1.1.0-rc01"
 compose-navigation = "2.5.3"
-compose-ui = "1.4.1"
-compose-ui-preview = "1.4.1"
+compose-ui = "1.4.2"
+compose-ui-preview = "1.4.2"
 compose-viewModel = "2.6.1"
 dagger = "2.45"
-google-services = "17.0.0"
-room = "2.5.0"
+google-services = "17.1.0"
+room = "2.5.1"
 totp = "2.4.0"
 
 [plugins]
@@ -47,7 +47,7 @@ compose-activity = { module = "androidx.activity:activity-compose", version.ref 
 compose-constraintLayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "compose-constraintLayout" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-foundation" }
 compose-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-icons" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose-material" }
+compose-material = { module = "androidx.compose.material3:material3", version.ref = "compose-material" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-ui" }
 compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-ui-preview" }

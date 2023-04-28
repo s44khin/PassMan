@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +47,7 @@ fun BoxScope.AppFab(
             ) {
                 FloatingActionButton(
                     modifier = Modifier.size(40.dp),
-                    backgroundColor = AppTheme.colors.primary,
+                    containerColor = AppTheme.colors.primary,
                     contentColor = AppTheme.colors.textOnPrimary,
                     onClick = { appFabData.onClick() }
                 ) {

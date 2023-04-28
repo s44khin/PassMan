@@ -8,17 +8,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.s44khin.uikit.theme.AppTheme
 
-val BottomNavigationHeight = 56.5.dp
+val BottomNavigationHeight = 80.5.dp
 
 @Composable
 fun BottomNav(
@@ -28,7 +29,7 @@ fun BottomNav(
     Column(modifier = modifier.fillMaxWidth()) {
         AppDivider(modifier = Modifier.fillMaxWidth())
 
-        Surface(elevation = 0.dp) {
+        Surface(tonalElevation = 0.dp) {
             Row(
                 modifier = Modifier
                     .background(color = AppTheme.colors.background)
@@ -51,13 +52,18 @@ fun RowScope.BottomNavItem(
     alwaysShowLabel: Boolean = false,
     onClick: () -> Unit,
 ) {
-    BottomNavigationItem(
+    NavigationBarItem(
         selected = selected,
         label = { Text(text = label) },
         icon = { Icon(imageVector = icon, contentDescription = icon.name) },
         alwaysShowLabel = alwaysShowLabel,
-        selectedContentColor = AppTheme.colors.primary,
+        colors = NavigationBarItemDefaults.colors(
+            selectedTextColor = AppTheme.colors.primary,
+            selectedIconColor = AppTheme.colors.textOnPrimary,
+            indicatorColor = AppTheme.colors.primary,
+            unselectedTextColor = AppTheme.colors.textOnBackgroundVariant,
+            unselectedIconColor = AppTheme.colors.textOnBackgroundVariant,
+        ),
         onClick = onClick,
-        unselectedContentColor = AppTheme.colors.textOnBackgroundVariant
     )
 }

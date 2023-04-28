@@ -1,6 +1,6 @@
 package com.s44khin.uikit.theme
 
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
@@ -120,7 +120,7 @@ internal fun lightColors(primary: PrimaryColor) = AppColors(
     textOnBackground = Color(0xff000000),
     textOnBackgroundVariant = Color(0x80000000),
     textBoxBackground = Color(0xffedeef0),
-    divider = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+    divider = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
     overlay = Color(0xBFFFFFFF),
     error = Color(0xFFFF0000),
     statusBar = Color(0xBFFFFFFF),

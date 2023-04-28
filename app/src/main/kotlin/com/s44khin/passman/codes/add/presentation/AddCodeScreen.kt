@@ -2,9 +2,11 @@ package com.s44khin.passman.codes.add.presentation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.imePadding
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.s44khin.passman.R
@@ -14,27 +16,22 @@ import com.s44khin.passman.common.presentation.confirmDialog.ConfirmDialog
 import com.s44khin.passman.common.presentation.confirmDialog.ConfirmDialogButton
 import com.s44khin.passman.core.BaseScreen
 import com.s44khin.uikit.util.BottomSheetWrapper
-import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddCodeScreen() = BaseScreen<AddCodeState, AddCodeAction, AddCodeViewModel> {
-    val coroutineScope = rememberCoroutineScope()
+    var bottomSheetIsOpen by remember { mutableStateOf(false) }
 
     BackHandler(enabled = state.isNotEmpty) {
-        if (sheetState.isVisible) {
-            hideSheet()
-        } else {
-            showSheet()
-        }
+        bottomSheetIsOpen = !bottomSheetIsOpen
     }
 
     BottomSheetWrapper(
         modifier = Modifier.imePadding(),
-        title = stringResource(R.string.codes_add_are_you_sure),
-        sheetState = sheetState,
-        bottomSheetContent = {
+        bottomSheetIsOpen = bottomSheetIsOpen,
+        onDismissRequest = { bottomSheetIsOpen = false },
+        content = {
             ConfirmDialog(
+                title = stringResource(R.string.codes_add_are_you_sure),
                 subtitle = stringResource(R.string.codes_add_progress_will_be_lost),
                 firstButton = ConfirmDialogButton(
                     label = stringResource(R.string.common_exit),
@@ -42,22 +39,21 @@ fun AddCodeScreen() = BaseScreen<AddCodeState, AddCodeAction, AddCodeViewModel> 
                 ),
                 secondButton = ConfirmDialogButton(
                     label = stringResource(R.string.common_cancel),
-                    onClick = { coroutineScope.launch { sheetState.hide() } }
+                    onClick = { bottomSheetIsOpen = false }
                 )
             )
         },
-        content = {
-            AddCodeContent(
-                state = state,
-                onAction = onAction,
-                onBackClick = {
-                    if (state.isNotEmpty) {
-                        showSheet()
-                    } else {
-                        onAction(AddCodeAction.BackClick)
-                    }
-                }
-            )
+    )
+
+    AddCodeContent(
+        state = state,
+        onAction = onAction,
+        onBackClick = {
+            if (state.isNotEmpty) {
+                bottomSheetIsOpen = true
+            } else {
+                onAction(AddCodeAction.BackClick)
+            }
         }
     )
 }
