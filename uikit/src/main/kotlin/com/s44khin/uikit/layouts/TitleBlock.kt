@@ -1,0 +1,45 @@
+package com.s44khin.uikit.layouts
+
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.s44khin.uikit.theme.AppTheme
+import com.s44khin.uikit.widgets.Spacer
+
+@Composable
+fun TitleBlock(
+    modifier: Modifier = Modifier,
+    spacerHeight: Dp = 16.dp,
+    title: String,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .animateContentSize()
+            .background(color = AppTheme.colors.background)
+            .then(modifier)
+    ) {
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = title,
+            color = AppTheme.colors.textOnBackground,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp
+        )
+
+        Spacer(height = spacerHeight)
+
+        content()
+    }
+}
