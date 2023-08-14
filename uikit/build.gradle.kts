@@ -1,19 +1,22 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin)
 }
 
 android {
     namespace = "com.s44khin.uikit"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        signingConfig = signingConfigs.getByName("debug")
+        minSdk = libs.versions.sdk.min.get().toInt()
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
+
         release {
             isMinifyEnabled = true
             proguardFiles(
@@ -21,19 +24,15 @@ android {
                 "proguard-rules.pro"
             )
         }
-
-        debug {
-            isMinifyEnabled = false
-        }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 
     buildFeatures {
@@ -46,10 +45,10 @@ android {
 }
 
 dependencies {
-
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
     implementation(libs.compose.foundation)
-    implementation(libs.compose.icons)
-    implementation(libs.compose.material)
     implementation(libs.compose.ui)
-    implementation(libs.compose.ui.preview)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.icons)
 }
