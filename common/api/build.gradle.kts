@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -50,4 +51,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.compose.navigation)
     implementation(libs.compose.icons)
+
+    implementation(libs.dagger2)
+    kapt(libs.dagger2.compiler)
 }

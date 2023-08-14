@@ -53,6 +53,7 @@ android {
 dependencies {
 
     implementation(libs.core.ktx)
+    implementation(libs.viewModel)
     implementation(libs.compose.activity)
     implementation(libs.compose.navigation)
 
@@ -65,5 +66,6 @@ dependencies {
     implementation(project(":uikit"))
     implementation(project(":common:api"))
     implementation(project(":passwords:api"))
+    implementation(project(":passwords:impl"))
     implementation(project(":codes:api"))
 }
