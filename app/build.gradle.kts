@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -57,6 +58,9 @@ dependencies {
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
+
+    implementation(libs.dagger2)
+    kapt(libs.dagger2.compiler)
 
     implementation(project(":uikit"))
     implementation(project(":common:api"))
