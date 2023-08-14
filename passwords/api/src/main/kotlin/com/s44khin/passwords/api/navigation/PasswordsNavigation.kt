@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import com.s44khin.common.api.navigation.NavDestination
 import com.s44khin.common.api.navigation.composable
 import com.s44khin.common.api.navigation.navigation
-import com.s44khin.passwords.PasswordsScreen
+import com.s44khin.passwords.list.master.PasswordsScreen
 
 object PasswordsNavigation : NavDestination {
 

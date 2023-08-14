@@ -65,6 +65,7 @@ dependencies {
 
     implementation(project(":uikit"))
     implementation(project(":common:api"))
+    implementation(project(":common:impl"))
     implementation(project(":passwords:api"))
     implementation(project(":passwords:impl"))
     implementation(project(":codes:api"))
