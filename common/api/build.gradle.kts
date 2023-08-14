@@ -1,25 +1,21 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
 }
 
 android {
-    namespace = "com.s44khin.passman"
+    namespace = "com.s44khin.common.api"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        applicationId = "com.s44khin.passman"
         minSdk = libs.versions.sdk.min.get().toInt()
-        targetSdk = libs.versions.sdk.target.get().toInt()
-        versionCode = libs.versions.version.code.get().toInt()
-        versionName = libs.versions.version.name.get()
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         debug {
             isMinifyEnabled = false
-            isDebuggable = true
         }
 
         release {
@@ -52,14 +48,6 @@ android {
 dependencies {
 
     implementation(libs.core.ktx)
-    implementation(libs.compose.activity)
     implementation(libs.compose.navigation)
-
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.material3)
-
-    implementation(project(":uikit"))
-    implementation(project(":common:api"))
-    implementation(project(":passwords:api"))
-    implementation(project(":codes:api"))
+    implementation(libs.compose.icons)
 }

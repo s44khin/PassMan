@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">PassMan</string>
+    <string name="passwords">Пароли</string>
+    <string name="codes">Коды</string>
+    <string name="menu">Меню</string>
+</resources>

@@ -17,3 +17,9 @@ dependencyResolutionManagement {
 rootProject.name = "PassMan"
 include(":app")
 include(":uikit")
+include(":passwords:api")
+include(":passwords:impl")
+include(":common:api")
+include(":common:impl")
+include(":codes:api")
+include(":codes:impl")
