@@ -3,10 +3,13 @@ package com.s44khin.common.api.navigation
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.navigation
 
 fun NavGraphBuilder.navigation(
@@ -40,15 +43,25 @@ fun NavGraphBuilder.composable(
         enterTransition = {
             slideIntoContainer(
                 towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-                animationSpec = tween(700),
-            )
+                animationSpec = tween(500),
+            ) + fadeIn()
         },
         exitTransition = {
             slideOutOfContainer(
                 towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-                animationSpec = tween(700)
-            )
+                animationSpec = tween(500)
+            ) + fadeOut()
         },
+        content = content,
+    )
+}
+
+fun NavGraphBuilder.dialog(
+    destination: NavDestination,
+    content: @Composable (NavBackStackEntry) -> Unit,
+) {
+    dialog(
+        route = destination.route,
         content = content,
     )
 }
