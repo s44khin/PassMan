@@ -7,8 +7,3 @@ val bottomNavigationItems = setOf(
     PasswordsNavigation,
     CodesNavigation
 )
-
-val bottomNavigationRouts = setOf(
-    PasswordsNavigation.route,
-    CodesNavigation.route,
-)
