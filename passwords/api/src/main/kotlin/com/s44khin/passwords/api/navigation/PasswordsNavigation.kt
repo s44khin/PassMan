@@ -23,6 +23,6 @@ object PasswordsNavigation : BottomNavigationItem {
     object Detail : NavDestination {
 
         override val route = "${PasswordsNavigation.route}/detail"
-        override val showBottomNavigation = false
+        override val showBottomNavigation = true
     }
 }

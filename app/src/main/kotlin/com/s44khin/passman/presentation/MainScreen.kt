@@ -54,7 +54,15 @@ internal fun MainScreen(
                         icon = screen.icon,
                         label = screen.label.resolve(),
                         onClick = {
-                            navHostController.navigate(screen.route)
+                            if (currentDestination?.hierarchy?.any { it.route == screen.route } != true) {
+                                navHostController.navigate(screen.route) {
+                                    popUpTo(screen.route) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
                         }
                     )
                 }
