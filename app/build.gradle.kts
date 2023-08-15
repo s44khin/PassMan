@@ -69,4 +69,5 @@ dependencies {
     implementation(project(":passwords:api"))
     implementation(project(":passwords:impl"))
     implementation(project(":codes:api"))
+    implementation(project(":codes:impl"))
 }

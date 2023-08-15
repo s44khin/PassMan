@@ -1,11 +1,11 @@
-package com.s44khin.passman
+package com.s44khin.passman.core
 
 import android.app.Application
 import com.s44khin.common.api.di.ComponentStorageImpl
 import com.s44khin.common.api.di.FeatureDependenciesMap
 import com.s44khin.common.api.di.FeatureDependenciesProvider
+import com.s44khin.common.api.navigation.createNavHostController
 import com.s44khin.passman.di.AppComponent
-import com.s44khin.passman.di.DaggerAppComponent
 import javax.inject.Inject
 
 class App : Application(), FeatureDependenciesProvider {
@@ -13,6 +13,7 @@ class App : Application(), FeatureDependenciesProvider {
     lateinit var appComponent: AppComponent
 
     @Inject
+    @Suppress("ProtectedInFinal")
     override lateinit var dependencies: FeatureDependenciesMap
         protected set
 
@@ -22,10 +23,10 @@ class App : Application(), FeatureDependenciesProvider {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent
-            .builder()
-            .bindContext(applicationContext)
-            .build()
+        appComponent = AppComponent.create(
+            context = applicationContext,
+            navHostController = createNavHostController(applicationContext)
+        )
 
         appComponent.inject(this)
 

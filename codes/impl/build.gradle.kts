@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.core.ktx)
 
     implementation(platform(libs.compose.bom))
+    implementation(libs.compose.navigation)
     implementation(libs.compose.material3)
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui)
@@ -57,4 +58,6 @@ dependencies {
     implementation(libs.compose.icons)
 
     implementation(project(":uikit"))
+    implementation(project(":common:api"))
+    implementation(project(":codes:api"))
 }

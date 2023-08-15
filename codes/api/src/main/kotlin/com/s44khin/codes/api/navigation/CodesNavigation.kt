@@ -1,25 +1,22 @@
 package com.s44khin.codes.api.navigation
 
-import androidx.navigation.NavGraphBuilder
-import com.s44khin.codes.CodesScreen
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Pin
+import com.s44khin.codes.api.R
+import com.s44khin.common.api.navigation.BottomNavigationItem
 import com.s44khin.common.api.navigation.NavDestination
-import com.s44khin.common.api.navigation.composable
-import com.s44khin.common.api.navigation.navigation
+import com.s44khin.common.api.util.NativeText
 
-object CodesNavigation : NavDestination {
+object CodesNavigation : BottomNavigationItem {
 
     override val route = "codes"
+    override val icon = Icons.Default.Pin
+    override val label = NativeText.Resource(R.string.codes)
+    override val showBottomNavigation = true
 
     object List : NavDestination {
 
         override val route = "${CodesNavigation.route}/list"
-    }
-}
-
-fun NavGraphBuilder.codesNavigation() {
-    navigation(rootDestination = CodesNavigation, startDestination = CodesNavigation.List) {
-        composable(destination = CodesNavigation.List) {
-            CodesScreen()
-        }
+        override val showBottomNavigation = true
     }
 }
