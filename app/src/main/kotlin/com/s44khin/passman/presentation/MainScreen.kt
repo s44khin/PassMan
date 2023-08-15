@@ -15,11 +15,10 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.s44khin.auth.api.navigation.AuthNavigation
-import com.s44khin.auth.navigation.authNavigation
 import com.s44khin.codes.navigation.codesNavigation
 import com.s44khin.common.api.navigation.AppNavHost
 import com.s44khin.passman.presentation.data.bottomNavigationItems
+import com.s44khin.passwords.api.navigation.PasswordsNavigation
 import com.s44khin.passwords.navigation.passwordsNavigation
 import com.s44khin.uikit.widgets.BottomNavigationItem
 
@@ -35,9 +34,9 @@ internal fun MainScreen(
         AppNavHost(
             modifier = Modifier.fillMaxSize(),
             navHostController = navHostController,
-            startDestination = AuthNavigation
+            startDestination = PasswordsNavigation
         ) {
-            authNavigation()
+//            authNavigation()
             passwordsNavigation()
             codesNavigation()
         }
