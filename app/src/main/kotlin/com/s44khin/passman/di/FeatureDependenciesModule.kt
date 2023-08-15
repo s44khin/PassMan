@@ -1,5 +1,6 @@
 package com.s44khin.passman.di
 
+import com.s44khin.auth.di.dependencies.AuthDependencies
 import com.s44khin.common.api.di.FeatureDependencies
 import com.s44khin.passwords.di.dependencies.PasswordDependencies
 import dagger.Binds
@@ -11,4 +12,7 @@ interface FeatureDependenciesModule {
 
     @[Binds IntoMap FeatureDependenciesKey(PasswordDependencies::class)]
     fun bindPasswordDependencies(appComponent: AppComponent): FeatureDependencies
+
+    @[Binds IntoMap FeatureDependenciesKey(AuthDependencies::class)]
+    fun bindAuthDependencies(appComponent: AppComponent): FeatureDependencies
 }

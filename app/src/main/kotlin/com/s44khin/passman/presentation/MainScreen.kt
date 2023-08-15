@@ -12,12 +12,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.s44khin.auth.api.navigation.AuthNavigation
+import com.s44khin.auth.navigation.authNavigation
 import com.s44khin.codes.navigation.codesNavigation
 import com.s44khin.common.api.navigation.AppNavHost
 import com.s44khin.passman.presentation.data.bottomNavigationItems
-import com.s44khin.passwords.api.navigation.PasswordsNavigation
 import com.s44khin.passwords.navigation.passwordsNavigation
 import com.s44khin.uikit.widgets.BottomNavigationItem
 
@@ -33,8 +35,9 @@ internal fun MainScreen(
         AppNavHost(
             modifier = Modifier.fillMaxSize(),
             navHostController = navHostController,
-            startDestination = PasswordsNavigation
+            startDestination = AuthNavigation
         ) {
+            authNavigation()
             passwordsNavigation()
             codesNavigation()
         }
@@ -49,19 +52,22 @@ internal fun MainScreen(
         ) {
             BottomAppBar(modifier = Modifier.fillMaxWidth()) {
                 bottomNavigationItems.forEach { screen ->
+                    val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
+
                     BottomNavigationItem(
-                        selected = currentDestination?.hierarchy?.any { it.route == screen.route },
+                        selected = selected,
                         icon = screen.icon,
                         label = screen.label.resolve(),
                         onClick = {
-                            if (currentDestination?.hierarchy?.any { it.route == screen.route } != true) {
-                                navHostController.navigate(screen.route) {
-                                    popUpTo(screen.route) {
+                            navHostController.navigate(screen.route) {
+                                if (!selected) {
+                                    popUpTo(navHostController.graph.findStartDestination().id) {
                                         saveState = true
                                     }
-                                    launchSingleTop = true
-                                    restoreState = true
                                 }
+
+                                launchSingleTop = true
+                                restoreState = true
                             }
                         }
                     )

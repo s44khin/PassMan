@@ -4,24 +4,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-interface StateStore<STATE> {
+interface StateStore<STATE : Any> {
 
     val state: StateFlow<STATE>
 
     var viewState: STATE
 }
 
-class StateStoreImpl<STATE>(
+class StateStoreImpl<STATE : Any>(
     initState: STATE,
 ) : StateStore<STATE> {
 
     private val _state = MutableStateFlow(initState)
-
     override val state: StateFlow<STATE> = _state.asStateFlow()
-
-    override var viewState: STATE
-        get() = state.value
-        set(value) {
-            _state.value = value
-        }
+    override var viewState by viewStateFlow(_state, initState)
 }

@@ -1,26 +1,22 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.s44khin.passman"
+    namespace = "com.s44khin.auth"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        applicationId = "com.s44khin.passman"
         minSdk = libs.versions.sdk.min.get().toInt()
-        targetSdk = libs.versions.sdk.target.get().toInt()
-        versionCode = libs.versions.version.code.get().toInt()
-        versionName = libs.versions.version.name.get()
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         debug {
             isMinifyEnabled = false
-            isDebuggable = true
         }
 
         release {
@@ -54,22 +50,20 @@ dependencies {
 
     implementation(libs.core.ktx)
     implementation(libs.viewModel)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.navigation)
 
     implementation(platform(libs.compose.bom))
+    implementation(libs.compose.navigation)
     implementation(libs.compose.material3)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.icons)
 
     implementation(libs.dagger2)
     kapt(libs.dagger2.compiler)
 
     implementation(project(":uikit"))
     implementation(project(":common:api"))
-    implementation(project(":common:impl"))
     implementation(project(":auth:api"))
-    implementation(project(":auth:impl"))
     implementation(project(":passwords:api"))
-    implementation(project(":passwords:impl"))
-    implementation(project(":codes:api"))
-    implementation(project(":codes:impl"))
 }
