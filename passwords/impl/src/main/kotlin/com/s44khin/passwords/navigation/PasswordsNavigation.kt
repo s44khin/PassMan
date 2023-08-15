@@ -1,7 +1,7 @@
 package com.s44khin.passwords.navigation
 
 import androidx.navigation.NavGraphBuilder
-import com.s44khin.common.api.navigation.dialog
+import com.s44khin.common.api.navigation.composable
 import com.s44khin.common.api.navigation.navigation
 import com.s44khin.common.api.navigation.rootComposable
 import com.s44khin.passwords.api.navigation.PasswordsNavigation
@@ -17,7 +17,7 @@ fun NavGraphBuilder.passwordsNavigation() {
             PasswordsScreen()
         }
 
-        dialog(destination = PasswordsNavigation.Detail) {
+        composable(destination = PasswordsNavigation.Detail) {
             PasswordDetailScreen()
         }
     }
