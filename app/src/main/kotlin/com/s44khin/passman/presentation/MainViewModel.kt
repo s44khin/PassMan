@@ -2,8 +2,8 @@ package com.s44khin.passman.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.s44khin.common.api.core.StateStore
-import com.s44khin.common.api.core.StateStoreImpl
+import com.s44khin.common.api.core.base.StateStore
+import com.s44khin.common.api.core.base.StateStoreImpl
 import com.s44khin.common.api.navigation.ScreenRouter
 import com.s44khin.passman.presentation.data.BottomNavigationVisibilityDispatcher
 import kotlinx.coroutines.Dispatchers

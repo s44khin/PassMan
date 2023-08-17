@@ -8,15 +8,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @MainThread
 @Composable
-inline fun <reified VM : ViewModel, T : ViewModelsFeatureComponent> injectViewModel(
-    featureComponentFactory: FeatureComponentFactory<T>,
-): VM {
+inline fun <reified VM : ViewModel, T : ViewModelsFeatureComponent> FeatureComponentFactory<T>.injectViewModel(): VM {
     val context = LocalContext.current
 
     return viewModel(
         factory = FeatureViewModelFactory(
             ComponentStorage
-                .bind(context = context, componentFactory = featureComponentFactory)
+                .bind(context = context, componentFactory = this)
                 .getViewModels(),
         ),
     )

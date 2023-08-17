@@ -28,7 +28,7 @@ import com.s44khin.common.api.di.injectViewModel
 
 @Composable
 internal fun LoginScreen() {
-    val viewModel: LoginViewModel = injectViewModel(AuthComponent)
+    val viewModel: LoginViewModel = AuthComponent.injectViewModel()
     val state by viewModel.state.collectAsState()
 
     Column(

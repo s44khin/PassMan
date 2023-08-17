@@ -1,5 +1,6 @@
-package com.s44khin.common.api.core
+package com.s44khin.common.api.core.base
 
+import com.s44khin.common.api.core.viewStateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

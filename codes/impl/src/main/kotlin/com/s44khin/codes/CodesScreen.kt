@@ -9,9 +9,11 @@ import androidx.compose.ui.graphics.Color
 
 @Composable
 fun CodesScreen() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(color = Color.Green)) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.Green)
+    ) {
 
     }
 }

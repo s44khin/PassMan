@@ -2,7 +2,7 @@ package com.s44khin.passwords.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.s44khin.common.api.di.ViewModelKey
-import com.s44khin.passwords.list.master.PasswordsListViewModel
+import com.s44khin.passwords.list.master.presentation.PasswordsListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

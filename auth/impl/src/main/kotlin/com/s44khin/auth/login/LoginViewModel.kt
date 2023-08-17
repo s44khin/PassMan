@@ -2,12 +2,10 @@ package com.s44khin.auth.login
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.s44khin.auth.api.navigation.AuthNavigation
 import com.s44khin.auth.api.navigation.util.AuthStrings
-import com.s44khin.common.api.core.ActionHandler
-import com.s44khin.common.api.core.StateStore
-import com.s44khin.common.api.core.StateStoreImpl
-import com.s44khin.common.api.navigation.NavDestination
+import com.s44khin.common.api.core.base.ActionHandler
+import com.s44khin.common.api.core.base.StateStore
+import com.s44khin.common.api.core.base.StateStoreImpl
 import com.s44khin.common.api.navigation.ScreenRouter
 import com.s44khin.common.api.repositories.UserRepository
 import com.s44khin.common.api.util.NativeText

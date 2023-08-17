@@ -6,7 +6,7 @@ import com.s44khin.common.api.navigation.navigation
 import com.s44khin.common.api.navigation.rootComposable
 import com.s44khin.passwords.api.navigation.PasswordsNavigation
 import com.s44khin.passwords.detail.master.PasswordDetailScreen
-import com.s44khin.passwords.list.master.PasswordsScreen
+import com.s44khin.passwords.list.master.presentation.PasswordsListScreen
 
 fun NavGraphBuilder.passwordsNavigation() {
     navigation(
@@ -14,7 +14,7 @@ fun NavGraphBuilder.passwordsNavigation() {
         startDestination = PasswordsNavigation.List
     ) {
         rootComposable(destination = PasswordsNavigation.List) {
-            PasswordsScreen()
+            PasswordsListScreen()
         }
 
         composable(destination = PasswordsNavigation.Detail) {
