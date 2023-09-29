@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="PassMan" parent="android:Theme.Material.NoActionBar">
+    <style name="Theme.PassMan" parent="android:Theme.Material.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>

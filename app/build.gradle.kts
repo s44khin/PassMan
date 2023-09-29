@@ -2,15 +2,16 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
+    alias(libs.plugins.hilt)
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.s44khin.passman"
+    namespace = "dev.s44khin.passman"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        applicationId = "com.s44khin.passman"
+        applicationId = "dev.s44khin.passman"
         minSdk = libs.versions.sdk.min.get().toInt()
         targetSdk = libs.versions.sdk.target.get().toInt()
         versionCode = libs.versions.version.code.get().toInt()
@@ -19,17 +20,14 @@ android {
 
     buildTypes {
         debug {
-            isMinifyEnabled = false
             isDebuggable = true
+            isMinifyEnabled = false
         }
 
         release {
+            isDebuggable = false
             isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -52,25 +50,22 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.core.ktx)
-    implementation(libs.viewModel)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.navigation)
-
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
+    implementation(libs.compose.material.icons)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.navigation)
 
-    implementation(libs.dagger2)
-    kapt(libs.dagger2.compiler)
+    implementation(libs.activity.compose)
+    implementation(libs.viewModel.compose)
+
+    implementation(libs.hilt)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+
+    debugImplementation(libs.compose.ui.tooling)
 
     implementation(project(":uikit"))
-    implementation(project(":common:api"))
-    implementation(project(":common:impl"))
-    implementation(project(":auth:api"))
-    implementation(project(":auth:impl"))
-    implementation(project(":passwords:api"))
-    implementation(project(":passwords:impl"))
-    implementation(project(":codes:api"))
-    implementation(project(":codes:impl"))
 }

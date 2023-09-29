@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.s44khin.uikit"
+    namespace = "dev.s44khin.uikit"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
@@ -16,13 +16,9 @@ android {
         debug {
             isMinifyEnabled = false
         }
-
         release {
             isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -45,10 +41,13 @@ android {
 }
 
 dependencies {
+
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
+    implementation(libs.compose.material.icons)
     implementation(libs.compose.foundation)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.icons)
+
+    debugImplementation(libs.compose.ui.tooling)
 }

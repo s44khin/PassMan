@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="confirm">Confirm</string>
-    <string name="enter_pin">Enter the PIN code</string>
-    <string name="confirm_pin">Confirm PIN code</string>
-</resources>
