@@ -1,16 +1,17 @@
 package dev.s44khin.uikit.widgets
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import dev.s44khin.uikit.util.clickableWithoutRipple
 
 @Immutable
 data class AppTopNavBarAction(
@@ -25,11 +26,20 @@ fun AppTopNavBar(
     title: String,
     navigationIcon: AppTopNavBarAction? = null,
     actions: List<AppTopNavBarAction>? = null,
-    scrollBehavior: TopAppBarScrollBehavior? = null
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    onTitleClick: (() -> Unit)? = null,
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         modifier = modifier,
-        title = { Text(text = title) },
+        title = {
+            Text(
+                modifier = Modifier.clickableWithoutRipple(
+                    enabled = onTitleClick != null,
+                    onClick = { onTitleClick?.invoke() }
+                ),
+                text = title
+            )
+        },
         scrollBehavior = scrollBehavior,
         navigationIcon = {
             AppAnimatedVisibility(visible = navigationIcon != null) {
@@ -63,11 +73,20 @@ fun AppTopNavBar(
     title: String,
     navigationIcon: AppTopNavBarAction? = null,
     actions: @Composable RowScope.() -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior? = null
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    onTitleClick: (() -> Unit)? = null,
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         modifier = modifier,
-        title = { Text(text = title) },
+        title = {
+            Text(
+                modifier = Modifier.clickableWithoutRipple(
+                    enabled = onTitleClick != null,
+                    onClick = { onTitleClick?.invoke() }
+                ),
+                text = title
+            )
+        },
         scrollBehavior = scrollBehavior,
         navigationIcon = {
             AppAnimatedVisibility(visible = navigationIcon != null) {

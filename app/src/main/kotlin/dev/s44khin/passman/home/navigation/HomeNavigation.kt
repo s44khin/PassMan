@@ -1,18 +1,16 @@
 package dev.s44khin.passman.home.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import dev.s44khin.passman.R
 import dev.s44khin.passman.core.navigation.NavDestination
 import dev.s44khin.passman.core.navigation.NavRootDestination
 import dev.s44khin.passman.core.navigation.composable
 import dev.s44khin.passman.core.navigation.navigation
+import dev.s44khin.passman.core.navigation.rootComposable
 import dev.s44khin.passman.core.util.NativeText
+import dev.s44khin.passman.home.detail.DetailScreen
 import dev.s44khin.passman.home.list.presentation.HomeScreen
 
 object HomeNavigation : NavRootDestination {
@@ -38,14 +36,12 @@ object HomeNavigation : NavRootDestination {
 
 fun NavGraphBuilder.homeNavigation() {
     navigation(rootDestination = HomeNavigation) {
-        composable(destination = HomeNavigation.List) {
+        rootComposable(destination = HomeNavigation.List) {
             HomeScreen()
         }
 
         composable(destination = HomeNavigation.Detail) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Text(text = "Detail")
-            }
+            DetailScreen()
         }
     }
 }

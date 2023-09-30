@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import dev.s44khin.passman.R
 import dev.s44khin.passman.core.base.BaseScreen
 import dev.s44khin.passman.core.navigation.navigate
@@ -25,18 +26,22 @@ import dev.s44khin.uikit.widgets.AppTopNavBar
 import dev.s44khin.uikit.widgets.Spacer
 import dev.s44khin.uikit.widgets.bottomNavHeight
 
+private enum class ContentType {
+    Account
+}
+
 private val firstShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
 private val defaultShape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
 private val lastShape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 16.dp, bottomEnd = 16.dp)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() = BaseScreen<HomeState, HomeAction, HomeViewModel, HomeUiEffect> {
+fun HomeScreen() = BaseScreen(factory = { hiltViewModel<HomeViewModel>() }) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     onEffect = {
         when (it) {
-            is HomeUiEffect.OpenDetail -> navController.navigate(HomeNavigation.Detail)
+            is HomeSideEffect.OpenDetail -> navController.navigate(HomeNavigation.Detail)
         }
     }
 
@@ -55,17 +60,18 @@ fun HomeScreen() = BaseScreen<HomeState, HomeAction, HomeViewModel, HomeUiEffect
                 .navigationBarsPadding()
                 .fillMaxWidth()
                 .weight(1f),
-            contentPadding = PaddingValues(
-                top = 16.dp,
-                bottom = bottomNavHeight + 16.dp
-            )
+            contentPadding = PaddingValues(top = 16.dp, bottom = bottomNavHeight + 16.dp)
         ) {
-            itemsIndexed(state.list) { index, account ->
+            itemsIndexed(
+                items = state.list,
+                key = { _, item -> item.uid.uuid },
+                contentType = { _, _ -> ContentType.Account }
+            ) { index, account ->
                 HomeAccountItem(
                     modifier = Modifier
                         .padding(horizontal = 12.dp)
                         .fillMaxWidth(),
-                    text = account.uid.toString(),
+                    accountVO = account,
                     shape = when (index) {
                         0 -> firstShape
                         state.list.lastIndex -> lastShape

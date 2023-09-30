@@ -8,19 +8,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import dev.s44khin.passman.core.base.actionHandler.ActionHandler
-import dev.s44khin.passman.core.base.stateStore.StateStore
 import dev.s44khin.passman.core.util.LocalNavController
 import dev.s44khin.passman.core.util.rememberOnAction
 
 @Composable
-inline fun <STATE : Any, ACTION, reified VM, EFFECT : UiEffect> BaseScreen(
+inline fun <STATE : Any, ACTION, EFFECT : AppSideEffect> BaseScreen(
+    factory: @Composable () -> BaseViewModel<STATE, ACTION, EFFECT>,
     content: @Composable BaseScreenScope<STATE, ACTION, EFFECT>.() -> Unit,
-) where VM : ViewModel, VM : ActionHandler<ACTION>, VM : StateStore<STATE>, VM : UiEffectProvider<EFFECT> {
-    val viewModel: VM = hiltViewModel()
+) {
+    val viewModel = factory()
 
     val state by viewModel.state.collectAsState()
     val onAction = viewModel.rememberOnAction()
@@ -41,11 +38,10 @@ inline fun <STATE : Any, ACTION, reified VM, EFFECT : UiEffect> BaseScreen(
     }
 
     scope.update(state)
-
     scope.content()
 }
 
-interface BaseScreenScope<STATE : Any, ACTION, EFFECT : UiEffect> {
+interface BaseScreenScope<STATE : Any, ACTION, EFFECT : AppSideEffect> {
 
     val state: STATE
     val onAction: (ACTION) -> Unit
@@ -54,7 +50,7 @@ interface BaseScreenScope<STATE : Any, ACTION, EFFECT : UiEffect> {
 }
 
 @Stable
-class BaseScreenScopeImpl<STATE : Any, ACTION, EFFECT : UiEffect>(
+class BaseScreenScopeImpl<STATE : Any, ACTION, EFFECT : AppSideEffect>(
     state: STATE,
     override val navController: NavController,
     override val onAction: (ACTION) -> Unit,

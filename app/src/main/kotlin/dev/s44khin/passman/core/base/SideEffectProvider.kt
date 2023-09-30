@@ -6,14 +6,14 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
-interface UiEffectProvider<EFFECT : UiEffect> {
+interface SideEffectProvider<EFFECT : AppSideEffect> {
 
     val effects: SharedFlow<EFFECT>
 
     suspend fun onEffect(effect: EFFECT)
 }
 
-class UiEffectProviderImpl<EFFECT : UiEffect> : UiEffectProvider<EFFECT> {
+class SideEffectProviderImpl<EFFECT : AppSideEffect> : SideEffectProvider<EFFECT> {
 
     private val _effects = MutableSharedFlow<EFFECT>()
     override val effects: SharedFlow<EFFECT> = _effects.asSharedFlow()
@@ -24,7 +24,7 @@ class UiEffectProviderImpl<EFFECT : UiEffect> : UiEffectProvider<EFFECT> {
 }
 
 @Immutable
-open class UiEffect {
+open class AppSideEffect {
 
     val uid: UID = UID.randomUID()
 }

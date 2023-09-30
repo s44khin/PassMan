@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAccountsUseCase: GetAccountsUseCase,
-) : BaseViewModel<HomeState, HomeAction, HomeUiEffect>(
+) : BaseViewModel<HomeState, HomeAction, HomeSideEffect>(
     initState = HomeState()
 ) {
 
@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
 
     private fun itemClick(uid: UID) {
         viewModelScope.launchIoCoroutine {
-            onEffect(HomeUiEffect.OpenDetail())
+            onEffect(HomeSideEffect.OpenDetail())
         }
     }
 

@@ -6,8 +6,8 @@ import androidx.navigation.NavGraphBuilder
 import dev.s44khin.passman.R
 import dev.s44khin.passman.core.navigation.NavDestination
 import dev.s44khin.passman.core.navigation.NavRootDestination
-import dev.s44khin.passman.core.navigation.composable
 import dev.s44khin.passman.core.navigation.navigation
+import dev.s44khin.passman.core.navigation.rootComposable
 import dev.s44khin.passman.core.util.NativeText
 import dev.s44khin.passman.settings.list.SettingsScreen
 
@@ -29,7 +29,7 @@ object SettingsNavigation : NavRootDestination {
 
 fun NavGraphBuilder.settingsNavigation() {
     navigation(rootDestination = SettingsNavigation) {
-        composable(destination = SettingsNavigation.List) {
+        rootComposable(destination = SettingsNavigation.List) {
             SettingsScreen()
         }
     }

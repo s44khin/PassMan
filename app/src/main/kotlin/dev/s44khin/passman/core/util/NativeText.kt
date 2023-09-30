@@ -11,6 +11,8 @@ sealed class NativeText {
 
     companion object {
         val Empty = Simple(value = "")
+
+        fun String.toNativeText() = Simple(this)
     }
 
     data class Resource(@StringRes val resId: Int) : NativeText()
