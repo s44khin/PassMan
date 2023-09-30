@@ -21,8 +21,17 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix = ".debug"
+
             isDebuggable = true
             isMinifyEnabled = false
+        }
+
+        create("staging") {
+            signingConfig = signingConfigs.getByName("debug")
+            applicationIdSuffix = ".staging"
+            isDebuggable = true
+            isMinifyEnabled = true
         }
 
         release {

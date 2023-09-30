@@ -1,10 +1,10 @@
 package dev.s44khin.passman.home.list.presentation.widgets
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,14 +25,17 @@ fun HomeAccountItem(
     modifier: Modifier = Modifier,
     accountVO: AccountVO,
     shape: RoundedCornerShape,
+    onLongClick: () -> Unit,
     onClick: () -> Unit,
 ) {
     SurfaceRow(
-        modifier = modifier.clickable { onClick.invoke() },
+        modifier = modifier,
         tonalElevation = 8.dp,
         shape = shape,
         verticalAlignment = Alignment.CenterVertically,
-        contentPadding = PaddingValues(vertical = 12.dp)
+        contentPadding = PaddingValues(vertical = 12.dp),
+        onLongClick = onLongClick,
+        onClick = { onClick.invoke() }
     ) {
         Spacer(width = 16.dp)
 
@@ -47,7 +50,7 @@ fun HomeAccountItem(
 
         Spacer(width = 16.dp)
 
-        Column {
+        Column(modifier = Modifier.padding(end = 4.dp)) {
             Text(
                 text = stringResource(
                     id = R.string.home_account_label_dot,
@@ -63,7 +66,7 @@ fun HomeAccountItem(
             Text(
                 text = "123 321",
                 color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.displayLarge,
+                style = MaterialTheme.typography.headlineSmall,
             )
         }
     }

@@ -1,6 +1,8 @@
 package dev.s44khin.uikit.layouts
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 inline fun SurfaceRow(
     modifier: Modifier = Modifier,
@@ -26,6 +29,8 @@ inline fun SurfaceRow(
     border: BorderStroke? = null,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.Top,
+    noinline onClick: (() -> Unit)? = null,
+    noinline onLongClick: (() -> Unit)? = null,
     crossinline content: @Composable RowScope.() -> Unit
 ) {
     Surface(
@@ -37,6 +42,10 @@ inline fun SurfaceRow(
     ) {
         Row(
             modifier = Modifier
+                .combinedClickable(
+                    onClick = { onClick?.invoke() },
+                    onLongClick = { onLongClick?.invoke() }
+                )
                 .padding(contentPadding)
                 .fillMaxWidth(),
             horizontalArrangement = horizontalArrangement,
