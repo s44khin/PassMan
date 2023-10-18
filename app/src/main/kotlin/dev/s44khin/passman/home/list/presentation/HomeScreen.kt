@@ -12,16 +12,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.s44khin.passman.R
-import dev.s44khin.passman.core.base.BaseScreen
-import dev.s44khin.passman.core.navigation.navigate
+import dev.s44khin.passman.core.util.rememberOnAction
 import dev.s44khin.passman.home.list.presentation.widgets.HomeAccountItem
-import dev.s44khin.passman.home.navigation.HomeNavigation
 import dev.s44khin.uikit.widgets.AppTopNavBar
 import dev.s44khin.uikit.widgets.Spacer
 import dev.s44khin.uikit.widgets.bottomNavHeight
@@ -36,14 +36,12 @@ private val lastShape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, botto
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() = BaseScreen(factory = { hiltViewModel<HomeViewModel>() }) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+fun HomeScreen() {
+    val viewModel = hiltViewModel<HomeViewModel>()
+    val state by viewModel.state.collectAsState()
+    val onAction = viewModel.rememberOnAction()
 
-    onEffect = {
-        when (it) {
-            is HomeSideEffect.OpenDetail -> navController.navigate(HomeNavigation.Detail)
-        }
-    }
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Column(
         modifier = Modifier

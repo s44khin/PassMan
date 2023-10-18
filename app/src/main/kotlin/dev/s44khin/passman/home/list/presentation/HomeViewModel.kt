@@ -4,13 +4,16 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.s44khin.passman.core.base.BaseViewModel
 import dev.s44khin.passman.core.coroutines.launchIoCoroutine
+import dev.s44khin.passman.core.navigation.ScreenRouter
 import dev.s44khin.passman.core.util.UID
 import dev.s44khin.passman.home.list.domain.GetAccountsUseCase
+import dev.s44khin.passman.home.navigation.HomeNavigation
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAccountsUseCase: GetAccountsUseCase,
+    private val screenRouter: ScreenRouter,
 ) : BaseViewModel<HomeState, HomeAction, HomeSideEffect>(
     initState = HomeState()
 ) {
@@ -24,9 +27,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun itemClick(uid: UID) {
-        viewModelScope.launchIoCoroutine {
-            onEffect(HomeSideEffect.OpenDetail())
-        }
+        screenRouter.navigateTo(HomeNavigation.Detail)
     }
 
     private fun getAccounts() {
